@@ -1,10 +1,11 @@
 const { validationResult } = require('express-validator');
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs'); // Add this for password comparison
 
-const AuthController = {
-
+const authController = {
     async login(req, res) {
+        console.log("🔍 Login method called");
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
@@ -16,8 +17,12 @@ const AuthController = {
             }
 
             const { email, password } = req.body;
+            console.log("🔍 Login attempt for:", email);
 
+            // Find user
             const user = await User.findOne({ email });
+            console.log("user found", user);
+
             if (!user) {
                 return res.status(400).json({
                     success: false,
@@ -25,26 +30,29 @@ const AuthController = {
                 });
             }
 
-            const validPassword = await user.comparePassword(password);
+        //  comparing the psswrd
+            const validPassword = await bcrypt.compare(password, user.password);
+            
             if (!validPassword) {
                 return res.status(400).json({
                     success: false,
                     message: 'Invalid email or password',
                 });
-
             }
 
+            // Generate token
             const token = jwt.sign({
                 userId: user._id,
                 email: user.email,
                 role: user.role
             },
                 process.env.JWT_SECRET,
-                { expiresIn: process.env.JWT_SECRET || '2d' }
+                { expiresIn: process.env.JWT_EXPIRES || '2d' }
             );
 
-            console.log(`User logged in successfully: ${user.email}`);
-
+         
+            
+            // Send success response
             res.status(200).json({
                 success: true,
                 message: 'User logged in successfully',
@@ -54,13 +62,13 @@ const AuthController = {
                         id: user._id,
                         email: user.email,
                         role: user.role,
+                        username: user.username,
                         createdAt: user.createdAt,
                     }
                 }
             });
 
         } catch (err) {
-            console.error(err);
             res.status(500).json({
                 success: false,
                 message: 'Internal server error'
@@ -101,4 +109,4 @@ const AuthController = {
     }
 }
 
-module.export = AuthController; 
+module.exports = authController; 

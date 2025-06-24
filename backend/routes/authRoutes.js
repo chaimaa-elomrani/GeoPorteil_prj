@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/auth');
 const router = express.Router();
 
 
-const loginLimiter = rareLimit({
+const loginLimiter = rateLimit({
     windowMs:15 * 60 * 1000,
     max:10, 
     message:{
@@ -20,6 +20,7 @@ const validateLogin = [
     body("email").isEmail().withMessage("Invalid email address").normalizeEmail(),
     body("password").isLength({min:6}).withMessage("Password must be at least 6 characters long"),
 ];
+
 
 router.post('/login', loginLimiter, validateLogin, authcontroller.login);
 router.post('/logout', authcontroller.logout);
