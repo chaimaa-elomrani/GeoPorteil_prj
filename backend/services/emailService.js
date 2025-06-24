@@ -34,27 +34,39 @@ class EmailService {
   }
 
   async sendAdminNotificationEmail(userEmail, requestId) {
-    const adminEmail = process.env.ADMIN_EMAIL
+    const adminEmail = process.env.ADMIN_EMAIL;
+    
+    console.log("🔍 Admin email debug:");
+    console.log("- ADMIN_EMAIL from env:", adminEmail);
+    console.log("- User email:", userEmail);
+    console.log("- Request ID:", requestId);
+    
     if (!adminEmail) {
-      console.warn("⚠️ ADMIN_EMAIL not configured, skipping admin notification")
-      return
+      console.warn("⚠️ ADMIN_EMAIL not configured, skipping admin notification");
+      return;
     }
 
     const mailOptions = {
-      from: `"${process.env.APP_NAME || "Mon Application"}" <${process.env.SMTP_USER}>`,
+      from: `"${process.env.APP_NAME || "Geoporteil"}" <${process.env.SMTP_USER}>`,
       to: adminEmail,
-      subject: "Nouvelle demande d'inscription",
+      subject: "🔔 Nouvelle demande d'inscription - Geoporteil",
       html: this.getAdminNotificationTemplate(userEmail, requestId),
       text: this.getAdminNotificationTextTemplate(userEmail, requestId),
-    }
+    };
+
+    console.log("📧 Sending admin email to:", adminEmail);
 
     try {
-      const info = await this.transporter.sendMail(mailOptions)
-      console.log("✅ Admin notification email sent:", info.messageId)
-      return info
+      const info = await this.transporter.sendMail(mailOptions);
+      console.log("✅ Admin notification email sent successfully!");
+      console.log("- Message ID:", info.messageId);
+      console.log("- To:", adminEmail);
+      return info;
     } catch (error) {
-      console.error("❌ Error sending admin notification email:", error)
-      throw error
+      console.error("❌ Error sending admin notification email:");
+      console.error("- Error:", error.message);
+      console.error("- Admin email:", adminEmail);
+      throw error;
     }
   }
 

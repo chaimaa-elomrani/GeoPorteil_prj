@@ -8,7 +8,7 @@ const router = express.Router()
 
 // Rate limiting: 5 requests per 15 minutes per IP
 const signupLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, 
   max: 5,
   message: {
     error: "Trop de tentatives. Veuillez réessayer dans 15 minutes.",
@@ -64,13 +64,16 @@ router.post("/request", signupLimiter, validateSignupRequest, async (req, res) =
 
     // Send emails
     try {
-      await Promise.all([
-        emailService.sendUserConfirmationEmail(email),
-        emailService.sendAdminNotificationEmail(email, signupRequest._id),
-      ])
+      console.log("📧 Sending confirmation email to user:", email)
+      await emailService.sendUserConfirmationEmail(email)
+      
+      console.log("📧 Sending notification email to admin:", process.env.ADMIN_EMAIL)
+      await emailService.sendAdminNotificationEmail(email, signupRequest._id)
+      
+      console.log("✅ Both emails sent successfully!")
     } catch (emailError) {
-      console.error("Email sending error:", emailError)
-      // Don't fail the request if email fails, but log it
+      console.error("❌ Email sending failed:", emailError)
+      // Continue anyway - don't fail the request if email fails
     }
 
     res.status(201).json({
