@@ -68,16 +68,37 @@ const AuthController = {
         }
     },
 
-    async logout(req, res){
+    async logout(req, res) {
         res.json({
             success: true,
             message: 'User logged out successfully',
         });
+    },
+
+
+    async getCurrentUser(req, res) {
+        try {
+            const user = await User.findById(req.user.userId);
+
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found"
+                });
+            }
+
+            res.json({
+                success: true,
+                data: { user }
+            });
+        } catch (err) {
+            console.error("error in the method getCurrentUser", err);
+            res.status(500).json({
+                success: false,
+                message: "Internal server error"
+            });
+        }
     }
-
-
-    
-
-
-
 }
+
+module.export = AuthController; 
