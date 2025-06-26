@@ -20,6 +20,13 @@ app.use("/api/auth", authRoutes);
 const signupRoutes = require('./routes/signup');
 app.use("/api/signup", signupRoutes);
 
+try {
+    const adminroutes = require('./routes/adminDashboard');
+    app.use("/api/admin", adminroutes);
+    console.log('admin routes loaded');
+} catch (err) {
+  console.error('Error loading admin routes:', err);
+}
 
 // Test route
 app.get('/health', (req, res) => {
