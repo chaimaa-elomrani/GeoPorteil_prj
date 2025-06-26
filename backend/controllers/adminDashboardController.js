@@ -78,10 +78,11 @@ const adminDashboardController = {
     async approveSignupRequest(req, res) {
         try {
             const { id } = req.params;
-            console.log('approve signup request');
-
+            console.log('approve signup request for ID:', id);
+            
             const requests = await SignupRequest.findById(id);
-
+            console.log('Found request:', requests);
+            
             if (!requests) {
                 return res.status(404).json({
                     success: false,
@@ -92,12 +93,12 @@ const adminDashboardController = {
             if (requests.status !== 'pending') {
                 return res.status(400).json({
                     success: false,
-                    message: `Request is already ${SignupRequest.status}`
+                    message: `Request is already ${requests.status}`
                 });
             }
 
-            // cheking if the user already exists 
-            const existingUser = await User.findOne({ email: SignupRequest.email });
+            // Check if user already exists
+            const existingUser = await User.findOne({ email: requests.email });
             if (existingUser) {
                 return res.status(400).json({
                     success: false,
@@ -105,23 +106,35 @@ const adminDashboardController = {
                 });
             }
 
-
-            // creating a new user 
+            // Create new user - votre SignupRequest n'a que l'email
+            // Donc on génère les autres champs
+            const emailUsername = requests.email.split('@')[0];
+            
             const newUser = new User({
-                username: SignupRequest.username,
-                email: SignupRequest.email,
-                password: SignupRequest.password,
-                role: SignupRequest.role || 'client',
-                fistName: SignupRequest.name
+                name: emailUsername,  // Utilise la partie avant @ de l'email
+                email: requests.email,
+                password: 'TempPassword123!', // Mot de passe temporaire
+                role: 'client',
+                firstName: emailUsername,
+                lastName: '',
+                phone: '',
+                organization: ''
             });
+
+            console.log('Creating user with data:', {
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role
+            });
+
             await newUser.save();
 
-            SignupRequest.status = 'approved';
-            SignupRequest.approvedAt = Date.now();
-            await SignupRequest.save();
+            // Update request status
+            requests.status = 'approved';
+            requests.approvedAt = new Date();
+            await requests.save();
 
             console.log('Signup request approved successfully');
-
             res.json({
                 success: true,
                 message: "Signup request approved successfully",
@@ -132,14 +145,16 @@ const adminDashboardController = {
                         email: newUser.email,
                         role: newUser.role
                     },
-                    request: SignupRequest
+                    request: requests
                 }
             });
+
         } catch (err) {
-            console.error('error in approving the signup request', err);
+            console.error('Error in approving signup request:', err);
             res.status(500).json({
                 success: false,
-                message: 'internal server error'
+                message: 'Internal server error',
+                debug: process.env.NODE_ENV === 'development' ? err.message : undefined
             });
         }
     },
@@ -168,9 +183,9 @@ const adminDashboardController = {
             }
 
 
-            SignupRequest.status = 'rejected';
-            SignupRequest.rejectedAt = Date.now();
-            await SignupRequest.save();
+            requests.status = 'rejected';
+            requests.rejectedAt = Date.now();
+            await requests.save();
 
             console.log('Signup request rejected successfully');
 
@@ -191,16 +206,17 @@ const adminDashboardController = {
         }
     },
 
+    // GET /api/admin/stats - Ge dashboard stats 
 
     async getDashboardStats(req, res) {
         try {
             console.log('fetching dashboard stats');
-
             const [
                 totalUsers,
                 pendingRequests,
                 approvedRequests,
-                rejectedRequests
+                rejectedRequests,
+                recentRequests  // Ajoutez cette variable manquante
             ] = await Promise.all([
                 User.countDocuments(),
                 SignupRequest.countDocuments({ status: 'pending' }),
@@ -238,6 +254,7 @@ const adminDashboardController = {
     async getAllUsers(req, res) {
         try {
             console.log('fetching users');
+            const { role, page = 1, limit = 10 } = req.query;
 
             let filter = {};
             if (role && ['admin', 'Directeur technique', 'Directeur generale', 'Directeur administratif', 'Technicien', 'chef de projet'].includes(role)) {

@@ -2,22 +2,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User'); 
 
 
-if(!user){
-    return res.status(401).json({
-                success:false,
-                message: "User not found"
-            });
-}
-
-if(user.role !== admin){
-    return res.status(403).json({
-        success:false , 
-        message: 'access denied , only admin is allowed to acces this page'
-    });
-}
-
-req.user = user; 
-console.log(`admin authenticated: ${User.email}`);
 const adminAuth = async(req , res , next) => {
     try{
         console.log('checking admin auth'); 
@@ -42,7 +26,7 @@ const adminAuth = async(req , res , next) => {
             });
         }
 
-        if(user.role !== admin){
+        if(user.role !== 'admin'){
             return res.status(403).json({
                 success:false , 
                 message: 'access denied , only admin is allowed to acces this page'
@@ -56,7 +40,7 @@ const adminAuth = async(req , res , next) => {
         console.error('error in admin auth middleware', err);
         res.status(500).json({
             success:false,
-            message: 'Internal server error'
+            message: 'Internal serverknv error'
         });
     }
 };

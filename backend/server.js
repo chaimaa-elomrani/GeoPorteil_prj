@@ -20,13 +20,12 @@ app.use("/api/auth", authRoutes);
 const signupRoutes = require('./routes/signup');
 app.use("/api/signup", signupRoutes);
 
-try {
-    const adminroutes = require('./routes/adminDashboard');
-    app.use("/api/admin", adminroutes);
-    console.log('admin routes loaded');
-} catch (err) {
-  console.error('Error loading admin routes:', err);
-}
+// ENLEVEZ le try/catch pour voir l'erreur
+console.log('🔧 Loading admin routes...');
+const adminroutes = require('./routes/adminDashboard');
+app.use("/api/admin", adminroutes);
+console.log('✅ admin routes loaded');
+
 
 // Test route
 app.get('/health', (req, res) => {
@@ -43,4 +42,5 @@ app.use("*", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
 });
