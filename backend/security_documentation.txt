@@ -1,0 +1,215 @@
+
+==============================
+🔒 GEO PORTEIL - SÉCURITÉ BACKEND
+==============================
+
+Vue d'ensemble :
+---------------
+Cette documentation résume les principales **mesures de sécurité** mises en place dans le projet **GeoPorteil** pour protéger l’application contre les attaques courantes, garantir la confidentialité des données et respecter les bonnes pratiques.
+
+🛡️ 1. Protection Anti-Brute Force 
+---------------------------------
+📁 Fichier : backend/middleware/loginLimiter.js  
+🎯 Objectif : Limiter les tentatives de connexion pour prévenir les attaques par force brute.
+
+```js
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 tentatives par IP
+  keyGenerator: (req) => `${req.ip}-${req.body.email || 'unknown'}`,
+  skipSuccessfulRequests: true
+});
+```
+
+✅ Fonctionnalités :
+- 5 tentatives max par IP/email toutes les 15 min
+- Clé = IP + email → contrôle plus précis
+- Les tentatives réussies ne sont pas comptées
+- En-têtes HTTP informatifs
+
+🛡 Protège contre :
+- Dictionnaires
+- Brute force
+- Bots automatisés
+
+📊 2. Système de Logs de Sécurité
+-------------------------------
+📁 Fichier : backend/middleware/securityLogger.js  
+🎯 Objectif : Journaliser toutes les activités de sécurité pour audit et détection.
+
+📘 Types d’événements :
+| Événement            | Description                         | Données capturées                          |
+|----------------------|-------------------------------------|--------------------------------------------|
+| LOGIN_ATTEMPT        | Tentative de connexion              | Email, IP, User-Agent, succès/échec        |
+| LOGIN_SUCCESS        | Connexion réussie                   | UserID, IP, timestamp                       |
+| LOGIN_FAILURE        | Connexion échouée                   | Email, IP, raison                          |
+| SUSPICIOUS_ACTIVITY  | Activité suspecte détectée          | Type, détails                              |
+| ADMIN_ACTION         | Action d’un admin                   | AdminID, action, cible, IP                 |
+
+📄 Format :
+{
+  "timestamp": "2024-12-14T10:30:00.000Z",
+  "event": "LOGIN_FAILURE",
+  "email": "user@example.com",
+  "ip": "192.168.1.100",
+  "userAgent": "Mozilla/5.0...",
+  "reason": "INVALID_PASSWORD"
+}
+
+🗂️ Stockage : `backend/logs/security.log`  
+🔁 Rotation des logs : À implémenter
+
+🔐 3. Chiffrement des Mots de Passe
+----------------------------------
+📁 Fichier : backend/models/User.js  
+🎯 Objectif : Stocker les mots de passe de manière sécurisée
+
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+✅ Spécifications :
+- bcrypt avec 12 salt rounds
+- Hash automatique avant sauvegarde
+- Méthode `comparePassword()` pour vérification
+
+🚫 Protège contre : avec bcrypt 
+- Vol de DB (utilisation de bcrypt  pour rendre les mots de passe inutilisables même volés.)
+- Rainbow tables (tableau avec des milliers de mots de passe hachés pour retrouver les mots de passe originaux.)
+- Reverse engineering (deviner le mot de passe à partir du hash)
+
+🔐 4. Contrôle d’Accès aux Fichiers
+----------------------------------
+📁 Fichier : backend/middleware/fileAccessControl.js  
+🎯 Objectif : Bloquer l’accès aux fichiers sensibles
+
+📌 Fichiers/Dossiers protégés :
+const forbiddenPaths = [
+  '/.env', '/config/', '/logs/', '/.git/', '/node_modules/',
+  '/package.json', '/package-lock.json'
+];
+
+📌 Extensions interdites :
+const forbiddenExtensions = ['.env', '.log', '.key', '.pem', '.p12'];
+
+🔎 Détection :
+- Directory Traversal (`../`)
+- Injection de chemins
+- Log de toute tentative
+
+🧱 Protège contre :
+- LFI (local file inclusion) : (quand quelqu'un tente d'accéder à un fichier privé en manipulant l'URL)
+- Vol de config ou clés privées (une  middleware qui interdit l'accés au fichier sensible)
+
+🛡️ 5. Headers de Sécurité HTTP
+------------------------------
+📁 Implémenté dans `server.js` avec Helmet
+
+app.use(helmet());
+
+✅ Headers activés :
+- X-Content-Type-Options       → Empêche le sniffing MIME (détermination du type de contenu d'un fichier)
+- X-Frame-Options: DENY        → Contre le clickjacking  (affichage d'un site web dans un iframe sur un autre site)
+- X-XSS-Protection             → Contre les attaques XSS simples
+- Strict-Transport-Security    → Force l’usage de HTTPS
+- Content-Security-Policy      → Contrôle les ressources chargées
+
+🧼 6. Validation et Nettoyage des Entrées
+----------------------------------------
+📁 Fichier : backend/routes/authRoutes.js
+
+const validateLogin = [
+  body('email').isEmail().normalizeEmail(),
+  body('password').isLength({ min: 6 })
+];
+
+✅ Validations :
+- Email : format + normalisation
+- Password : minimum 6 caractères
+- Sanitisation automatique
+
+🔍 7. Monitoring & Alertes
+--------------------------
+📁 Fichier : authController.js  
+🎯 Log automatique des tentatives :
+
+await securityLogger.logLoginFailure(email, ip, userAgent, 'INVALID_PASSWORD');
+await securityLogger.logLoginSuccess(user._id, email, ip, userAgent);
+
+📌 Infos loggées :
+- IP utilisateur
+- Navigateur (User-Agent)
+- Timestamp
+- ID utilisateur (si succès)
+
+⚙️ 8. Configuration de Sécurité
+------------------------------
+📁 `.env` ou variables d’environnement
+
+# Auth
+JWT_SECRET= token 
+JWT_EXPIRES=2d
+
+# Base de données
+MONGO_URI=mongodb://127.0.0.1:27017/geoporteil
+
+# Email (si utilisé)
+ADMIN_EMAIL=admin@geoporteil.com
+
+# Environnement
+NODE_ENV=production
+
+✅ Bonnes pratiques :
+- Utiliser une `JWT_SECRET` longue et complexe
+- Forcer HTTPS
+- CORS strict
+- Limiter taille des requêtes
+
+📋 9. Checklist de Sécurité
+--------------------------
+✅ Implémenté :
+- [x] Hash bcrypt mots de passe
+- [x] Rate limiting login/signup
+- [x] Logs sécurité
+- [x] Contrôle fichiers sensibles
+- [x] Headers de sécurité
+- [x] Validation entrées
+- [x] JWT + Auth middleware
+
+🔄 Améliorations à venir :
+- [ ] Rotation automatique des logs
+- [ ] Alertes email
+- [ ] Blacklist IPs
+- [ ] Audit trail admin
+- [ ] Chiffrement base de données
+- [ ] Backups sécurisés
+
+🚨 10. Réponse aux Incidents
+---------------------------
+📌 Actions à suivre :
+1. Vérifier les logs :
+tail -f backend/logs/security.log
+
+2. Identifier les IP suspectes :
+grep "LOGIN_FAILURE" backend/logs/security.log | jq -r '.ip' | sort | uniq -c
+
+3. Voir activités suspectes :
+grep "SUSPICIOUS_ACTIVITY" backend/logs/security.log
+
+🛑 En cas d'attaque :
+- Analyser logs
+- Identifier l’impact
+- Bloquer IP (blacklist)
+
+📊 11. Métriques de Sécurité
+---------------------------
+KPIs à surveiller :
+- Nombre de tentatives échouées / jour
+- IPs avec +10 tentatives / heure
+- Tentatives d’accès à fichiers sensibles
+- Taux de succès login
+- Réponse API sur endpoints critiques
+
+

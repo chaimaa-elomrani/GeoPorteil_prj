@@ -1,14 +1,24 @@
 const { validationResult } = require('express-validator');
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs'); // Add this for password comparison
+const bcrypt = require('bcryptjs');
+const securityLogger = require('../middleware/securityLogger');
 
 const authController = {
     async login(req, res) {
-        console.log("🔍 Login method called");
+        const ip = req.ip || req.connection.remoteAddress;
+        const userAgent = req.get('User-Agent');
+        
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
+                await securityLogger.logLoginFailure(
+                    req.body.email || 'unknown',
+                    ip,
+                    userAgent,
+                    'VALIDATION_ERROR'
+                );
+                
                 return res.status(400).json({
                     success: false,
                     message: "Invalid email or password",
@@ -17,23 +27,25 @@ const authController = {
             }
 
             const { email, password } = req.body;
-            console.log("🔍 Login attempt for:", email);
 
             // Find user
-            const user = await User.findOne({ email });
-            console.log("user found", user);
-
+            const user = await User.findOne({ email: email });
+            
             if (!user) {
+                await securityLogger.logLoginFailure(email, ip, userAgent, 'USER_NOT_FOUND');
+                
                 return res.status(400).json({
                     success: false,
                     message: 'Invalid email or password',
                 });
             }
 
-        //  comparing the psswrd
-            const validPassword = await bcrypt.compare(password, user.password);
+            // Compare password
+            const validPassword = await user.comparePassword(password);
             
             if (!validPassword) {
+                await securityLogger.logLoginFailure(email, ip, userAgent, 'INVALID_PASSWORD');
+                
                 return res.status(400).json({
                     success: false,
                     message: 'Invalid email or password',
@@ -50,7 +62,8 @@ const authController = {
                 { expiresIn: process.env.JWT_EXPIRES || '2d' }
             );
 
-         
+            // Log successful login
+            await securityLogger.logLoginSuccess(user._id, email, ip, userAgent);
             
             // Send success response
             res.status(200).json({
@@ -62,13 +75,21 @@ const authController = {
                         id: user._id,
                         email: user.email,
                         role: user.role,
-                        username: user.username,
+                        username: user.name,
                         createdAt: user.createdAt,
                     }
                 }
             });
 
         } catch (err) {
+            await securityLogger.logLoginFailure(
+                req.body.email || 'unknown',
+                ip,
+                userAgent,
+                'SYSTEM_ERROR'
+            );
+            
+            console.error("❌ Login error:", err);
             res.status(500).json({
                 success: false,
                 message: 'Internal server error'
@@ -109,4 +130,4 @@ const authController = {
     }
 }
 
-module.exports = authController; 
+module.exports = authController;
