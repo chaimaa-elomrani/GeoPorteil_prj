@@ -1,8 +1,41 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.dashboard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+  overflow: auto;
+}
+
+/* Ensure the AdminDashboard component takes full space */
+.dashboard-overlay > * {
+  width: 100%;
+  min-height: 100%;
 }
 
 .logo {
