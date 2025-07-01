@@ -384,6 +384,203 @@ const adminDashboardController = {
       })
     }
   },
+
+  // POST /api/admin/users/:id/suspend - Suspend a user
+  async suspendUser(req, res) {
+    try {
+      const { id } = req.pamas
+      const { reason } = req.body
+
+      console.log(`Suspending user with ID : ${id}`)
+
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+      }
+
+      if (user.status === "suspended") {
+        return res.status(400).json({
+          success: false,
+          message: "User is already suspended",
+        })
+      }
+
+      // update user status 
+      const updatedUser = await User.findByIdAndUpdate(id, {
+        status: "suspended",
+        suspendedAt: new Date(),
+        suspensionReason: reason,
+      },
+        { new: true, runValidators: true }
+      ).select("-password -__v")
+
+      console.log("user suspended successfully")
+      res.json({
+        success: true,
+        message: "User suspended successfully",
+        data: {
+          user: updatedUser,
+        }
+      })
+    } catch (err) {
+      console.error("Error suspending user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      })
+    }
+  },
+
+  // POST /api/admin/users/:id/block - Block a user
+  async blockUser(res, req) {
+    try {
+      const { id } = req.params
+      const { reason } = req.body
+
+      console.log(`Blocking user with ID: ${id}`)
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+      }
+
+      // check if the user is already blocked 
+      if (user.status === "blocked") {
+        return res.status(400).json({
+          success: false,
+          message: "User is already blocked",
+        })
+      }
+
+      // update user status
+      const updatedUser =  User.findByIdAndUpdate(id, {
+        status: "blocked",
+        blockedAt: new Date(),
+        blockedReason: reason || "No reason provided",
+      },
+        { new: true, runValidators: true }
+      ).selected("-password -__v")
+
+      console.log("User blocked successfully")
+
+      res.json({
+        success: true,
+        message: "User blocked successfully",
+        data: {
+          user: updatedUser,
+        },
+      })
+    } catch (err) {
+      console.log("Error blocking user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      })
+    }
+  },
+
+  // POST /api/admin/users/:id/unblock - Unblock a user
+  async unblockUser(req, res) {
+    try {
+      const { id } = req.params
+
+      console.log(`Unblocking user with ID: ${id}`)
+
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+      }
+
+      if (user.status !== "blocked") {
+        return res.status(400).json({
+          success: false,
+          message: "User is not blocked",
+        })
+      }
+
+      // update user status
+      const updatedUser = User.findByIdAndUpdate(id, {
+        status: "active",
+        blockedReason: 1,
+      },
+        { new: true, runValidators: true }
+      ).select("-password -__v")
+      console.log("User unblocked successfully")
+
+      res.json({
+        success: true,
+        message: "User unblocked successfully",
+        data: {
+          user: updatedUser,
+        },
+      })
+
+    } catch (err) {
+      console.log("Error unblocking user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      })
+    }
+  },
+
+
+  // POST /api/admin/users/:id/unsuspend - Unsuspend a user
+  async unsupendUser(req, res) {
+    try {
+      const { id } = req.params
+      console.log(`Unsunspending user with ID: ${id}`)
+
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        })
+      }
+
+      if (user.status !== "suspended") {
+        return res.status(400).json({
+          success: false,
+          message: "User is not suspended",
+        })
+      }
+
+      // update user status
+      const updatedUser = await User.findByIdAndUpdate(id, {
+        status: "active",
+        suspendedAt: 1,
+        suspensionReason: 1,
+      },
+        { new: true, runValidators: true }
+      ).select("-password -__v")
+
+      console.log("User unsuspended successfully")
+
+      res.json({
+        success: true,
+        message: "User unsuspended successfully",
+        data: {
+          user: updatedUser,
+        },
+      })
+    }catch(err){
+      console.log("Error unsuspending user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      })
+    }
+  }, 
+
 }
 
 module.exports = adminDashboardController

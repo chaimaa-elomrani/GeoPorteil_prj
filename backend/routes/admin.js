@@ -21,4 +21,11 @@ router.post("/users", adminDashboardController.createUser)
 router.put("/users/:id", adminDashboardController.updateUser)
 router.delete("/users/:id", adminDashboardController.deleteUser)
 
+// status management 
+router.post('/users/:id/suspend', adminDashboardController.suspendUser)
+router.post('/users/:id/unsuspend', adminDashboardController.unsupendUser)
+router.post('/users/:id/block', adminDashboardController.blockUser)
+router.post('/users/:id/unblock', adminDashboardController.unblockUser)
+
+
 module.exports = router
