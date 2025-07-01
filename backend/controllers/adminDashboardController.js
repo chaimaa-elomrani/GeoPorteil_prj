@@ -435,51 +435,48 @@ const adminDashboardController = {
   },
 
   // POST /api/admin/users/:id/block - Block a user
-  async blockUser(res, req) {
+  async blockUser(req, res) {
     try {
       const { id } = req.params
       const { reason } = req.body
-
-      console.log(`Blocking user with ID: ${id}`)
+    
+      console.log("=== BLOCK USER DEBUG ===")
+      console.log("User ID:", id)
+      console.log("Reason:", reason)
+    
+      // Find the user
       const user = await User.findById(id)
+    
       if (!user) {
         return res.status(404).json({
           success: false,
-          message: "User not found",
+          message: "User not found"
         })
       }
-
-      // check if the user is already blocked 
-      if (user.status === "blocked") {
-        return res.status(400).json({
-          success: false,
-          message: "User is already blocked",
-        })
-      }
-
-      // update user status
-      const updatedUser =  User.findByIdAndUpdate(id, {
-        status: "blocked",
-        blockedAt: new Date(),
-        blockedReason: reason || "No reason provided",
-      },
-        { new: true, runValidators: true }
-      ).selected("-password -__v")
-
-      console.log("User blocked successfully")
-
+    
+      // Update user status
+      user.status = 'blocked'
+      user.blockReason = reason
+      user.blockedAt = new Date()
+    
+      await user.save()
+    
       res.json({
         success: true,
         message: "User blocked successfully",
-        data: {
-          user: updatedUser,
-        },
+        user: {
+          id: user._id,
+          status: user.status,
+          blockReason: user.blockReason
+        }
       })
-    } catch (err) {
-      console.log("Error blocking user:", err)
+    
+    } catch (error) {
+      console.error("Error blocking user:", error)
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        error: error.message
       })
     }
   },
@@ -487,48 +484,55 @@ const adminDashboardController = {
   // POST /api/admin/users/:id/unblock - Unblock a user
   async unblockUser(req, res) {
     try {
-      const { id } = req.params
-
-      console.log(`Unblocking user with ID: ${id}`)
-
-      const user = await User.findById(id)
+      const { id } = req.params;
+    
+      console.log("=== UNBLOCK USER DEBUG ===");
+      console.log("User ID:", id);
+    
+      // Find the user
+      const user = await User.findById(id);
+    
       if (!user) {
         return res.status(404).json({
           success: false,
-          message: "User not found",
-        })
+          message: "User not found"
+        });
       }
-
-      if (user.status !== "blocked") {
+    
+      console.log("Current user status:", user.status);
+    
+      if (user.status !== 'blocked') {
         return res.status(400).json({
           success: false,
-          message: "User is not blocked",
-        })
+          message: `User is not blocked. Current status: ${user.status}`
+        });
       }
-
-      // update user status
-      const updatedUser = User.findByIdAndUpdate(id, {
-        status: "active",
-        blockedReason: 1,
-      },
-        { new: true, runValidators: true }
-      ).select("-password -__v")
-      console.log("User unblocked successfully")
-
+    
+      // Update user status back to active
+      user.status = 'active';
+      user.blockReason = undefined;
+      user.blockedAt = undefined;
+      user.unblockedAt = new Date();
+    
+      await user.save();
+    
       res.json({
         success: true,
         message: "User unblocked successfully",
-        data: {
-          user: updatedUser,
-        },
-      })
-
-    } catch (err) {
-      console.log("Error unblocking user:", err)
+        user: {
+          id: user._id,
+          status: user.status,
+          unblockedAt: user.unblockedAt
+        }
+      });
+    
+    } catch (error) {
+      console.error("Error unblocking user:", error);
       res.status(500).json({
         success: false,
         message: "Internal server error",
-      })
+        error: error.message
+      });
     }
   },
 
@@ -537,46 +541,59 @@ const adminDashboardController = {
   async unsupendUser(req, res) {
     try {
       const { id } = req.params
-      console.log(`Unsunspending user with ID: ${id}`)
-
+    
+      console.log("=== UNSUSPEND USER DEBUG ===")
+      console.log("User ID:", id)
+    
+      // Find the user
       const user = await User.findById(id)
+    
       if (!user) {
+        console.log("User not found")
         return res.status(404).json({
           success: false,
-          message: "User not found",
+          message: "User not found"
         })
       }
-
-      if (user.status !== "suspended") {
+    
+      console.log("Current user status:", user.status)
+      console.log("User object:", JSON.stringify(user, null, 2))
+    
+      // Check if user is suspended (be flexible with the check)
+      if (user.status !== 'suspended') {
+        console.log("User is not suspended. Current status:", user.status)
         return res.status(400).json({
           success: false,
-          message: "User is not suspended",
+          message: `User is not suspended. Current status: ${user.status}`
         })
       }
-
-      // update user status
-      const updatedUser = await User.findByIdAndUpdate(id, {
-        status: "active",
-        suspendedAt: 1,
-        suspensionReason: 1,
-      },
-        { new: true, runValidators: true }
-      ).select("-password -__v")
-
+    
+      // Update user status back to active
+      user.status = 'active'
+      user.suspensionReason = undefined; // Remove suspension reason
+      user.suspensionDuration = undefined; // Remove suspension duration
+      user.unsuspendedAt = new Date()
+    
+      await user.save()
+    
       console.log("User unsuspended successfully")
-
+    
       res.json({
         success: true,
         message: "User unsuspended successfully",
-        data: {
-          user: updatedUser,
-        },
+        user: {
+          id: user._id,
+          status: user.status,
+          unsuspendedAt: user.unsuspendedAt
+        }
       })
-    }catch(err){
-      console.log("Error unsuspending user:", err)
+    
+    } catch (error) {
+      console.error("Error unsuspending user:", error)
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        error: error.message
       })
     }
   }, 

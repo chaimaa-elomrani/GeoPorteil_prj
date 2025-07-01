@@ -30,27 +30,15 @@ const userSchema = new mongoose.Schema({
         default: 'client',
     },
 
-    phone: {
-        type: String,
-        required: true,
-        trim: true,
-    },
 
     status:{
         type: String,
-        enum: ['active', 'suspendu', 'bloqué'],
-        default: 'active',
-        suspensionReason:{
-            type: String, 
-        },
-        blockedAt: {
-            type: Date,
-        },
-        blockedReason:{
-            type: String,
-        },
-        
+        enum: ['active', 'suspended', 'blocked'],
+        default: 'active'
     },
+    suspendedAt: Date,
+    suspensionReason: String,
+    suspensionEndDate: Date,
 
     createdAt: {
         type: Date,
