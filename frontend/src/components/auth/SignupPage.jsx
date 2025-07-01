@@ -76,7 +76,7 @@ export default function SignupPage() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/background.jpg')",
+          backgroundImage: "url('public/background_bg.jpg')",
         }}
       />
       {/* Dark Overlay */}

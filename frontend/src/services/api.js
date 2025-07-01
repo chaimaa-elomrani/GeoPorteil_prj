@@ -100,6 +100,36 @@ class ApiService {
       method: "POST",
     })
   }
+
+  // User status management 
+
+  async suspendUser(id , reason){
+    return this.request(`/admin/users/${id}/suspend`, {
+      method: "POST",
+      body: JSON.stringify({reason})
+    })
+  }
+
+  async unsuspendUser(id){
+    return this.request(`/admin/users/${id}/unsuspend`, {
+      method:"POST",
+    })
+  }
+
+  async blockUser(id){
+    return this.request(`/admin/users/${id}/block`, {
+      method:"POST", 
+      body:JSON.stringify({reason}),
+    })
+  }
+
+
+  async unblockUser(id){
+    return this.request(`/admin/users/${id}/unblock`, {
+      method:"POST", 
+    })
+  }
+  
 }
 
 export const apiService = new ApiService()
@@ -126,5 +156,5 @@ export async function post(path, data, auth = false) {
     throw new Error(responseData.message || `HTTP error! status: ${response.status}`)
   }
 
-  return responseData
+return responseData
 }

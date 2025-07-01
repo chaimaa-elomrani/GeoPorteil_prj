@@ -1,6 +1,11 @@
 "use client"
 
-export default function UserTable({ users, loading, onEdit, onDelete, actionLoading }) {
+import { useState } from "react"
+
+export default function UserTable({ users, loading, onEdit, onDelete, onApprove, onSuspend, onBlock, actionLoading }) {
+  const [openDropdown, setOpenDropdown] = useState(null)
+  const [approvedUsers, setApprovedUsers] = useState(new Set())
+
   const getRoleBadgeColor = (role) => {
     const colors = {
       admin: "bg-purple-100 text-purple-800 border-purple-200",
@@ -14,8 +19,47 @@ export default function UserTable({ users, loading, onEdit, onDelete, actionLoad
     return colors[role] || "bg-gray-100 text-gray-800 border-gray-200"
   }
 
-  const getStatusColor = (isActive) => {
+  const getStatusColor = (isActive, status) => {
+    if (status === "pending") {
+      return "bg-yellow-100 text-yellow-800 border-yellow-200"
+    }
+    if (status === "rejected") {
+      return "bg-red-100 text-red-800 border-red-200"
+    }
+    if (status === "suspended") {
+      return "bg-orange-100 text-orange-800 border-orange-200"
+    }
+    if (status === "blocked") {
+      return "bg-red-100 text-red-800 border-red-200"
+    }
     return isActive ? "bg-green-100 text-green-800 border-green-200" : "bg-red-100 text-red-800 border-red-200"
+  }
+
+  const getStatusText = (isActive, status) => {
+    if (status === "pending") return "En attente"
+    if (status === "rejected") return "Rejeté"
+    if (status === "suspended") return "Suspendu"
+    if (status === "blocked") return "Bloqué"
+    return isActive !== false ? "Actif" : "Inactif"
+  }
+
+  const toggleDropdown = (userId) => {
+    setOpenDropdown(openDropdown === userId ? null : userId)
+  }
+
+  const handleDropdownAction = (action, userId) => {
+    setOpenDropdown(null)
+    if (typeof action === "function") {
+      action(userId)
+    } else {
+      action()
+    }
+  }
+
+  const handleApprove = (userId) => {
+    setApprovedUsers((prev) => new Set([...prev, userId]))
+    onApprove(userId)
+    setOpenDropdown(null)
   }
 
   if (loading && users.length === 0) {
@@ -77,9 +121,9 @@ export default function UserTable({ users, loading, onEdit, onDelete, actionLoad
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
-                    className={`inline-flex px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(user.isActive !== false)}`}
+                    className={`inline-flex px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(user.isActive, user.status)}`}
                   >
-                    {user.isActive !== false ? "Actif" : "Inactif"}
+                    {getStatusText(user.isActive, user.status)}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -87,25 +131,81 @@ export default function UserTable({ users, loading, onEdit, onDelete, actionLoad
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => onEdit(user)}
-                      className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      onClick={() => onDelete(user._id)}
-                      disabled={actionLoading[user._id]}
-                      className="text-red-600 hover:text-red-800 font-medium text-sm transition-colors disabled:opacity-50"
-                    >
-                      {actionLoading[user._id] ? "Suppression..." : "Supprimer"}
-                    </button>
+                    {/* Suspend and Block Buttons */}
+                    {approvedUsers.has(user._id) ? (
+                      <button
+                        onClick={() => handleApprove(user._id)}
+                        disabled={actionLoading[`approve_${user._id}`]}
+                        className="text-green-600 hover:text-green-800 font-medium text-sm transition-colors disabled:opacity-50"
+                      >
+                        {actionLoading[`approve_${user._id}`] ? "Approbation..." : "Approve"}
+                      </button>
+                    ) : (
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => handleDropdownAction(() => onSuspend(user._id), user._id)}
+                          disabled={actionLoading[`suspend_${user._id}`]}
+                          className="text-orange-600 hover:text-orange-800 font-medium text-sm transition-colors disabled:opacity-50"
+                        >
+                          {actionLoading[`suspend_${user._id}`] ? "Suspension..." : "Suspend"}
+                        </button>
+                        <span className="text-gray-300">|</span>
+                        <button
+                          onClick={() => handleDropdownAction(() => onBlock(user._id), user._id)}
+                          disabled={actionLoading[`block_${user._id}`]}
+                          className="text-red-600 hover:text-red-800 font-medium text-sm transition-colors disabled:opacity-50"
+                        >
+                          {actionLoading[`block_${user._id}`] ? "Blocage..." : "Block user"}
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Three Dots Dropdown */}
                     <div className="relative">
-                      <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                      <button
+                        onClick={() => toggleDropdown(user._id)}
+                        className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100"
+                      >
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                         </svg>
                       </button>
+
+                      {openDropdown === user._id && (
+                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                          <div className="py-1">
+                            <button
+                              onClick={() => handleDropdownAction(() => onEdit(user), user._id)}
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                            >
+                              <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                />
+                              </svg>
+                              Update
+                            </button>
+                            <button
+                              onClick={() => handleDropdownAction(() => onDelete(user._id), user._id)}
+                              disabled={actionLoading[user._id]}
+                              className="flex items-center w-full px-4 py-2 text-sm text-red-700 hover:bg-red-50 transition-colors disabled:opacity-50"
+                            >
+                              <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                />
+                              </svg>
+                              {actionLoading[user._id] ? "Suppression..." : "Delete"}
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </td>
@@ -129,6 +229,9 @@ export default function UserTable({ users, loading, onEdit, onDelete, actionLoad
           </div>
         )}
       </div>
+
+      {/* Click outside to close dropdown */}
+      {openDropdown && <div className="fixed inset-0 z-0" onClick={() => setOpenDropdown(null)} />}
     </div>
   )
 }

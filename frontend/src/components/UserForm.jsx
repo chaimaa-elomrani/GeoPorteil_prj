@@ -7,11 +7,8 @@ export default function UserForm({ user, onSubmit, onCancel, loading }) {
     name: "",
     email: "",
     phone: "",
+    team: "",
     role: "client",
-    firstName: "",
-    lastName: "",
-    organization: "",
-    isActive: true,
   })
 
   const [errors, setErrors] = useState({})
@@ -22,20 +19,17 @@ export default function UserForm({ user, onSubmit, onCancel, loading }) {
         name: user.name || "",
         email: user.email || "",
         phone: user.phone || "",
+        team: user.team || "",
         role: user.role || "client",
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        organization: user.organization || "",
-        isActive: user.isActive !== undefined ? user.isActive : true,
       })
     }
   }, [user])
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }))
 
     // Clear error when user starts typing
@@ -71,7 +65,7 @@ export default function UserForm({ user, onSubmit, onCancel, loading }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-xl font-semibold text-gray-900">
             {user ? "Modifier l'utilisateur" : "Ajouter un utilisateur"}
@@ -82,91 +76,62 @@ export default function UserForm({ user, onSubmit, onCancel, loading }) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Basic Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Name Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nom complet *</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
-                  errors.name ? "border-red-500" : "border-gray-300"
-                }`}
-                placeholder="Entrez le nom complet"
-              />
-              {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-            </div>
+          {/* Name Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Nom complet *</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                errors.name ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="Entrez le nom complet"
+            />
+            {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+          </div>
 
-            {/* Email Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Adresse email *</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                }`}
-                placeholder="exemple@email.com"
-              />
-              {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-            </div>
+          {/* Email Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Adresse email *</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="exemple@email.com"
+            />
+            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+          </div>
 
-            {/* First Name Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                placeholder="Prénom"
-              />
-            </div>
+          {/* Phone Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Numéro de téléphone</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+              placeholder="+33 6 12 34 56 78"
+            />
+          </div>
 
-            {/* Last Name Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Nom de famille</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                placeholder="Nom de famille"
-              />
-            </div>
-
-            {/* Phone Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                placeholder="+33 6 12 34 56 78"
-              />
-            </div>
-
-            {/* Organization Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Organisation</label>
-              <input
-                type="text"
-                name="organization"
-                value={formData.organization}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
-                placeholder="Nom de l'organisation"
-              />
-            </div>
+          {/* Team Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Équipe</label>
+            <input
+              type="text"
+              name="team"
+              value={formData.team}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+              placeholder="Nom de l'équipe"
+            />
           </div>
 
           {/* Role Selection */}
@@ -186,18 +151,6 @@ export default function UserForm({ user, onSubmit, onCancel, loading }) {
               <option value="Directeur général">Directeur général</option>
               <option value="admin">Administrateur</option>
             </select>
-          </div>
-
-          {/* Active Status */}
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="isActive"
-              checked={formData.isActive}
-              onChange={handleChange}
-              className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
-            />
-            <label className="ml-3 block text-sm text-gray-700">Utilisateur actif</label>
           </div>
 
           {/* Form Actions */}
