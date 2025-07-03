@@ -6,6 +6,10 @@ import PendingApprovalPage from "./components/auth/PendingApprovalPage"
 import ForgotPasswordPage from "./components/auth/ForgotPasswordPage"
 import ProtectedRoute from "./components/auth/ProtectedRoute"
 import AdminDashboard from "./components/AdminDashboard"
+import GeoJsonImport from "./components/GeoJsonImport"
+import ProjectsMap from "./components/ProjectsMap"
+
+// import ProjectsMap from "./components/ProjectsMap"
 import "./App.css"
 
 function App() {
@@ -18,6 +22,8 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/pending-approval" element={<PendingApprovalPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/projects" element={<ProjectsMap />} />
+          <Route path="/projects/import" element={<GeoJsonImport />} />
 
           {/* Protected Routes */}
           <Route
