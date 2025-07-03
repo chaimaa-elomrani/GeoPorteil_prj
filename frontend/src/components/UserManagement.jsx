@@ -10,150 +10,14 @@ import UserForm from "./UserForm"
 
 export default function UserManagement({ onStatsUpdate }) {
   const [users, setUsers] = useState([])
-
   const [loading, setLoading] = useState(true)
-
   const [currentPage, setCurrentPage] = useState(1)
-
   const [totalPages, setTotalPages] = useState(1)
-
   const [selectedRole, setSelectedRole] = useState("")
-
   const [searchTerm, setSearchTerm] = useState("")
-
   const [showForm, setShowForm] = useState(false)
-
   const [editingUser, setEditingUser] = useState(null)
-
   const [actionLoading, setActionLoading] = useState({})
-
-  useEffect(() => {
-    fetchUsers()
-  }, [currentPage, selectedRole])
-
-  const fetchUsers = async () => {
-    try {
-      setLoading(true)
-
-      const params = {
-        page: currentPage,
-
-        limit: 10,
-
-        ...(selectedRole && { role: selectedRole }),
-
-        ...(searchTerm && { search: searchTerm }),
-      }
-
-      const response = await apiService.getAllUsers(params)
-
-      if (response.success) {
-        setUsers(response.data.users)
-
-        setTotalPages(response.data.pagination.total_pages)
-      }
-    } catch (error) {
-      console.error("Error fetching users:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleSearch = () => {
-    setCurrentPage(1)
-
-    fetchUsers()
-  }
-
-  const handleAddUser = () => {
-    setEditingUser(null)
-
-    setShowForm(true)
-  }
-
-  const handleEditUser = (user) => {
-    setEditingUser(user)
-
-    setShowForm(true)
-  }
-
-  const handleFormSubmit = async (userData) => {
-    try {
-      setActionLoading((prev) => ({ ...prev, form: true }))
-
-      if (editingUser) {
-        await apiService.updateUser(editingUser._id, userData)
-      } else {
-        await apiService.createUser(userData)
-      }
-
-      setShowForm(false)
-
-      setEditingUser(null)
-
-      await fetchUsers()
-
-      onStatsUpdate?.()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setActionLoading((prev) => ({ ...prev, form: false }))
-    }
-  }
-
-  const handleDeleteUser = async (userId) => {
-    if (!window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
-      return
-    }
-
-    try {
-      setActionLoading((prev) => ({ ...prev, [userId]: true }))
-
-      await apiService.deleteUser(userId)
-
-      await fetchUsers()
-
-      onStatsUpdate?.()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setActionLoading((prev) => ({ ...prev, [userId]: false }))
-    }
-  }
-
-  const handleApproveUser = async (userId) => {
-    if (!window.confirm("Êtes-vous sûr de vouloir approuver cette demande d'inscription ?")) {
-      return
-    }
-
-    try {
-      setActionLoading((prev) => ({ ...prev, [`approve_${userId}`]: true }))
-      await apiService.approveUser(userId)
-      await fetchUsers()
-      onStatsUpdate?.()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setActionLoading((prev) => ({ ...prev, [`approve_${userId}`]: false }))
-    }
-  }
-
-  const handleRejectUser = async (userId) => {
-    if (!window.confirm("Êtes-vous sûr de vouloir rejeter cette demande d'inscription ?")) {
-      return
-    }
-
-    try {
-      setActionLoading((prev) => ({ ...prev, [`reject_${userId}`]: true }))
-      await apiService.rejectUser(userId)
-      await fetchUsers()
-      onStatsUpdate?.()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setActionLoading((prev) => ({ ...prev, [`reject_${userId}`]: false }))
-    }
-  }
 
   const handleSuspendUser = async (userId) => {
     if (!window.confirm("Êtes-vous sûr de vouloir suspendre cet utilisateur ?")) {
@@ -172,6 +36,97 @@ export default function UserManagement({ onStatsUpdate }) {
     }
   }
 
+  useEffect(() => {
+    fetchUsers()
+  }, [currentPage, selectedRole])
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true)
+      const params = {
+        page: currentPage,
+        limit: 10,
+        ...(selectedRole && { role: selectedRole }),
+        ...(searchTerm && { search: searchTerm }),
+      }
+      const response = await apiService.getAllUsers(params)
+      if (response.success) {
+        setUsers(response.data.users)
+        setTotalPages(response.data.pagination.total_pages)
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSearch = () => {
+    setCurrentPage(1)
+    fetchUsers()
+  }
+
+  const handleAddUser = () => {
+    setEditingUser(null)
+    setShowForm(true)
+  }
+
+  const handleEditUser = (user) => {
+    setEditingUser(user)
+    setShowForm(true)
+  }
+
+  const handleFormSubmit = async (userData) => {
+    try {
+      setActionLoading((prev) => ({ ...prev, form: true }))
+      if (editingUser) {
+        await apiService.updateUser(editingUser._id, userData)
+      } else {
+        await apiService.createUser(userData)
+      }
+      setShowForm(false)
+      setEditingUser(null)
+      await fetchUsers()
+      onStatsUpdate?.()
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setActionLoading((prev) => ({ ...prev, form: false }))
+    }
+  }
+
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+      return
+    }
+
+    try {
+      setActionLoading((prev) => ({ ...prev, [userId]: true }))
+      await apiService.deleteUser(userId)
+      await fetchUsers()
+      onStatsUpdate?.()
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setActionLoading((prev) => ({ ...prev, [userId]: false }))
+    }
+  }
+
+  const handleApproveUser = async (userId) => {
+    try {
+      setActionLoading((prev) => ({ ...prev, [userId]: true }))
+      // Add your approve user API call here
+      // await apiService.approveUser(userId)
+      console.log("Approving user:", userId)
+      await fetchUsers()
+      onStatsUpdate?.()
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setActionLoading((prev) => ({ ...prev, [userId]: false }))
+    }
+  }
+
   const handleBlockUser = async (userId) => {
     if (!window.confirm("Êtes-vous sûr de vouloir bloquer cet utilisateur ?")) {
       return
@@ -180,24 +135,60 @@ export default function UserManagement({ onStatsUpdate }) {
     try {
       setActionLoading((prev) => ({ ...prev, [`block_${userId}`]: true }))
       await apiService.blockUser(userId)
+      console.log("✅ User blocked successfully:", userId)
+      await fetchUsers()
+      onStatsUpdate?.()
+    } catch (error) {
+      console.error("❌ Error blocking user:", error)
+      alert("Erreur lors du blocage: " + error.message)
+    } finally {
+      setActionLoading((prev) => ({ ...prev, [`block_${userId}`]: false }))
+    }
+  }
+
+  const handleUnsuspendUser = async (userId) => {
+    if (!window.confirm("Êtes-vous sûr de vouloir réactiver cet utilisateur ?")) {
+      return
+    }
+
+    try {
+      setActionLoading((prev) => ({ ...prev, [`unsuspend_${userId}`]: true }))
+      await apiService.unsuspendUser(userId)
       await fetchUsers()
       onStatsUpdate?.()
     } catch (error) {
       alert(error.message)
     } finally {
-      setActionLoading((prev) => ({ ...prev, [`block_${userId}`]: false }))
+      setActionLoading((prev) => ({ ...prev, [`unsuspend_${userId}`]: false }))
+    }
+  }
+
+  const handleUnblockUser = async (userId) => {
+    if (!window.confirm("Êtes-vous sûr de vouloir débloquer cet utilisateur ?")) {
+      return
+    }
+
+    try {
+      setActionLoading((prev) => ({ ...prev, [`unblock_${userId}`]: true }))
+      await apiService.unblockUser(userId)
+      console.log("✅ User unblocked successfully:", userId)
+      await fetchUsers()
+      onStatsUpdate?.()
+    } catch (error) {
+      console.error("❌ Error unblocking user:", error)
+      alert("Erreur lors du déblocage: " + error.message)
+    } finally {
+      setActionLoading((prev) => ({ ...prev, [`unblock_${userId}`]: false }))
     }
   }
 
   return (
     <div className="space-y-6">
       {/* Header with Search and Filters */}
-
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Gestion des Utilisateurs</h2>
-
             <p className="text-gray-600 mt-1">Gérez tous les utilisateurs de votre plateforme</p>
           </div>
 
@@ -208,13 +199,11 @@ export default function UserManagement({ onStatsUpdate }) {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-
             <span>Ajouter un utilisateur</span>
           </button>
         </div>
 
         {/* Filters */}
-
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
@@ -226,7 +215,6 @@ export default function UserManagement({ onStatsUpdate }) {
                 onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
-
               <svg
                 className="w-5 h-5 text-gray-400 absolute left-3 top-4"
                 fill="none"
@@ -249,17 +237,11 @@ export default function UserManagement({ onStatsUpdate }) {
             className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
           >
             <option value="">Tous les rôles</option>
-
             <option value="admin">Administrateur</option>
-
             <option value="Directeur technique">Directeur technique</option>
-
             <option value="Directeur generale">Directeur général</option>
-
             <option value="Directeur administratif">Directeur administratif</option>
-
             <option value="Technicien">Technicien</option>
-
             <option value="chef de projet">Chef de projet</option>
           </select>
 
@@ -273,7 +255,6 @@ export default function UserManagement({ onStatsUpdate }) {
       </div>
 
       {/* Users Table */}
-
       <UserTable
         users={users}
         loading={loading}
@@ -281,12 +262,13 @@ export default function UserManagement({ onStatsUpdate }) {
         onDelete={handleDeleteUser}
         onApprove={handleApproveUser}
         onSuspend={handleSuspendUser}
+        onUnsuspend={handleUnsuspendUser}
         onBlock={handleBlockUser}
+        onUnblock={handleUnblockUser}
         actionLoading={actionLoading}
       />
 
       {/* Pagination */}
-
       {totalPages > 1 && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 px-6 py-4">
           <div className="flex items-center justify-between">
@@ -294,7 +276,6 @@ export default function UserManagement({ onStatsUpdate }) {
               Page <span className="font-medium">{currentPage}</span> sur{" "}
               <span className="font-medium">{totalPages}</span>
             </div>
-
             <div className="flex space-x-2">
               <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
@@ -303,7 +284,6 @@ export default function UserManagement({ onStatsUpdate }) {
               >
                 Précédent
               </button>
-
               <button
                 onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
@@ -317,14 +297,12 @@ export default function UserManagement({ onStatsUpdate }) {
       )}
 
       {/* User Form Modal */}
-
       {showForm && (
         <UserForm
           user={editingUser}
           onSubmit={handleFormSubmit}
           onCancel={() => {
             setShowForm(false)
-
             setEditingUser(null)
           }}
           loading={actionLoading.form}

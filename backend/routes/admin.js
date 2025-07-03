@@ -81,8 +81,7 @@ router.post('/users/:id/suspend', async (req, res) => {
     }
 })
 router.post('/users/:id/unsuspend', adminDashboardController.unsupendUser)
-router.post('/users/:id/block', adminDashboardController.blockUser)
-router.post('/users/:id/unblock', adminDashboardController.unblockUser)
+
 
     
 module.exports = router

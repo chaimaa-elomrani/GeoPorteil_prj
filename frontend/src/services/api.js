@@ -116,20 +116,6 @@ class ApiService {
     })
   }
 
-  async blockUser(id){
-    return this.request(`/admin/users/${id}/block`, {
-      method:"POST", 
-      body:JSON.stringify({reason}),
-    })
-  }
-
-
-  async unblockUser(id){
-    return this.request(`/admin/users/${id}/unblock`, {
-      method:"POST", 
-    })
-  }
-  
 }
 
 export const apiService = new ApiService()

@@ -30,6 +30,12 @@ const userSchema = new mongoose.Schema({
         default: 'client',
     },
 
+    phone: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    },
 
     status:{
         type: String,

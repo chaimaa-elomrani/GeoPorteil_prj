@@ -69,7 +69,7 @@ export default function LoginPage() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('public/background_bg.jpg')",
+          backgroundImage: "url('background_bg.jpg')",
         }}
       />
       {/* Dark Overlay */}
