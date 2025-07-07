@@ -387,6 +387,50 @@ const clientController = {
                 error: error.message
             });
         }
+      },
+
+      // PUT /api/clients/:id/unarchive - Unarchive client
+      unarchiveClient: async (req, res) => {
+        try {
+            const { id } = req.params;
+            console.log("Unarchiving client:", id);
+
+            const client = await Client.findById(id);
+            if (!client) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Client not found"
+                });
+            }
+
+            if (!client.isArchived) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Client is not archived"
+                });
+            }
+
+            const unarchivedClient = await Client.findByIdAndUpdate(
+                id,
+                { isArchived: false },
+                { new: true }
+            );
+
+            console.log("Client unarchived successfully");
+
+            res.json({
+                success: true,
+                message: "Client unarchived successfully",
+                data: { client: unarchivedClient }
+            });
+        } catch (error) {
+            console.error("Error unarchiving client:", error);
+            res.status(500).json({
+                success: false,
+                message: "Internal server error",
+                error: error.message
+            });
+        }
       }
 }; 
 
