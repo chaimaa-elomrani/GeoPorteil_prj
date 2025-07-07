@@ -4,7 +4,9 @@ const connectDB = require("./config/db")
 const authRoutes = require("./routes/authRoutes")
 const adminRoutes = require("./routes/admin")
 const loginLimiter = require("./middleware/loginLimiter")
+const clientRoutes = require('./routes/clientRoutes');
 const fileAccessControl = require("./middleware/fileAccessControl")
+const signupRequestRoutes = require('./routes/SignupRequest')
 
 require("dotenv").config()
 
@@ -30,7 +32,8 @@ app.use(fileAccessControl)
 // Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/admin", adminRoutes)
-
+app.use('/api/clients', clientRoutes);
+app.use('/api/signup-request', signupRequestRoutes)
 
 // Health check
 app.get("/api/health", (req, res) => {
@@ -41,9 +44,6 @@ app.get("/api/health", (req, res) => {
   })
 })
 
-// Add this to your server.js
-const signupRequestRoutes = require('./routes/SignupRequest')
-app.use('/api/signup-request', signupRequestRoutes)
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -68,3 +68,6 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`)
   console.log(`📍 API URL: http://localhost:${PORT}/api`)
 })
+
+
+// clients routes

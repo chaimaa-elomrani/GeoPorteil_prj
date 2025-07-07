@@ -24,6 +24,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/projects" element={<ProjectsMap />} />
           <Route path="/projects/import" element={<GeoJsonImport />} />
+       
 
           {/* Protected Routes */}
           <Route
