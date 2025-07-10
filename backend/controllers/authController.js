@@ -40,12 +40,22 @@ const authController = {
                 });
             }
 
+            // Check if user is active
+            if (user.status !== 'active') {
+                await securityLogger.logLoginFailure(email, ip, userAgent, 'USER_NOT_ACTIVE');
+
+                return res.status(400).json({
+                    success: false,
+                    message: 'Account is not active. Please contact administrator.',
+                });
+            }
+
             // Compare password
             const validPassword = await user.comparePassword(password);
-            
+
             if (!validPassword) {
                 await securityLogger.logLoginFailure(email, ip, userAgent, 'INVALID_PASSWORD');
-                
+
                 return res.status(400).json({
                     success: false,
                     message: 'Invalid email or password',

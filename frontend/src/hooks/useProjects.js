@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import api from "../utils/api"
+import { apiService } from "../services/api"
 
 // Mock data for testing without backend - Morocco examples
 const mockProjects = [
@@ -238,7 +238,7 @@ export const useProjects = () => {
         return
       }
 
-      const response = await api.get("/projects")
+      const response = await apiService.request("/projects")
       setProjects(response.data)
     } catch (err) {
       console.warn("Backend not available, using mock data")
@@ -284,7 +284,9 @@ export const useProjects = () => {
         formData.append("files", file)
       })
 
-      const response = await api.post("/projects", formData, {
+      const response = await apiService.request("/projects", {
+        method: "POST",
+        body: formData,
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -311,7 +313,7 @@ export const useProjects = () => {
         return mockGeoJsonData
       }
 
-      const response = await api.get(geoJsonUrl)
+      const response = await apiService.request(geoJsonUrl)
       return response.data
     } catch (err) {
       console.warn("Using mock GeoJSON data")

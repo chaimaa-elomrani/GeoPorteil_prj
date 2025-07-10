@@ -17,7 +17,7 @@ const testRoutes = require('./routes/testRoutes');
 
 // Import routes (these will now have access to env variables)
 const authRoutes = require('./routes/authRoutes');
-const signupRequestRoutes = require('./routes/SignupRequest');
+const signupRequestRoutes = require('./routes/signupRequest');
 const adminRoutes = require('./routes/admin');
 
 const app = express();

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { apiService } from "../services/api"
+import ApprovalModal from "./ApprovalModal"
+import RejectionModal from "./RejectionModal"
 
 export default function SignupRequests({ onStatsUpdate }) {
   const [requests, setRequests] = useState([])
@@ -10,6 +12,11 @@ export default function SignupRequests({ onStatsUpdate }) {
   const [totalPages, setTotalPages] = useState(1)
   const [selectedStatus, setSelectedStatus] = useState("pending")
   const [actionLoading, setActionLoading] = useState({})
+
+  // Modal states
+  const [showApprovalModal, setShowApprovalModal] = useState(false)
+  const [showRejectionModal, setShowRejectionModal] = useState(false)
+  const [selectedRequest, setSelectedRequest] = useState(null)
 
   useEffect(() => {
     fetchRequests()
@@ -23,9 +30,7 @@ export default function SignupRequests({ onStatsUpdate }) {
         limit: 10,
         status: selectedStatus,
       }
-
       const response = await apiService.getAllSignupRequests(params)
-
       if (response.success) {
         setRequests(response.data.requests)
         setTotalPages(response.data.pagination.total_pages)
@@ -37,15 +42,28 @@ export default function SignupRequests({ onStatsUpdate }) {
     }
   }
 
-  const handleApprove = async (requestId) => {
+  const handleApproveClick = (request) => {
+    setSelectedRequest(request)
+    setShowApprovalModal(true)
+  }
+
+  const handleRejectClick = (request) => {
+    setSelectedRequest(request)
+    setShowRejectionModal(true)
+  }
+
+  const handleApprove = async (requestId, password, additionalInfo) => {
     try {
       setActionLoading((prev) => ({ ...prev, [requestId]: "approving" }))
-
-      const response = await apiService.approveSignupRequest(requestId)
-
+      const response = await apiService.approveSignupRequest(requestId, {
+        password,
+        additionalInfo,
+      })
       if (response.success) {
         await fetchRequests()
         onStatsUpdate?.()
+        setShowApprovalModal(false)
+        setSelectedRequest(null)
       } else {
         alert(response.message || "Erreur lors de l'approbation")
       }
@@ -57,15 +75,15 @@ export default function SignupRequests({ onStatsUpdate }) {
     }
   }
 
-  const handleReject = async (requestId) => {
+  const handleReject = async (requestId, reason) => {
     try {
       setActionLoading((prev) => ({ ...prev, [requestId]: "rejecting" }))
-
-      const response = await apiService.rejectSignupRequest(requestId)
-
+      const response = await apiService.rejectSignupRequest(requestId, { reason })
       if (response.success) {
         await fetchRequests()
         onStatsUpdate?.()
+        setShowRejectionModal(false)
+        setSelectedRequest(null)
       } else {
         alert(response.message || "Erreur lors du rejet")
       }
@@ -110,7 +128,6 @@ export default function SignupRequests({ onStatsUpdate }) {
             <p className="text-gray-600 mt-1">Gérez les demandes d'accès à votre plateforme</p>
           </div>
         </div>
-
         <div className="flex items-center space-x-4">
           <select
             value={selectedStatus}
@@ -148,7 +165,6 @@ export default function SignupRequests({ onStatsUpdate }) {
               {requests.map((request) => {
                 const statusBadge = getStatusBadge(request.status)
                 const isLoading = actionLoading[request._id]
-
                 return (
                   <tr key={request._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -184,14 +200,14 @@ export default function SignupRequests({ onStatsUpdate }) {
                       {request.status === "pending" && (
                         <div className="flex space-x-3">
                           <button
-                            onClick={() => handleApprove(request._id)}
+                            onClick={() => handleApproveClick(request)}
                             disabled={isLoading}
                             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 shadow-sm"
                           >
                             {isLoading === "approving" ? "Approbation..." : "Approuver"}
                           </button>
                           <button
-                            onClick={() => handleReject(request._id)}
+                            onClick={() => handleRejectClick(request)}
                             disabled={isLoading}
                             className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 shadow-sm"
                           >
@@ -265,6 +281,32 @@ export default function SignupRequests({ onStatsUpdate }) {
           </div>
         )}
       </div>
+
+      {/* Approval Modal */}
+      {showApprovalModal && selectedRequest && (
+        <ApprovalModal
+          request={selectedRequest}
+          onApprove={handleApprove}
+          onCancel={() => {
+            setShowApprovalModal(false)
+            setSelectedRequest(null)
+          }}
+          loading={actionLoading[selectedRequest._id] === "approving"}
+        />
+      )}
+
+      {/* Rejection Modal */}
+      {showRejectionModal && selectedRequest && (
+        <RejectionModal
+          request={selectedRequest}
+          onReject={handleReject}
+          onCancel={() => {
+            setShowRejectionModal(false)
+            setSelectedRequest(null)
+          }}
+          loading={actionLoading[selectedRequest._id] === "rejecting"}
+        />
+      )}
     </div>
   )
 }

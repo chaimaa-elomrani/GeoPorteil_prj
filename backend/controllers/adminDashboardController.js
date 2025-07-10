@@ -1,5 +1,7 @@
 const User = require("../models/User")
-const SignupRequest = require("../models/User")
+const SignupRequest = require("../models/SignupRequest")
+const emailService = require("../services/emailService")
+const { getApprovalEmailTemplate, getRejectionEmailTemplate } = require("../utils/emailTemplates")
 
 const adminDashboardController = {
   // GET /api/admin/signup-requests - Get all pending signup requests
@@ -24,169 +26,48 @@ const adminDashboardController = {
     }
   },
 
-  // GET /api/admin/signup-requests/all - Get all signup requests (pending, approved, rejected)
+  // GET /api/admin/signup-requests/all - Get all signup requests with pagination
   async getAllSignupRequests(req, res) {
     try {
-      const { status, page = 1, limit = 10 } = req.query
-      const filter = {}
-      if (status && ["pending", "approved", "rejected"].includes(status)) {
+      const page = parseInt(req.query.page) || 1
+      const limit = parseInt(req.query.limit) || 10
+      const status = req.query.status || "all"
+      const skip = (page - 1) * limit
+
+      let filter = {}
+      if (status !== "all") {
         filter.status = status
       }
 
-      const skip = (page - 1) * limit
-      const requests = await SignupRequest.find(filter)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(Number.parseInt(limit))
-        .select("-__v")
+      const [requests, totalCount] = await Promise.all([
+        SignupRequest.find(filter)
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limit)
+          .select("-__v"),
+        SignupRequest.countDocuments(filter),
+      ])
 
-      const total = await SignupRequest.countDocuments(filter)
+      const totalPages = Math.ceil(totalCount / limit)
 
       res.json({
         success: true,
-        message: "All signup requests fetched successfully",
+        message: "Signup requests fetched successfully",
         data: {
           requests,
           pagination: {
-            current_page: Number.parseInt(page),
-            total_pages: Math.ceil(total / limit),
-            total_requests: total,
-            per_page: Number.parseInt(limit),
+            current_page: page,
+            total_pages: totalPages,
+            total_count: totalCount,
+            per_page: limit,
           },
         },
       })
     } catch (err) {
-      console.error("error in fetching the signup requests", err)
-      res.status(500).json({
-        success: false,
-        message: "internal server error",
-      })
-    }
-  },
-
-  // POST /api/admin/signup-requests/:id/approve - Approve a signup request
-  async approveSignupRequest(req, res) {
-    try {
-      const { id } = req.params
-      console.log("approve signup request for ID:", id)
-
-      const request = await SignupRequest.findById(id)
-      console.log("Found request:", request)
-
-      if (!request) {
-        return res.status(404).json({
-          success: false,
-          message: "Signup request not found",
-        })
-      }
-
-      if (request.status !== "pending") {
-        return res.status(400).json({
-          success: false,
-          message: `Request is already ${request.status}`,
-        })
-      }
-
-      // Check if user already exists
-      const existingUser = await User.findOne({ email: request.email })
-      if (existingUser) {
-        return res.status(400).json({
-          success: false,
-          message: "User already exists",
-        })
-      }
-
-      // Create new user
-      const emailUsername = request.email.split("@")[0]
-
-      const newUser = new User({
-        name: emailUsername,
-        email: request.email,
-        password: "TempPassword123!", // Temporary password
-        role: "client",
-        firstName: emailUsername,
-        lastName: "",
-        phone: "",
-        organization: "",
-      })
-
-      console.log("Creating user with data:", {
-        name: newUser.name,
-        email: newUser.email,
-        role: newUser.role,
-      })
-
-      await newUser.save()
-
-      // Update request status
-      request.status = "approved"
-      request.approvedAt = new Date()
-      await request.save()
-
-      console.log("Signup request approved successfully")
-
-      res.json({
-        success: true,
-        message: "Signup request approved successfully",
-        data: {
-          user: {
-            id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            role: newUser.role,
-          },
-          request: request,
-        },
-      })
-    } catch (err) {
-      console.error("Error in approving signup request:", err)
+      console.error("Error fetching all signup requests:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
-        debug: process.env.NODE_ENV === "development" ? err.message : undefined,
-      })
-    }
-  },
-
-  // POST /api/admin/signup-requests/:id/reject - Reject a signup request
-  async rejectSignupRequest(req, res) {
-    try {
-      const { id } = req.params
-      console.log("reject signup request")
-
-      const request = await SignupRequest.findById(id)
-      if (!request) {
-        return res.status(404).json({
-          success: false,
-          message: "Signup request not found",
-        })
-      }
-
-      if (request.status !== "pending") {
-        return res.status(400).json({
-          success: false,
-          message: `Request is already ${request.status}`,
-        })
-      }
-
-      request.status = "rejected"
-      request.rejectedAt = new Date()
-      await request.save()
-
-      console.log("Signup request rejected successfully")
-
-      res.json({
-        success: true,
-        message: "Signup request rejected successfully",
-        data: {
-          request: request, // Fixed: was returning SignupRequest model instead of request instance
-        },
-      })
-    } catch (err) {
-      console.error("error in rejecting the signup request", err)
-      res.status(500).json({
-        success: false,
-        message: "internal server error",
       })
     }
   },
@@ -203,22 +84,24 @@ const adminDashboardController = {
         SignupRequest.find().sort({ createdAt: -1 }).limit(5).select("email status createdAt"),
       ])
 
+      const totalRequests = pendingRequests + approvedRequests + rejectedRequests
+
       res.json({
         success: true,
-        message: "Dashboard stats retrieved successfully",
+        message: "Dashboard stats fetched successfully",
         data: {
           stats: {
             total_users: totalUsers,
             pending_requests: pendingRequests,
             approved_requests: approvedRequests,
             rejected_requests: rejectedRequests,
-            total_requests: pendingRequests + approvedRequests + rejectedRequests,
+            total_requests: totalRequests,
           },
           recent_requests: recentRequests,
         },
       })
-    } catch (error) {
-      console.error("Error fetching dashboard stats:", error)
+    } catch (err) {
+      console.error("Error fetching dashboard stats:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -226,36 +109,44 @@ const adminDashboardController = {
     }
   },
 
-  // GET /api/admin/users - Get all users
+  // GET /api/admin/users - Get all users with pagination
   async getAllUsers(req, res) {
     try {
-      console.log("fetching users")
-      const { role, page = 1, limit = 10 } = req.query
-      const filter = {}
+      const page = parseInt(req.query.page) || 1
+      const limit = parseInt(req.query.limit) || 10
+      const search = req.query.search || ""
+      const role = req.query.role || "all"
+      const status = req.query.status || "all"
+      const skip = (page - 1) * limit
 
-      if (
-        role &&
-        [
-          "admin",
-          "Directeur technique",
-          "Directeur generale",
-          "Directeur administratif",
-          "Technicien",
-          "chef de projet",
-          "client",
-        ].includes(role)
-      ) {
+      let filter = {}
+
+      if (search) {
+        filter.$or = [
+          { nom: { $regex: search, $options: "i" } },
+          { prenom: { $regex: search, $options: "i" } },
+          { email: { $regex: search, $options: "i" } },
+        ]
+      }
+
+      if (role !== "all") {
         filter.role = role
       }
 
-      const skip = (page - 1) * limit
-      const users = await User.find(filter)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(Number.parseInt(limit))
-        .select("-password -__v")
+      if (status !== "all") {
+        filter.status = status
+      }
 
-      const total = await User.countDocuments(filter)
+      const [users, totalCount] = await Promise.all([
+        User.find(filter)
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limit)
+          .select("-password -__v"),
+        User.countDocuments(filter),
+      ])
+
+      const totalPages = Math.ceil(totalCount / limit)
 
       res.json({
         success: true,
@@ -263,10 +154,10 @@ const adminDashboardController = {
         data: {
           users,
           pagination: {
-            current_page: Number.parseInt(page),
-            total_pages: Math.ceil(total / limit),
-            total_users: total,
-            per_page: Number.parseInt(limit),
+            current_page: page,
+            total_pages: totalPages,
+            total_count: totalCount,
+            per_page: limit,
           },
         },
       })
@@ -286,7 +177,7 @@ const adminDashboardController = {
 
       // Check if user already exists
       const existingUser = await User.findOne({
-        $or: [{ email: userData.email }, { name: userData.name }],
+        $or: [{ email: userData.email }, { nom: userData.nom, prenom: userData.prenom }],
       })
 
       if (existingUser) {
@@ -316,6 +207,7 @@ const adminDashboardController = {
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        debug: process.env.NODE_ENV === "development" ? err.message : undefined,
       })
     }
   },
@@ -326,14 +218,15 @@ const adminDashboardController = {
       const { id } = req.params
       const updateData = req.body
 
-      // Remove password from update if it's empty
-      if (!updateData.password) {
+      // Remove password from update data if it's empty
+      if (updateData.password === "") {
         delete updateData.password
       }
 
-      const updatedUser = await User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }).select(
-        "-password",
-      )
+      const updatedUser = await User.findByIdAndUpdate(id, updateData, {
+        new: true,
+        runValidators: true,
+      }).select("-password -__v")
 
       if (!updatedUser) {
         return res.status(404).json({
@@ -354,6 +247,7 @@ const adminDashboardController = {
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        debug: process.env.NODE_ENV === "development" ? err.message : undefined,
       })
     }
   },
@@ -375,23 +269,29 @@ const adminDashboardController = {
       res.json({
         success: true,
         message: "User deleted successfully",
+        data: {
+          user: {
+            id: deletedUser._id,
+            email: deletedUser.email,
+          },
+        },
       })
     } catch (err) {
       console.error("Error deleting user:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        debug: process.env.NODE_ENV === "development" ? err.message : undefined,
       })
     }
   },
 
-  // POST /api/admin/users/:id/suspend - Suspend a user
-  async suspendUser(req, res) {
+  // POST /api/admin/users/:id/unsuspend - Unsuspend user
+  async unsupendUser(req, res) {
     try {
-      const { id } = req.pamas
-      const { reason } = req.body
+      const { id } = req.params
 
-      console.log(`Suspending user with ID : ${id}`)
+      console.log(`Unsuspending user with ID: ${id}`)
 
       const user = await User.findById(id)
       if (!user) {
@@ -401,100 +301,225 @@ const adminDashboardController = {
         })
       }
 
-      if (user.status === "suspended") {
+      if (user.status !== "suspended") {
         return res.status(400).json({
           success: false,
-          message: "User is already suspended",
+          message: "User is not suspended",
         })
       }
 
-      // update user status 
-      const updatedUser = await User.findByIdAndUpdate(id, {
-        status: "suspended",
-        suspendedAt: new Date(),
-        suspensionReason: reason,
-      },
-        { new: true, runValidators: true }
-      ).select("-password -__v")
+      // Update user status back to active
+      user.status = 'active'
+      user.suspensionReason = undefined // Remove suspension reason
+      user.suspendedAt = undefined // Remove suspension date
 
-      console.log("user suspended successfully")
+      await user.save()
+
       res.json({
         success: true,
-        message: "User suspended successfully",
+        message: "User unsuspended successfully",
         data: {
-          user: updatedUser,
+          user: {
+            id: user._id,
+            status: user.status,
+          }
         }
       })
+
     } catch (err) {
-      console.error("Error suspending user:", err)
+      console.error("Error unsuspending user:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
+        error: err.message
       })
     }
   },
 
-  // POST /api/admin/users/:id/unsuspend - Unsuspend a user
-  async unsupendUser(req, res) {
+  // Updated approve signup request method
+  async approveSignupRequest(req, res) {
     try {
       const { id } = req.params
-    
-      console.log("=== UNSUSPEND USER DEBUG ===")
-      console.log("User ID:", id)
-    
-      // Find the user
-      const user = await User.findById(id)
-    
-      if (!user) {
-        console.log("User not found")
+      const { password, additionalInfo } = req.body
+
+      console.log("approve signup request for ID:", id)
+
+      const request = await SignupRequest.findById(id)
+      console.log("Found request:", request)
+
+      if (!request) {
         return res.status(404).json({
           success: false,
-          message: "User not found"
+          message: "Signup request not found",
         })
       }
-    
-      console.log("Current user status:", user.status)
-      console.log("User object:", JSON.stringify(user, null, 2))
-    
-      // Check if user is suspended (be flexible with the check)
-      if (user.status !== 'suspended') {
-        console.log("User is not suspended. Current status:", user.status)
+
+      if (request.status !== "pending") {
         return res.status(400).json({
           success: false,
-          message: `User is not suspended. Current status: ${user.status}`
+          message: `Request is already ${request.status}`,
         })
       }
-    
-      // Update user status back to active
-      user.status = 'active'
-      user.suspensionReason = undefined; // Remove suspension reason
-      user.suspensionDuration = undefined; // Remove suspension duration
-      user.unsuspendedAt = new Date()
-    
-      await user.save()
-    
-      console.log("User unsuspended successfully")
-    
+
+      // Check if user already exists
+      const existingUser = await User.findOne({ email: request.email })
+      if (existingUser) {
+        return res.status(400).json({
+          success: false,
+          message: "User already exists",
+        })
+      }
+
+      // Validate password
+      if (!password || password.length < 8) {
+        return res.status(400).json({
+          success: false,
+          message: "Password must be at least 8 characters long",
+        })
+      }
+
+      // Create new user
+      const newUser = new User({
+        nom: request.nom,
+        prenom: request.prenom,
+        email: request.email,
+        password: password, // The password from the form
+        role: "client",
+        phone: request.phone || "",
+        status: "active",
+        signupRequestId: request._id,
+      })
+
+      console.log("Creating user with data:", {
+        nom: newUser.nom,
+        prenom: newUser.prenom,
+        email: newUser.email,
+        role: newUser.role,
+      })
+
+      await newUser.save()
+
+      // Update request status
+      request.status = "approved"
+      request.approvedAt = new Date()
+      request.approvedBy = req.user?.id // If you have user authentication
+      await request.save()
+
+      // Send approval email
+      try {
+        const emailTemplate = getApprovalEmailTemplate(request.email, password, additionalInfo)
+
+        await emailService.transporter.sendMail({
+          from: `"${process.env.APP_NAME || "Geoporteil"}" <${process.env.SMTP_USER}>`,
+          to: request.email,
+          subject: emailTemplate.subject,
+          html: emailTemplate.html,
+          text: emailTemplate.text,
+        })
+
+        console.log("Approval email sent successfully")
+      } catch (emailError) {
+        console.error("Error sending approval email:", emailError)
+        // Don't fail the request if email fails, but log it
+      }
+
+      console.log("Signup request approved successfully")
+
       res.json({
         success: true,
-        message: "User unsuspended successfully",
-        user: {
-          id: user._id,
-          status: user.status,
-          unsuspendedAt: user.unsuspendedAt
-        }
+        message: "Signup request approved successfully and email sent",
+        data: {
+          user: {
+            id: newUser._id,
+            nom: newUser.nom,
+            prenom: newUser.prenom,
+            email: newUser.email,
+            role: newUser.role,
+          },
+          request: request,
+        },
       })
-    
-    } catch (error) {
-      console.error("Error unsuspending user:", error)
+    } catch (err) {
+      console.error("Error in approving signup request:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
-        error: error.message
+        debug: process.env.NODE_ENV === "development" ? err.message : undefined,
       })
     }
-  }, 
+  },
 
+  // Updated reject signup request method
+  async rejectSignupRequest(req, res) {
+    try {
+      const { id } = req.params
+      const { reason } = req.body
+
+      console.log("reject signup request")
+
+      if (!reason || reason.trim().length < 10) {
+        return res.status(400).json({
+          success: false,
+          message: "Rejection reason must be at least 10 characters long",
+        })
+      }
+
+      const request = await SignupRequest.findById(id)
+      if (!request) {
+        return res.status(404).json({
+          success: false,
+          message: "Signup request not found",
+        })
+      }
+
+      if (request.status !== "pending") {
+        return res.status(400).json({
+          success: false,
+          message: `Request is already ${request.status}`,
+        })
+      }
+
+      request.status = "rejected"
+      request.rejectedAt = new Date()
+      request.rejectionReason = reason.trim()
+      request.rejectedBy = req.user?.id // If you have user authentication
+      await request.save()
+
+      // Send rejection email
+      try {
+        const emailTemplate = getRejectionEmailTemplate(request.email, reason.trim())
+
+        await emailService.transporter.sendMail({
+          from: `"${process.env.APP_NAME || "Geoporteil"}" <${process.env.SMTP_USER}>`,
+          to: request.email,
+          subject: emailTemplate.subject,
+          html: emailTemplate.html,
+          text: emailTemplate.text,
+        })
+
+        console.log("Rejection email sent successfully")
+      } catch (emailError) {
+        console.error("Error sending rejection email:", emailError)
+        // Don't fail the request if email fails, but log it
+      }
+
+      console.log("Signup request rejected successfully")
+
+      res.json({
+        success: true,
+        message: "Signup request rejected successfully and email sent",
+        data: {
+          request: request,
+        },
+      })
+    } catch (err) {
+      console.error("error in rejecting the signup request", err)
+      res.status(500).json({
+        success: false,
+        message: "internal server error",
+      })
+    }
+  },
 }
 
 module.exports = adminDashboardController
