@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/auth/login`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

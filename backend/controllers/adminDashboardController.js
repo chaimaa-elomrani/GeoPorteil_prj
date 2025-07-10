@@ -1,5 +1,5 @@
 const User = require("../models/User")
-const SignupRequest = require("../models/SignupRequest")
+const SignupRequest = require("../models/User")
 
 const adminDashboardController = {
   // GET /api/admin/signup-requests - Get all pending signup requests

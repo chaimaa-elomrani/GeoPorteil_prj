@@ -20,5 +20,7 @@ router.delete('/delete/:id', clientController.deleteClient);
 router.put('/:id/archive', clientController.archiveClient);
 router.put('/:id/blacklist', clientController.blacklistClient);
 router.put('/:id/unblacklist', clientController.unblacklistClient); 
+router.put('/:id/unarchive', clientController.unarchiveClient); 
+
 
 module.exports = router; 

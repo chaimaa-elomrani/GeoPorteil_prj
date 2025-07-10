@@ -3,12 +3,20 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
 
-    name: {
+   nom: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
         trim: true,
     },
+
+    prenom: {
+        type: String,
+        required: true,
+        unique: false,
+        trim: true,
+    },
+    
     
     email: {
         type: String,
@@ -20,7 +28,7 @@ const userSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: true,
+        required: false,
         minlength: 6,
     },
 
@@ -39,8 +47,8 @@ const userSchema = new mongoose.Schema({
 
     status:{
         type: String,
-        enum: ['active', 'suspended', 'blocked'],
-        default: 'active'
+        enum: ['active', 'pending', 'blocked'],
+        default: 'pending',
     },
     suspendedAt: Date,
     suspensionReason: String,
