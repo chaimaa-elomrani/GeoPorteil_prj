@@ -12,6 +12,7 @@ console.log("- ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
 // Now import everything else
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const testRoutes = require('./routes/testRoutes');
 
@@ -26,8 +27,12 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true // Allow cookies to be sent
+}));
 app.use(express.json());
+app.use(cookieParser()); // Parse cookies
 
 // Routes
 app.use('/api/authRoutes', authRoutes);

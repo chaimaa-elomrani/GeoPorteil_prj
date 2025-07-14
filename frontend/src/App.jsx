@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute"
 import AdminDashboard from "./components/AdminDashboard"
 import GeoJsonImport from "./components/GeoJsonImport"
 import ProjectsMap from "./components/ProjectsMap"
+import SecurityDemoPage from "./pages/SecurityDemoPage"
 
 // import ProjectsMap from "./components/ProjectsMap"
 import "./App.css"
@@ -24,6 +25,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/projects" element={<ProjectsMap />} />
           <Route path="/projects/import" element={<GeoJsonImport />} />
+          <Route path="/security-demo" element={<SecurityDemoPage />} />
        
 
           {/* Protected Routes */}

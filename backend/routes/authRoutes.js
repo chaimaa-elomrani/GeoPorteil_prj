@@ -14,5 +14,6 @@ const validateLogin = [
 router.post('/login', loginLimiter, validateLogin, authController.login);
 router.post('/logout', authController.logout);
 router.get('/current-user', authController.getCurrentUser);
+router.post('/verify-token', authController.verifyToken);
 
 module.exports = router;

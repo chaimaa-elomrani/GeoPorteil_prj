@@ -71,19 +71,31 @@ const authController = {
             // Log successful login
             await securityLogger.logLoginSuccess(user._id, email, ip, userAgent);
             
-            // Send success response
+            // Set HttpOnly cookie for token (most secure)
+            res.cookie('authToken', token, {
+                httpOnly: true, // Prevents JavaScript access
+                secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+                sameSite: 'strict', // CSRF protection
+                maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
+            });
+
+            // Send success response with user data
+            // Include token for encrypted localStorage fallback if needed
             res.status(200).json({
                 success: true,
                 message: 'User logged in successfully',
                 data: {
-                    token,
                     user: {
                         id: user._id,
                         email: user.email,
                         role: user.role,
-                        username: user.name,
+                        nom: user.nom,
+                        prenom: user.prenom,
                         createdAt: user.createdAt,
-                    }
+                    },
+                    // Provide token for encrypted storage fallback
+                    // Note: HttpOnly cookie is preferred, this is for compatibility
+                    token: process.env.PROVIDE_TOKEN_FALLBACK === 'true' ? token : undefined
                 }
             });
 
@@ -104,6 +116,13 @@ const authController = {
     },
 
     async logout(req, res) {
+        // Clear the HttpOnly cookie
+        res.clearCookie('authToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        });
+
         res.json({
             success: true,
             message: 'User logged out successfully',
@@ -113,24 +132,113 @@ const authController = {
 
     async getCurrentUser(req, res) {
         try {
-            const user = await User.findById(req.user.userId);
+            // Get token from cookie
+            const token = req.cookies.authToken;
+
+            if (!token) {
+                return res.status(401).json({
+                    success: false,
+                    message: 'No authentication token found'
+                });
+            }
+
+            // Verify token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            // Get user from database
+            const user = await User.findById(decoded.userId).select('-password');
 
             if (!user) {
-                return res.status(404).json({
+                return res.status(401).json({
                     success: false,
-                    message: "User not found"
+                    message: 'User not found'
+                });
+            }
+
+            if (user.status !== 'active') {
+                return res.status(401).json({
+                    success: false,
+                    message: 'Account is not active'
                 });
             }
 
             res.json({
                 success: true,
-                data: { user }
+                message: 'User authenticated',
+                data: {
+                    user: {
+                        id: user._id,
+                        email: user.email,
+                        role: user.role,
+                        nom: user.nom,
+                        prenom: user.prenom,
+                        createdAt: user.createdAt,
+                    }
+                }
             });
-        } catch (err) {
-            console.error("error in the method getCurrentUser", err);
-            res.status(500).json({
+
+        } catch (error) {
+            console.error('Get current user error:', error);
+            return res.status(401).json({
                 success: false,
-                message: "Internal server error"
+                message: 'Invalid token'
+            });
+        }
+    },
+
+    async verifyToken(req, res) {
+        try {
+            // Get token from Authorization header
+            const authHeader = req.headers.authorization;
+            const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+            if (!token) {
+                return res.status(401).json({
+                    success: false,
+                    message: 'No token provided'
+                });
+            }
+
+            // Verify token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            // Get user from database
+            const user = await User.findById(decoded.userId).select('-password');
+
+            if (!user) {
+                return res.status(401).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+
+            if (user.status !== 'active') {
+                return res.status(401).json({
+                    success: false,
+                    message: 'Account is not active'
+                });
+            }
+
+            res.json({
+                success: true,
+                message: 'Token verified',
+                data: {
+                    user: {
+                        id: user._id,
+                        email: user.email,
+                        role: user.role,
+                        nom: user.nom,
+                        prenom: user.prenom,
+                        createdAt: user.createdAt,
+                    }
+                }
+            });
+
+        } catch (error) {
+            console.error('Token verification error:', error);
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid token'
             });
         }
     }

@@ -4,15 +4,21 @@ const User = require('../models/User');
 
 const adminAuth = async(req , res , next) => {
     try{
-        console.log('checking admin auth'); 
+        console.log('checking admin auth');
 
-        const  token = req.header('Authorization')?.replace('Bearer ', '');
+        // Try to get token from HttpOnly cookie first (most secure)
+        let token = req.cookies?.authToken;
+
+        // Fallback to Authorization header for backward compatibility
+        if (!token) {
+            token = req.header('Authorization')?.replace('Bearer ', '');
+        }
 
         if(!token){
             return res.status(401).json({
                 success:false,
-                message: "access denied, no token provided" 
-            }); 
+                message: "access denied, no token provided"
+            });
         }
 
         const decoded =jwt.verify(token, process.env.JWT_SECRET); 
