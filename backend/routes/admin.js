@@ -82,6 +82,11 @@ router.post('/users/:id/suspend', async (req, res) => {
 })
 router.post('/users/:id/unsuspend', adminDashboardController.unsupendUser)
 
+// Projects management
+router.get("/projects", adminDashboardController.getAllProjects)
+router.get("/projects/:id", adminDashboardController.getProjectById)
+router.put("/projects/:id", adminDashboardController.updateProject)
+router.delete("/projects/:id", adminDashboardController.deleteProject)
+router.post("/projects/import-geojson", adminDashboardController.createProjectFromGeoJSON)
 
-    
 module.exports = router

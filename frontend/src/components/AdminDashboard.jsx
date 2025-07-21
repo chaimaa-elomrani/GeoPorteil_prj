@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import Sidebar from "./Sidebar"
 import Header from "./Header"
 import DashboardOverview from "./DashboardOverview"
@@ -9,7 +10,7 @@ import SignupRequests from "./SignupRequests"
 import { apiService } from "../services/api"
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("dashboard")
+  const location = useLocation()
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -18,6 +19,18 @@ export default function AdminDashboard() {
     role: "Administrateur",
     avatar: "AU",
   })
+
+  // Determine active tab based on current URL
+  const getActiveTab = () => {
+    const path = location.pathname
+    if (path.includes('/admin/users')) return 'users'
+    if (path.includes('/admin/signup-requests')) return 'requests'
+    if (path.includes('/projects')) return 'projects'
+    if (path.includes('/security-demo')) return 'security'
+    return 'dashboard'
+  }
+
+  const activeTab = getActiveTab()
 
   const fetchDashboardStats = async () => {
     try {
@@ -80,11 +93,16 @@ export default function AdminDashboard() {
             <p className="text-gray-600">Section des projets en cours de développement...</p>
           </div>
         )
-      case "reports":
+      case "security":
         return (
           <div className="p-6 bg-white rounded-lg shadow-sm">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Rapports</h2>
-            <p className="text-gray-600">Section des rapports et analyses...</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Sécurité</h2>
+            <p className="text-gray-600">
+              Fonctionnalités de sécurité disponibles dans la{" "}
+              <a href="/security-demo" className="text-blue-600 hover:underline">
+                page de démonstration sécurité
+              </a>
+            </p>
           </div>
         )
       default:
@@ -94,7 +112,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
+      <Sidebar user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header activeTab={activeTab} user={user} onRefresh={fetchDashboardStats} />
         <main className="flex-1 overflow-y-auto p-6">

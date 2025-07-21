@@ -185,6 +185,56 @@ class ApiService {
       body: JSON.stringify({ email }),
     })
   }
+
+  // Projects API methods
+  async getAllProjects() {
+    try {
+      console.log("🔄 Fetching all projects...")
+      const response = await this.request("/admin/projects", {
+        method: "GET",
+      })
+      console.log("📊 Projects API response:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error fetching projects:", error)
+      throw error
+    }
+  }
+
+  async getProjectById(id) {
+    return this.request(`/admin/projects/${id}`, {
+      method: "GET",
+    })
+  }
+
+  async updateProject(id, projectData) {
+    try {
+      console.log("🔄 Updating project:", id, projectData)
+      const response = await this.request(`/admin/projects/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(projectData),
+      })
+      console.log("✅ Project updated successfully:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error updating project:", error)
+      throw error
+    }
+  }
+
+  async deleteProject(id) {
+    try {
+      console.log("🗑️ Deleting project:", id)
+      const response = await this.request(`/admin/projects/${id}`, {
+        method: "DELETE",
+      })
+      console.log("✅ Project deleted successfully:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error deleting project:", error)
+      throw error
+    }
+  }
 }
 
 export const apiService = new ApiService()
@@ -210,4 +260,61 @@ export async function post(path, data, auth = false) {
   }
 
   return responseData
+}
+
+
+// Helper function to test data transformation
+export const testDataTransformation = (rawData) => {
+  console.log("🧪 Testing data transformation...")
+  console.log("📥 Raw data:", rawData)
+
+  // Test different response structures
+  let transformedData = []
+
+  if (rawData.data && Array.isArray(rawData.data)) {
+    transformedData = rawData.data
+    console.log("✅ Transformation: Using rawData.data")
+  } else if (Array.isArray(rawData)) {
+    transformedData = rawData
+    console.log("✅ Transformation: Using rawData directly")
+  } else if (rawData.projects && Array.isArray(rawData.projects)) {
+    transformedData = rawData.projects
+    console.log("✅ Transformation: Using rawData.projects")
+  } else {
+    console.warn("⚠️ Transformation: Unknown data structure")
+    transformedData = []
+  }
+
+  console.log("📤 Transformed data:", transformedData)
+  console.log("📊 Data count:", transformedData.length)
+
+  return transformedData
+}
+
+// Create project from GeoJSON data
+export const createProjectFromGeoJSON = async (projectData) => {
+  try {
+    console.log("🗺️ Creating project from GeoJSON:", projectData)
+
+    const response = await fetch('/api/admin/projects/import-geojson', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(projectData)
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Failed to create project from GeoJSON')
+    }
+
+    console.log("✅ GeoJSON project created successfully:", result.data)
+    return result
+  } catch (error) {
+    console.error("❌ Error creating GeoJSON project:", error)
+    throw error
+  }
 }

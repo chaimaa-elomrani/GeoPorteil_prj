@@ -9,6 +9,17 @@ import AdminDashboard from "./components/AdminDashboard"
 import GeoJsonImport from "./components/GeoJsonImport"
 import ProjectsMap from "./components/ProjectsMap"
 import SecurityDemoPage from "./pages/SecurityDemoPage"
+import ProjectsDashboard from "./components/ProjectsDashboard"
+import ProjectDetail from "./components/ProjectDetail"
+import ProjectsMapWithProject from "./components/ProjectsMapWithProject"
+import AdminUsersPage from "./pages/AdminUsersPage"
+import AdminSignupRequestsPage from "./pages/AdminSignupRequestsPage"
+import ProjectsPage from "./pages/ProjectsPage"
+import ProjectDetailPage from "./pages/ProjectDetailPage"
+import ProjectsMapPage from "./pages/ProjectsMapPage"
+import ProjectMapWithProjectPage from "./pages/ProjectMapWithProjectPage"
+import ProjectEditPage from "./pages/ProjectEditPage"
+
 
 // import ProjectsMap from "./components/ProjectsMap"
 import "./App.css"
@@ -23,12 +34,58 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/pending-approval" element={<PendingApprovalPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/projects" element={<ProjectsMap />} />
-          <Route path="/projects/import" element={<GeoJsonImport />} />
+          <Route
+            path="/projects"
+            element={
+              <ProtectedRoute>
+                <ProjectsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/:id"
+            element={
+              <ProtectedRoute>
+                <ProjectDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/:id/edit"
+            element={
+              <ProtectedRoute>
+                <ProjectEditPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/map"
+            element={
+              <ProtectedRoute>
+                <ProjectsMapPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/map/:projectId"
+            element={
+              <ProtectedRoute>
+                <ProjectMapWithProjectPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/import"
+            element={
+              <ProtectedRoute>
+                <GeoJsonImport />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/security-demo" element={<SecurityDemoPage />} />
-       
 
-          {/* Protected Routes */}
+
+          {/* Protected Admin Routes */}
           <Route
             path="/admin-dashboard"
             element={
@@ -38,6 +95,25 @@ function App() {
             }
           />
 
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminUsersPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/signup-requests"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminSignupRequestsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Protected User Routes */}
           <Route
             path="/dashboard"
             element={

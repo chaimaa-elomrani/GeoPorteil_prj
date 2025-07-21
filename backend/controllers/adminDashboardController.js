@@ -1,5 +1,6 @@
 const User = require("../models/User")
 const SignupRequest = require("../models/SignupRequest")
+const Project = require("../models/Project")
 const emailService = require("../services/emailService")
 const { getApprovalEmailTemplate, getRejectionEmailTemplate } = require("../utils/emailTemplates")
 
@@ -518,6 +519,121 @@ const adminDashboardController = {
         success: false,
         message: "internal server error",
       })
+    }
+  },
+
+  // Projects management
+  async getAllProjects(req, res) {
+    try {
+      const projects = await Project.find().sort({ createdAt: -1 })
+      res.json({ success: true, data: projects })
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la récupération des projets' })
+    }
+  },
+
+  async getProjectById(req, res) {
+    try {
+      const { id } = req.params
+      const project = await Project.findById(id)
+
+      if (!project) {
+        return res.status(404).json({ success: false, message: 'Projet non trouvé' })
+      }
+
+      res.json({ success: true, data: project })
+    } catch (error) {
+      console.error('Error fetching project:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la récupération du projet' })
+    }
+  },
+
+  async updateProject(req, res) {
+    try {
+      const { id } = req.params
+      const updateData = req.body
+
+      const project = await Project.findByIdAndUpdate(
+        id,
+        { ...updateData, updatedAt: new Date() },
+        { new: true, runValidators: true }
+      )
+
+      if (!project) {
+        return res.status(404).json({ success: false, message: 'Projet non trouvé' })
+      }
+
+      res.json({ success: true, data: project, message: 'Projet mis à jour avec succès' })
+    } catch (error) {
+      console.error('Error updating project:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour du projet' })
+    }
+  },
+
+  async deleteProject(req, res) {
+    try {
+      const { id } = req.params
+
+      const project = await Project.findByIdAndDelete(id)
+
+      if (!project) {
+        return res.status(404).json({ success: false, message: 'Projet non trouvé' })
+      }
+
+      res.json({ success: true, message: 'Projet supprimé avec succès' })
+    } catch (error) {
+      console.error('Error deleting project:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la suppression du projet' })
+    }
+  },
+
+  async createProjectFromGeoJSON(req, res) {
+    try {
+      const { name, description, geoJsonData } = req.body
+
+      // Generate unique project number
+      const projectNumber = `GEO-${Date.now()}`
+
+      // Calculate center coordinates from GeoJSON features
+      let centerLat = 0, centerLng = 0, pointCount = 0
+
+      if (geoJsonData && geoJsonData.features) {
+        geoJsonData.features.forEach(feature => {
+          if (feature.geometry.type === 'Point') {
+            centerLng += feature.geometry.coordinates[0]
+            centerLat += feature.geometry.coordinates[1]
+            pointCount++
+          }
+        })
+
+        if (pointCount > 0) {
+          centerLng = centerLng / pointCount
+          centerLat = centerLat / pointCount
+        }
+      }
+
+      const projectData = {
+        projectNumber,
+        anneeProjet: new Date().getFullYear().toString(),
+        region: "Marrakech-Safi",
+        prefecture: "Marrakech",
+        consistance: description || `Projet GeoJSON: ${name}`,
+        projectStatus: "En cours",
+        latitude: centerLat.toString(),
+        longitude: centerLng.toString(),
+        geoJsonData: geoJsonData,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+
+      const project = new Project(projectData)
+      await project.save()
+
+      res.json({ success: true, data: project, message: 'Projet GeoJSON créé avec succès' })
+    } catch (error) {
+      console.error('Error creating GeoJSON project:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la création du projet GeoJSON' })
     }
   },
 }

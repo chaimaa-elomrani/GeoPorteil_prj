@@ -20,6 +20,7 @@ const testRoutes = require('./routes/testRoutes');
 const authRoutes = require('./routes/authRoutes');
 const signupRequestRoutes = require('./routes/signupRequest');
 const adminRoutes = require('./routes/admin');
+const projectRoutes = require('./routes/projectRoutes');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(cookieParser()); // Parse cookies
 app.use('/api/authRoutes', authRoutes);
 app.use('/api/signup-request', signupRequestRoutes);
 app.use('/api/admin', adminRoutes);
+app.use("/api/admin/projects", projectRoutes)
 app.use('/api/test', testRoutes);
 // Basic route
 app.get('/', (req, res) => {

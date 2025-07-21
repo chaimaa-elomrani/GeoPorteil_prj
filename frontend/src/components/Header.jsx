@@ -1,7 +1,11 @@
 "use client"
 
-export default function Header({ activeTab, user, onRefresh }) {
+export default function Header({ activeTab, user, onRefresh, title }) {
   const getTitle = () => {
+    // If title prop is provided, use it
+    if (title) return title
+
+    // Otherwise, use activeTab to determine title
     switch (activeTab) {
       case "dashboard":
         return "Tableau de bord"
@@ -11,8 +15,8 @@ export default function Header({ activeTab, user, onRefresh }) {
         return "Demandes d'inscription"
       case "projects":
         return "Gestion des Projets"
-      case "reports":
-        return "Rapports et Analyses"
+      case "security":
+        return "Sécurité"
       default:
         return "Dashboard"
     }
