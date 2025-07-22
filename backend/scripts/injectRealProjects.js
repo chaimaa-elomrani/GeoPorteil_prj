@@ -34,7 +34,18 @@ const realProjects = [
     "coordonneesX": "219738",
     "coordonneesY": "124629",
     "status": "accepté",
-    "archived": false
+    "archived": false,
+    "images": [
+      "/background_bg.jpg",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1448630360428-65456885c650?w=400&h=300&fit=crop"
+    ],
+    "files": [
+      { "name": "Plan_architectural.pdf", "size": "2.5 MB", "type": "pdf" },
+      { "name": "Devis_estimatif.xlsx", "size": "1.2 MB", "type": "excel" },
+      { "name": "Cahier_charges.docx", "size": "850 KB", "type": "word" }
+    ]
   },
   {
     "_id": "677d12be9a6fa1883eba7cbf",
@@ -50,7 +61,16 @@ const realProjects = [
     "latitude": "31.676514",
     "longitude": "-8.046342",
     "status": "accepté",
-    "archived": false
+    "archived": false,
+    "images": [
+      "/background_bg.jpg",
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&h=300&fit=crop"
+    ],
+    "files": [
+      { "name": "Permis_construire.pdf", "size": "3.1 MB", "type": "pdf" },
+      { "name": "Plans_techniques.dwg", "size": "5.2 MB", "type": "autocad" }
+    ]
   },
   {
     "_id": "677d14f89a6fa1883eba8219",
@@ -66,7 +86,15 @@ const realProjects = [
     "latitude": "31.572958",
     "longitude": "-7.962957",
     "status": "accepté",
-    "archived": false
+    "archived": false,
+    "images": [
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+    ],
+    "files": [
+      { "name": "Etude_sol.pdf", "size": "4.7 MB", "type": "pdf" },
+      { "name": "Rapport_topographique.pdf", "size": "2.8 MB", "type": "pdf" },
+      { "name": "Photos_terrain.zip", "size": "15.3 MB", "type": "archive" }
+    ]
   },
   {
     "_id": "677e409efc4adc3947112065",
@@ -98,7 +126,20 @@ const realProjects = [
     "latitude": "31.669407",
     "longitude": "-7.928995",
     "status": "accepté",
-    "archived": false
+    "archived": false,
+    "images": [
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1590725175023-d4b0c0e0d8b3?w=400&h=300&fit=crop"
+    ],
+    "files": [
+      { "name": "Contrat_entreprise.pdf", "size": "1.8 MB", "type": "pdf" },
+      { "name": "Planning_travaux.xlsx", "size": "945 KB", "type": "excel" },
+      { "name": "Specifications_techniques.docx", "size": "1.1 MB", "type": "word" },
+      { "name": "Budget_previsionnel.xlsx", "size": "756 KB", "type": "excel" },
+      { "name": "Assurance_chantier.pdf", "size": "2.2 MB", "type": "pdf" }
+    ]
   }
 ];
 

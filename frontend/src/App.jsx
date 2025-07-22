@@ -7,18 +7,16 @@ import ForgotPasswordPage from "./components/auth/ForgotPasswordPage"
 import ProtectedRoute from "./components/auth/ProtectedRoute"
 import AdminDashboard from "./components/AdminDashboard"
 import GeoJsonImport from "./components/GeoJsonImport"
-import ProjectsMap from "./components/ProjectsMap"
-import SecurityDemoPage from "./pages/SecurityDemoPage"
-import ProjectsDashboard from "./components/ProjectsDashboard"
-import ProjectDetail from "./components/ProjectDetail"
-import ProjectsMapWithProject from "./components/ProjectsMapWithProject"
+
 import AdminUsersPage from "./pages/AdminUsersPage"
 import AdminSignupRequestsPage from "./pages/AdminSignupRequestsPage"
 import ProjectsPage from "./pages/ProjectsPage"
 import ProjectDetailPage from "./pages/ProjectDetailPage"
-import ProjectsMapPage from "./pages/ProjectsMapPage"
-import ProjectMapWithProjectPage from "./pages/ProjectMapWithProjectPage"
+
 import ProjectEditPage from "./pages/ProjectEditPage"
+import ProjectCreatePage from "./pages/ProjectCreatePage"
+import GeoJsonViewerPage from "./pages/GeoJsonViewerPage"
+import ArchivePage from "./pages/ArchivePage"
 
 
 // import ProjectsMap from "./components/ProjectsMap"
@@ -58,19 +56,12 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
-            path="/projects/map"
+            path="/projects/create"
             element={
               <ProtectedRoute>
-                <ProjectsMapPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/projects/map/:projectId"
-            element={
-              <ProtectedRoute>
-                <ProjectMapWithProjectPage />
+                <ProjectCreatePage />
               </ProtectedRoute>
             }
           />
@@ -82,7 +73,23 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/security-demo" element={<SecurityDemoPage />} />
+          <Route
+            path="/geojson-viewer"
+            element={
+              <ProtectedRoute>
+                <GeoJsonViewerPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/archive"
+            element={
+              <ProtectedRoute>
+                <ArchivePage />
+              </ProtectedRoute>
+            }
+          />
+
 
 
           {/* Protected Admin Routes */}

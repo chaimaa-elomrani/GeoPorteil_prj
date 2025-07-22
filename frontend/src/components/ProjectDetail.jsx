@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+
 import {
   ArrowLeft,
   MapPin,
@@ -17,6 +18,9 @@ import {
   Edit,
   Trash2,
   RefreshCw,
+  Image,
+  Download,
+  Eye,
 } from "lucide-react"
 import { apiService } from "../services/api"
 
@@ -122,6 +126,8 @@ export default function ProjectDetail() {
       setShowDeleteConfirm(false)
     }
   }
+
+
 
   if (loading) {
     return (
@@ -373,6 +379,123 @@ export default function ProjectDetail() {
                     <div className="mt-1">{getStatusBadge(project.projectStatus)}</div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Images Section */}
+            <div className="bg-white rounded-lg shadow-sm border">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h2 className="text-lg font-semibold text-gray-900 flex items-center space-x-2">
+                  <Image className="h-5 w-5 text-[#354939]" />
+                  <span>Images du projet</span>
+                  <span className="text-sm text-gray-500 ml-2">
+                    ({project.images ? project.images.length : 0})
+                  </span>
+                </h2>
+              </div>
+              <div className="p-6">
+                {project.images && project.images.length > 0 ? (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {project.images.map((image, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={image}
+                          alt={`Project image ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg shadow-sm border border-gray-200 group-hover:shadow-md transition-shadow cursor-pointer"
+                          onClick={() => window.open(image, '_blank')}
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 rounded-lg transition-all duration-200 flex items-center justify-center">
+                          <Eye className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <div className="w-full h-32 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                      <img
+                        src="/background_bg.jpg"
+                        alt="Default project image"
+                        className="w-full h-full object-cover rounded-lg opacity-50"
+                      />
+                    </div>
+                    <p className="text-gray-500 text-sm">Aucune image disponible pour ce projet</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Files Section */}
+            <div className="bg-white rounded-lg shadow-sm border">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h2 className="text-lg font-semibold text-gray-900 flex items-center space-x-2">
+                  <FileText className="h-5 w-5 text-[#354939]" />
+                  <span>Documents et fichiers</span>
+                  <span className="text-sm text-gray-500 ml-2">
+                    ({project.files ? project.files.length : 0})
+                  </span>
+                </h2>
+              </div>
+              <div className="p-6">
+                {project.files && project.files.length > 0 ? (
+                  <div className="space-y-3">
+                    {project.files.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group">
+                        <div className="flex items-center space-x-3">
+                          <div className="flex-shrink-0">
+                            {file.type === 'pdf' && (
+                              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                <span className="text-xs font-bold text-red-600">PDF</span>
+                              </div>
+                            )}
+                            {file.type === 'excel' && (
+                              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                <span className="text-xs font-bold text-green-600">XLS</span>
+                              </div>
+                            )}
+                            {file.type === 'word' && (
+                              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <span className="text-xs font-bold text-blue-600">DOC</span>
+                              </div>
+                            )}
+                            {file.type === 'image' && (
+                              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <Image className="w-5 h-5 text-purple-600" />
+                              </div>
+                            )}
+                            {!['pdf', 'excel', 'word', 'image'].includes(file.type) && (
+                              <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <FileText className="w-5 h-5 text-gray-600" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
+                              {file.name || `Document ${index + 1}`}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {file.size || 'Taille inconnue'} • {file.type || 'Type inconnu'}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-gray-400 hover:text-green-600 transition-colors">
+                            <Download className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <FileText className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500 text-sm">Aucun document attaché à ce projet</p>
+                    <p className="text-gray-400 text-xs mt-1">Les fichiers PDF, Excel, Word et autres documents apparaîtront ici</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

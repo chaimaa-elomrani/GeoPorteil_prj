@@ -187,10 +187,20 @@ class ApiService {
   }
 
   // Projects API methods
-  async getAllProjects() {
+  async getAllProjects(params = {}) {
     try {
-      console.log("🔄 Fetching all projects...")
-      const response = await this.request("/admin/projects", {
+      console.log("🔄 Fetching all projects with params:", params)
+
+      // Build query string
+      const queryParams = new URLSearchParams()
+      if (params.archived !== undefined) {
+        queryParams.append('archived', params.archived.toString())
+      }
+
+      const queryString = queryParams.toString()
+      const url = queryString ? `/admin/projects?${queryString}` : "/admin/projects"
+
+      const response = await this.request(url, {
         method: "GET",
       })
       console.log("📊 Projects API response:", response)
@@ -232,6 +242,49 @@ class ApiService {
       return response
     } catch (error) {
       console.error("❌ Error deleting project:", error)
+      throw error
+    }
+  }
+
+  async archiveProject(id) {
+    try {
+      console.log("📦 Archiving project:", id)
+      const response = await this.request(`/admin/projects/${id}/archive`, {
+        method: "POST",
+      })
+      console.log("✅ Project archived successfully:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error archiving project:", error)
+      throw error
+    }
+  }
+
+  async unarchiveProject(id) {
+    try {
+      console.log("📤 Unarchiving project:", id)
+      const response = await this.request(`/admin/projects/${id}/unarchive`, {
+        method: "POST",
+      })
+      console.log("✅ Project unarchived successfully:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error unarchiving project:", error)
+      throw error
+    }
+  }
+
+  async createProject(projectData) {
+    try {
+      console.log("➕ Creating new project:", projectData)
+      const response = await this.request("/admin/projects", {
+        method: "POST",
+        body: JSON.stringify(projectData),
+      })
+      console.log("✅ Project created successfully:", response)
+      return response
+    } catch (error) {
+      console.error("❌ Error creating project:", error)
       throw error
     }
   }

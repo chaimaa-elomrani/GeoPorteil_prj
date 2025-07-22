@@ -29,8 +29,17 @@ export default function UserTable({
     return colors[role] || "bg-gray-100 text-gray-800 border-gray-200"
   }
 
-  const getStatusColor = (isActive) => {
-    return isActive ? "bg-green-100 text-green-800 border-green-200" : "bg-red-100 text-red-800 border-red-200"
+  const getStatusColor = (status, isBlocked, isActive) => {
+    if (status === "suspended") {
+      return "bg-orange-100 text-orange-800 border-orange-200"
+    }
+    if (status === "blocked" || isBlocked) {
+      return "bg-red-100 text-red-800 border-red-200"
+    }
+    if (isActive !== false) {
+      return "bg-green-100 text-green-800 border-green-200"
+    }
+    return "bg-gray-100 text-gray-800 border-gray-200"
   }
 
   const toggleDropdown = (userId) => {
@@ -110,7 +119,7 @@ export default function UserTable({
 
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
-                    className={`inline-flex px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(user.status)}`}
+                    className={`inline-flex px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(user.status, user.isBlocked, user.isActive)}`}
                   >
                     {user.status === "suspended"
                       ? "Suspendu"
@@ -181,6 +190,41 @@ export default function UserTable({
                                   Mettre à jour
                                 </div>
                               </button>
+                              {/* Block/Unblock Button */}
+                              {user.status === "blocked" || user.isBlocked ? (
+                                <button
+                                  onClick={() => {
+                                    onUnblock?.(user._id)
+                                    closeDropdown()
+                                  }}
+                                  disabled={actionLoading[`unblock_${user._id}`]}
+                                  className="block w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors disabled:opacity-50"
+                                >
+                                  <div className="flex items-center">
+                                    <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                    </svg>
+                                    {actionLoading[`unblock_${user._id}`] ? "Traitement..." : "Débloquer"}
+                                  </div>
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    onBlock?.(user._id)
+                                    closeDropdown()
+                                  }}
+                                  disabled={actionLoading[`block_${user._id}`]}
+                                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+                                >
+                                  <div className="flex items-center">
+                                    <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                    {actionLoading[`block_${user._id}`] ? "Traitement..." : "Bloquer"}
+                                  </div>
+                                </button>
+                              )}
+
                               <button
                                 onClick={() => {
                                   onDelete(user._id)

@@ -5,6 +5,57 @@ import { useParams, useNavigate } from "react-router-dom"
 import { MapContainer, TileLayer, Marker, Popup, LayersControl, GeoJSON } from "react-leaflet"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
+
+// Custom CSS for enhanced popups
+const customPopupStyles = `
+  .leaflet-popup-content-wrapper {
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border: none;
+    background: white;
+    padding: 0;
+  }
+  .leaflet-popup-content {
+    margin: 0;
+    line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+  }
+  .leaflet-popup-tip {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .leaflet-popup-close-button {
+    color: #9ca3af;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    right: 8px;
+    top: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .leaflet-popup-close-button:hover {
+    color: #374151;
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+`
+
+// Inject custom styles
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style')
+  styleSheet.textContent = customPopupStyles
+  document.head.appendChild(styleSheet)
+}
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -349,22 +400,70 @@ export default function ProjectsMapWithProject() {
       <div className="flex-1 relative">
         <MapContainer center={mapCenter} zoom={mapZoom} className="h-full w-full" ref={mapRef}>
           <LayersControl position="topleft">
-            <BaseLayer checked name="🗺️ Carte Standard">
+            <BaseLayer checked name="🗺️ OpenStreetMap">
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
             </BaseLayer>
-            <BaseLayer name="🛰️ Vue Satellite">
+            <BaseLayer name="🛰️ Satellite (Esri)">
               <TileLayer
                 url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                attribution='&copy; <a href="https://www.esri.com/">Esri</a>'
+                attribution='&copy; <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, GeoEye, Earthstar Geographics'
               />
             </BaseLayer>
-            <BaseLayer name="🌍 Terrain">
+            <BaseLayer name="🌍 Terrain (OpenTopo)">
               <TileLayer
                 url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors'
+              />
+            </BaseLayer>
+            <BaseLayer name="🗺️ CartoDB Positron">
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+            </BaseLayer>
+            <BaseLayer name="🌙 CartoDB Dark">
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+            </BaseLayer>
+            <BaseLayer name="🛰️ Google Satellite">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+            <BaseLayer name="🗺️ Google Streets">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+            <BaseLayer name="🌍 Google Terrain">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+            <BaseLayer name="🛣️ OpenStreetMap France">
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+            </BaseLayer>
+            <BaseLayer name="🏔️ Stamen Terrain">
+              <TileLayer
+                url="https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png"
+                attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+            </BaseLayer>
+            <BaseLayer name="🎨 Stamen Watercolor">
+              <TileLayer
+                url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+                attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
             </BaseLayer>
           </LayersControl>
@@ -374,14 +473,142 @@ export default function ProjectsMapWithProject() {
             <>
               {/* Project Center Marker */}
               <Marker position={[Number.parseFloat(project.latitude), Number.parseFloat(project.longitude)]}>
-                <Popup>
-                  <div className="p-2">
-                    <h3 className="font-semibold">Projet {project.projectNumber}</h3>
-                    <p className="text-sm text-gray-600">{project.consistance}</p>
-                    <p className="text-sm text-gray-600">
-                      {project.region} - {project.prefecture}
-                    </p>
-                    <div className="mt-2">{getStatusBadge(project.projectStatus)}</div>
+                <Popup maxWidth={450} minWidth={350} className="custom-popup">
+                  <div className="p-5 w-full">
+                    {/* Header */}
+                    <div className="text-center mb-4">
+                      <h3 className="font-bold text-2xl text-gray-900 mb-2">Projet {project.projectNumber}</h3>
+                      <div className="flex items-center justify-center space-x-3">
+                        <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                          Année {project.anneeProjet}
+                        </span>
+                        {getStatusBadge(project.projectStatus)}
+                      </div>
+                    </div>
+
+                    {/* Project Image */}
+                    {project.images && project.images.length > 0 && (
+                      <div className="mb-5">
+                        <div className="rounded-xl h-48 overflow-hidden shadow-lg">
+                          <img
+                            src={project.images[0]}
+                            alt="Project"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        {project.images.length > 1 && (
+                          <div className="text-center mt-2">
+                            <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                              +{project.images.length - 1} autres photos
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Project Details */}
+                    <div className="space-y-4 mb-5">
+                      {/* Description */}
+                      {project.consistance && (
+                        <div className="text-center">
+                          <p className="text-base text-gray-700 leading-relaxed line-clamp-2">
+                            {project.consistance}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Location */}
+                      <div className="text-center">
+                        <div className="inline-flex items-center space-x-2 bg-blue-50 px-4 py-2 rounded-full">
+                          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="text-sm font-medium text-blue-800">
+                            {project.region} - {project.prefecture}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Additional Info */}
+                      <div className="grid grid-cols-2 gap-3 text-xs">
+                        {project.coordonneesX && project.coordonneesY && (
+                          <div className="text-center bg-gray-50 p-2 rounded-lg">
+                            <p className="font-medium text-gray-700">Coordonnées</p>
+                            <p className="text-gray-600 font-mono text-xs">
+                              {Number.parseFloat(project.latitude || 0).toFixed(4)}, {Number.parseFloat(project.longitude || 0).toFixed(4)}
+                            </p>
+                          </div>
+                        )}
+                        {project.anneeProjet && (
+                          <div className="text-center bg-gray-50 p-2 rounded-lg">
+                            <p className="font-medium text-gray-700">Année</p>
+                            <p className="text-gray-600">{project.anneeProjet}</p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Dates */}
+                      {(project.dateDebutProjet || project.dateLivraisonPrevue) && (
+                        <div className="flex justify-center space-x-4 text-xs text-gray-600">
+                          {project.dateDebutProjet && (
+                            <div className="text-center">
+                              <p className="font-medium">Début</p>
+                              <p>{formatDate(project.dateDebutProjet)}</p>
+                            </div>
+                          )}
+                          {project.dateLivraisonPrevue && (
+                            <div className="text-center">
+                              <p className="font-medium">Livraison</p>
+                              <p>{formatDate(project.dateLivraisonPrevue)}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Progress indicator if available */}
+                      {project.projectStatus && (
+                        <div className="text-center">
+                          <div className="text-xs text-gray-500 mb-1">Avancement du projet</div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className={`h-2 rounded-full ${
+                                project.projectStatus === 'livré' ? 'bg-green-500 w-full' :
+                                project.projectStatus === 'En cours' ? 'bg-blue-500 w-3/4' :
+                                project.projectStatus === 'Suspendu' ? 'bg-orange-500 w-1/2' :
+                                'bg-gray-400 w-1/4'
+                              }`}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Files Section - Only show if files exist */}
+                    {project.files && project.files.length > 0 && (
+                      <div className="mb-4">
+                        <div className="text-center">
+                          <div className="inline-flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-full">
+                            <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span className="text-sm font-medium text-gray-700">
+                              {project.files.length} document{project.files.length > 1 ? 's' : ''} attaché{project.files.length > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Action Button */}
+                    <div className="text-center pt-4 border-t border-gray-200">
+                      <button
+                        onClick={() => navigate(`/projects/${project._id}`)}
+                        className="bg-[#354939] hover:bg-[#2a3a2d] text-white px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                      >
+                        Voir les détails complets
+                      </button>
+                    </div>
                   </div>
                 </Popup>
               </Marker>

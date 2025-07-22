@@ -51,6 +51,7 @@ router.post('/users/:id/suspend', async (req, res) => {
       // Update user status to suspended
       user.status = 'suspended'
       user.suspensionReason = reason
+      user.suspendedAt = new Date()
       if (duration) {
         user.suspensionDuration = duration
       }
@@ -80,13 +81,18 @@ router.post('/users/:id/suspend', async (req, res) => {
       })
     }
 })
-router.post('/users/:id/unsuspend', adminDashboardController.unsupendUser)
+router.post('/users/:id/unsuspend', adminDashboardController.unsuspendUser)
+router.post('/users/:id/block', adminDashboardController.blockUser)
+router.post('/users/:id/unblock', adminDashboardController.unblockUser)
 
 // Projects management
 router.get("/projects", adminDashboardController.getAllProjects)
 router.get("/projects/:id", adminDashboardController.getProjectById)
+router.post("/projects", adminDashboardController.createProject)
 router.put("/projects/:id", adminDashboardController.updateProject)
 router.delete("/projects/:id", adminDashboardController.deleteProject)
+router.post("/projects/:id/archive", adminDashboardController.archiveProject)
+router.post("/projects/:id/unarchive", adminDashboardController.unarchiveProject)
 router.post("/projects/import-geojson", adminDashboardController.createProjectFromGeoJSON)
 
 module.exports = router

@@ -288,7 +288,7 @@ const adminDashboardController = {
   },
 
   // POST /api/admin/users/:id/unsuspend - Unsuspend user
-  async unsupendUser(req, res) {
+  async unsuspendUser(req, res) {
     try {
       const { id } = req.params
 
@@ -329,6 +329,177 @@ const adminDashboardController = {
 
     } catch (err) {
       console.error("Error unsuspending user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: err.message
+      })
+    }
+  },
+
+  // POST /api/admin/users/:id/block - Block user
+  async blockUser(req, res) {
+    try {
+      const { id } = req.params
+      const { reason } = req.body
+
+      console.log(`Blocking user with ID: ${id}`)
+
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
+        })
+      }
+
+      // Update user status to blocked
+      user.isBlocked = true
+      user.blockReason = reason || "Blocked by administrator"
+      user.blockedAt = new Date()
+      user.status = 'blocked'
+
+      await user.save()
+
+      res.json({
+        success: true,
+        message: "User blocked successfully",
+        data: {
+          user: {
+            id: user._id,
+            status: user.status,
+            isBlocked: user.isBlocked
+          }
+        }
+      })
+
+    } catch (err) {
+      console.error("Error blocking user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: err.message
+      })
+    }
+  },
+
+  // POST /api/admin/users/:id/unblock - Unblock user
+  async unblockUser(req, res) {
+    try {
+      const { id } = req.params
+
+      console.log(`Unblocking user with ID: ${id}`)
+
+      const user = await User.findById(id)
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
+        })
+      }
+
+      // Update user status to active and clear block fields
+      user.isBlocked = false
+      user.blockReason = null
+      user.blockedAt = null
+      user.status = 'active'
+
+      await user.save()
+
+      res.json({
+        success: true,
+        message: "User unblocked successfully",
+        data: {
+          user: {
+            id: user._id,
+            status: user.status,
+            isBlocked: user.isBlocked
+          }
+        }
+      })
+
+    } catch (err) {
+      console.error("Error unblocking user:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: err.message
+      })
+    }
+  },
+
+  // POST /api/admin/projects/:id/archive - Archive project
+  async archiveProject(req, res) {
+    try {
+      const { id } = req.params
+
+      console.log(`Archiving project with ID: ${id}`)
+
+      const project = await Project.findById(id)
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          message: "Project not found"
+        })
+      }
+
+      // Update project to archived
+      project.archived = true
+      await project.save()
+
+      res.json({
+        success: true,
+        message: "Project archived successfully",
+        data: {
+          project: {
+            id: project._id,
+            archived: project.archived
+          }
+        }
+      })
+
+    } catch (err) {
+      console.error("Error archiving project:", err)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: err.message
+      })
+    }
+  },
+
+  // POST /api/admin/projects/:id/unarchive - Unarchive project
+  async unarchiveProject(req, res) {
+    try {
+      const { id } = req.params
+
+      console.log(`Unarchiving project with ID: ${id}`)
+
+      const project = await Project.findById(id)
+      if (!project) {
+        return res.status(404).json({
+          success: false,
+          message: "Project not found"
+        })
+      }
+
+      // Update project to unarchived
+      project.archived = false
+      await project.save()
+
+      res.json({
+        success: true,
+        message: "Project unarchived successfully",
+        data: {
+          project: {
+            id: project._id,
+            archived: project.archived
+          }
+        }
+      })
+
+    } catch (err) {
+      console.error("Error unarchiving project:", err)
       res.status(500).json({
         success: false,
         message: "Internal server error",
@@ -525,8 +696,33 @@ const adminDashboardController = {
   // Projects management
   async getAllProjects(req, res) {
     try {
-      const projects = await Project.find().sort({ createdAt: -1 })
-      res.json({ success: true, data: projects })
+      const { archived } = req.query
+
+      // Build filter - by default exclude archived projects
+      const filter = {}
+      if (archived === 'true') {
+        filter.archived = true
+      } else if (archived === 'false') {
+        filter.archived = false
+      } else {
+        // Default: exclude archived projects
+        filter.archived = { $ne: true }
+      }
+
+      const projects = await Project.find(filter).sort({ createdAt: -1 })
+
+      res.json({
+        success: true,
+        data: {
+          projects: projects,
+          pagination: {
+            total: projects.length,
+            total_pages: 1,
+            current_page: 1,
+            per_page: projects.length
+          }
+        }
+      })
     } catch (error) {
       console.error('Error fetching projects:', error)
       res.status(500).json({ success: false, message: 'Erreur lors de la récupération des projets' })
@@ -546,6 +742,31 @@ const adminDashboardController = {
     } catch (error) {
       console.error('Error fetching project:', error)
       res.status(500).json({ success: false, message: 'Erreur lors de la récupération du projet' })
+    }
+  },
+
+  async createProject(req, res) {
+    try {
+      const projectData = req.body
+
+      // Check if project number already exists
+      const existingProject = await Project.findOne({ projectNumber: projectData.projectNumber })
+      if (existingProject) {
+        return res.status(400).json({ success: false, message: 'Un projet avec ce numéro existe déjà' })
+      }
+
+      const project = new Project({
+        ...projectData,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+
+      await project.save()
+
+      res.status(201).json({ success: true, data: project, message: 'Projet créé avec succès' })
+    } catch (error) {
+      console.error('Error creating project:', error)
+      res.status(500).json({ success: false, message: 'Erreur lors de la création du projet' })
     }
   },
 

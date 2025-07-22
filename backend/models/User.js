@@ -47,12 +47,21 @@ const userSchema = new mongoose.Schema({
 
     status:{
         type: String,
-        enum: ['active', 'pending', 'blocked'],
+        enum: ['active', 'pending', 'blocked', 'suspended'],
         default: 'pending',
     },
     suspendedAt: Date,
     suspensionReason: String,
     suspensionEndDate: Date,
+    suspensionDuration: String,
+
+    // Block-related fields
+    isBlocked: {
+        type: Boolean,
+        default: false,
+    },
+    blockedAt: Date,
+    blockReason: String,
 
     createdAt: {
         type: Date,

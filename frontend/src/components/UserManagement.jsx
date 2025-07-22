@@ -26,11 +26,15 @@ export default function UserManagement({ onStatsUpdate }) {
 
     try {
       setActionLoading((prev) => ({ ...prev, [`suspend_${userId}`]: true }))
-      await apiService.suspendUser(userId)
+      console.log("🔄 Suspending user:", userId)
+      const response = await apiService.suspendUser(userId, "Suspendu par l'administrateur")
+      console.log("✅ User suspended successfully:", response)
       await fetchUsers()
       onStatsUpdate?.()
+      alert("Utilisateur suspendu avec succès")
     } catch (error) {
-      alert(error.message)
+      console.error("❌ Error suspending user:", error)
+      alert("Erreur lors de la suspension: " + error.message)
     } finally {
       setActionLoading((prev) => ({ ...prev, [`suspend_${userId}`]: false }))
     }
@@ -43,19 +47,32 @@ export default function UserManagement({ onStatsUpdate }) {
   const fetchUsers = async () => {
     try {
       setLoading(true)
+      console.log("🔄 Fetching users with params:", { currentPage, selectedRole, searchTerm })
+
       const params = {
         page: currentPage,
         limit: 10,
         ...(selectedRole && { role: selectedRole }),
         ...(searchTerm && { search: searchTerm }),
       }
+
       const response = await apiService.getAllUsers(params)
+      console.log("📊 Users API response:", response)
+
       if (response.success) {
-        setUsers(response.data.users)
-        setTotalPages(response.data.pagination.total_pages)
+        setUsers(response.data.users || [])
+        setTotalPages(response.data.pagination?.total_pages || 1)
+        console.log("✅ Users loaded successfully:", response.data.users?.length || 0, "users")
+      } else {
+        console.error("❌ API returned error:", response.message)
+        setUsers([])
+        setTotalPages(1)
       }
     } catch (error) {
-      console.error("Error fetching users:", error)
+      console.error("❌ Error fetching users:", error)
+      setUsers([])
+      setTotalPages(1)
+      alert("Erreur lors du chargement des utilisateurs: " + error.message)
     } finally {
       setLoading(false)
     }
@@ -134,10 +151,12 @@ export default function UserManagement({ onStatsUpdate }) {
 
     try {
       setActionLoading((prev) => ({ ...prev, [`block_${userId}`]: true }))
-      await apiService.blockUser(userId)
-      console.log("✅ User blocked successfully:", userId)
+      console.log("🔄 Blocking user:", userId)
+      const response = await apiService.blockUser(userId, "Bloqué par l'administrateur")
+      console.log("✅ User blocked successfully:", response)
       await fetchUsers()
       onStatsUpdate?.()
+      alert("Utilisateur bloqué avec succès")
     } catch (error) {
       console.error("❌ Error blocking user:", error)
       alert("Erreur lors du blocage: " + error.message)
@@ -153,11 +172,15 @@ export default function UserManagement({ onStatsUpdate }) {
 
     try {
       setActionLoading((prev) => ({ ...prev, [`unsuspend_${userId}`]: true }))
-      await apiService.unsuspendUser(userId)
+      console.log("🔄 Unsuspending user:", userId)
+      const response = await apiService.unsuspendUser(userId)
+      console.log("✅ User unsuspended successfully:", response)
       await fetchUsers()
       onStatsUpdate?.()
+      alert("Utilisateur réactivé avec succès")
     } catch (error) {
-      alert(error.message)
+      console.error("❌ Error unsuspending user:", error)
+      alert("Erreur lors de la réactivation: " + error.message)
     } finally {
       setActionLoading((prev) => ({ ...prev, [`unsuspend_${userId}`]: false }))
     }
@@ -170,10 +193,12 @@ export default function UserManagement({ onStatsUpdate }) {
 
     try {
       setActionLoading((prev) => ({ ...prev, [`unblock_${userId}`]: true }))
-      await apiService.unblockUser(userId)
-      console.log("✅ User unblocked successfully:", userId)
+      console.log("🔄 Unblocking user:", userId)
+      const response = await apiService.unblockUser(userId)
+      console.log("✅ User unblocked successfully:", response)
       await fetchUsers()
       onStatsUpdate?.()
+      alert("Utilisateur débloqué avec succès")
     } catch (error) {
       console.error("❌ Error unblocking user:", error)
       alert("Erreur lors du déblocage: " + error.message)

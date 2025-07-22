@@ -1,0 +1,5212 @@
+[{
+  "_id": {
+    "$oid": "676e787fc18d82a93baceb51"
+  },
+  "projectNumber": "216",
+  "anneeProjet": 2024,
+  "maitreOuvrage": {
+    "$oid": "676e75e3c18d82a93bace628"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-",
+  "region": "Souss-Massa",
+  "prefecture": "Taroudannt",
+  "dateDebutProjet": {
+    "$date": "2024-12-27T00:00:00.000Z"
+  },
+  "Facture": [],
+  "status": "accepté",
+  "archived": true,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2024-12-30T09:56:31.537Z"
+      },
+      "raison": "gg",
+      "_id": {
+        "$oid": "67726e4f3358e85c2e5c0ad7"
+      },
+      "dateReprise": {
+        "$date": "2024-12-30T09:56:38.897Z"
+      }
+    }
+  ],
+  "__v": 1,
+  "projectStatus": "Suspendu",
+  "missionProjet": {
+    "$oid": "676e787fc18d82a93baceb56"
+  },
+  "dateArret": {
+    "$date": "2024-12-30T09:56:31.537Z"
+  },
+  "dateDerniereReprise": {
+    "$date": "2024-12-30T09:56:38.897Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6776b6857e5543c9e498e54c"
+  },
+  "projectNumber": "01",
+  "anneeProjet": 2024,
+  "maitreOuvrage": {
+    "$oid": "6776b4977e5543c9e498dfaa"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-289935/04 (P1)",
+  "consistance": "TC",
+  "coordonneesX": "219738",
+  "coordonneesY": "124629",
+  "region": "Marrakech-Safi",
+  "latitude": "31.679834",
+  "longitude": "-8.354474",
+  "prefecture": "Marrakech",
+  "Commune": "Sidi Zouine",
+  "dateDebutProjet": {
+    "$date": "2025-01-02T00:00:00.000Z"
+  },
+  "cercle": "Loudaya",
+  "Facture": [
+    {
+      "$oid": "6824646dcb3f49764ae30b5d"
+    },
+    {
+      "$oid": "68246be1cb3f49764ae44e85"
+    },
+    {
+      "$oid": "68246d01cb3f49764ae44fe8"
+    },
+    {
+      "$oid": "68481a7f648837778a2fe566"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-06T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-06T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 24,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "6776b6857e5543c9e498e551"
+  },
+  "DateDeCreation": "2023-06-15T10:30:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "677d12be9a6fa1883eba7cbf"
+  },
+  "projectNumber": "02",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677bce9244c44be6920c4b93"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-82669/04",
+  "consistance": "RDC+1",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2024-12-09T00:00:00.000Z"
+  },
+  "cercle": "Sidi Ghanem",
+  "Facture": [
+    {
+      "$oid": "682468fdcb3f49764ae310f7"
+    },
+    {
+      "$oid": "68246d13cb3f49764ae44ff2"
+    },
+    {
+      "$oid": "68247886f7cf9dab38c159ae"
+    },
+    {
+      "$oid": "682ceae4b88e0006213a85c5"
+    },
+    {
+      "$oid": "682ceb08b88e0006213b5059"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-07T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 6,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "677d12be9a6fa1883eba7cc5"
+  },
+  "Commune": "Ménara",
+  "latitude": "31.676514",
+  "longitude": "-8.046342"
+},
+{
+  "_id": {
+    "$oid": "677d14f89a6fa1883eba8219"
+  },
+  "projectNumber": "03",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677d0c8d9a6fa1883eba6ce2"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-07T00:00:00.000Z"
+  },
+  "cercle": " Riad ourika Marrakech",
+  "Facture": [
+    {
+      "$oid": "679c97889126ea5ac6677ca6"
+    },
+    {
+      "$oid": "67bdbac8000ab84361eb0629"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-14T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 3,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "677d14f89a6fa1883eba821e"
+  },
+  "Commune": "Tassoultante",
+  "latitude": "31.572958",
+  "longitude": "-7.962957"
+},
+{
+  "_id": {
+    "$oid": "677e409efc4adc3947112065"
+  },
+  "projectNumber": "04",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677e38c3fc4adc3947111065"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "cercle": "Riad ourika Marrakech",
+  "Facture": [
+    {
+      "$oid": "68247c3bf7cf9dab38c22b67"
+    },
+    {
+      "$oid": "682b1c5283a84c2b033cf8e1"
+    }
+  ],
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 4,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "677e409efc4adc394711206b"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-01-08T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-15T00:00:00.000Z"
+  },
+  "Commune": "Tassoultante",
+  "latitude": "31.572574",
+  "longitude": "-7.961063"
+},
+{
+  "_id": {
+    "$oid": "677e94acfc4adc394711e21d"
+  },
+  "projectNumber": "05",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677e8d45fc4adc394711d194"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-12813/M (P1)",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-08T00:00:00.000Z"
+  },
+  "cercle": "",
+  "Facture": [
+    {
+      "$oid": "682c9febcce8b648473c46b6"
+    },
+    {
+      "$oid": "682cef0db88e0006213ee320"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-15T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 3,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "677e94acfc4adc394711e223"
+  },
+  "consistance": "TN",
+  "Commune": "Annakhil",
+  "latitude": "31.669407",
+  "longitude": "-7.928995"
+},
+{
+  "_id": {
+    "$oid": "677fdc21abc5204d679734ba"
+  },
+  "projectNumber": "06",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677e8d45fc4adc394711d194"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "R-1427-52",
+  "consistance": "TN",
+  "region": "Rabat-Salé-Kénitra",
+  "prefecture": "Rabat",
+  "Commune": "Moulay Bousselham",
+  "dateDebutProjet": {
+    "$date": "2025-01-09T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "6824ba04671ea41add405eed"
+    },
+    {
+      "$oid": "682c9e20cce8b648473affa2"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "677fdc21abc5204d679734bf"
+  }
+},
+{
+  "_id": {
+    "$oid": "677fe6e3abc5204d67975055"
+  },
+  "projectNumber": "07",
+  "anneeProjet": 2023,
+  "maitreOuvrage": {
+    "$oid": "677fe2baabc5204d6797456b"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-307824-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-09T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682ca50ecce8b648473f2402"
+    },
+    {
+      "$oid": "682cc4e3b88e000621208b9d"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "677fe6e3abc5204d6797505b"
+  },
+  "Commune": "Tassoultante",
+  "latitude": "31.581957",
+  "longitude": "-8.023266",
+  "DateDeCreation": "2024-06-15T10:30:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "678534d341d48690580cf4fa"
+  },
+  "projectNumber": "08",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6785305841d48690580cecea"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "",
+  "dateDebutProjet": {
+    "$date": "2025-01-13T00:00:00.000Z"
+  },
+  "cercle": "Riad ourika Marrakech",
+  "Facture": [
+    {
+      "$oid": "682ccdb3b88e00062126fc3e"
+    },
+    {
+      "$oid": "682d0056b88e00062147adfa"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 3,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678534d341d48690580cf500"
+  },
+  "Commune": "Tassoultante",
+  "latitude": "31.570323",
+  "longitude": "-7.962498"
+},
+{
+  "_id": {
+    "$oid": "6788ddd5ef012bd1fc758ecb"
+  },
+  "projectNumber": "09",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6788c554ef012bd1fc755f80"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-17245-43",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Oulad Hassoune",
+  "dateDebutProjet": {
+    "$date": "2025-01-15T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "consistance": "RDC+1",
+  "missionProjet": {
+    "$oid": "6788df2d08e992ebf609e089"
+  },
+  "cercle": "El Bour"
+},
+{
+  "_id": {
+    "$oid": "678a10c6265b046751d6d4bb"
+  },
+  "projectNumber": "10",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678926bfa1a2810a7960fdbb"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "L'Oriental",
+  "prefecture": "Oujda-Angad",
+  "dateDebutProjet": {
+    "$date": "2025-01-15T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678a112c605f6994aa6b55ef"
+  }
+},
+{
+  "_id": {
+    "$oid": "678a11c0605f6994aa6b5803"
+  },
+  "projectNumber": "11",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678928342a67601f8226c1be"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-55737-04",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "dateDebutProjet": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "678a12091f1718a1d92251e5"
+  }
+},
+{
+  "_id": {
+    "$oid": "678a128f1f1718a1d92254d3"
+  },
+  "projectNumber": "12",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6789291a2a67601f8226c42e"
+  },
+  "statutFoncier": "Réquisition",
+  "referenceFonciere": "R-4076-43",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Oulad Hassoune",
+  "dateDebutProjet": {
+    "$date": "2025-01-16T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-07-11T14:34:42.166Z"
+      },
+      "raison": "test",
+      "_id": {
+        "$oid": "68712102deb2345bb614ff1a"
+      },
+      "dateReprise": {
+        "$date": "2025-07-11T14:34:47.331Z"
+      }
+    }
+  ],
+  "__v": 1,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "678a12d4cd15dc21910ebcb2"
+  },
+  "latitude": "31.656598",
+  "longitude": "-7.787810",
+  "dateArret": {
+    "$date": "2025-07-11T14:34:42.166Z"
+  },
+  "dateDerniereReprise": {
+    "$date": "2025-07-11T14:34:47.331Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "678a1809cd15dc21910ecbfa"
+  },
+  "projectNumber": "13",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678a1112605f6994aa6b55e9"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-17876-M",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-17T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "68249cb7671ea41add37a619"
+    },
+    {
+      "$oid": "68249d0f671ea41add37a6ae"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678a1809cd15dc21910ecbff"
+  },
+  "Commune": "Marrakech",
+  "latitude": "31.634106",
+  "longitude": "-8.015300"
+},
+{
+  "_id": {
+    "$oid": "678a32e6cd15dc21910f20f3"
+  },
+  "projectNumber": "14",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678a2785cd15dc21910efdce"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-17T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682d92b45402b536fef229dc"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678a32e6cd15dc21910f20f8"
+  },
+  "Commune": "Tassoultante",
+  "latitude": "31.572867",
+  "longitude": "-7.972403"
+},
+{
+  "_id": {
+    "$oid": "678e7941948ab3a2a5fc59f6"
+  },
+  "projectNumber": "15",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6a5a948ab3a2a5fc2ae1"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-13823-43",
+  "consistance": "TC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "El ouidane ",
+  "dateDebutProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682d985c5402b536fef4054d"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678e7941948ab3a2a5fc59fc"
+  },
+  "cercle": "El Bour",
+  "latitude": "31.602566",
+  "longitude": "-7.800614"
+},
+{
+  "_id": {
+    "$oid": "678e79ec948ab3a2a5fc5fe0"
+  },
+  "projectNumber": "16",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6b04948ab3a2a5fc2b91"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-7499-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "El ouidane ",
+  "dateDebutProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682dda1a7b47d16d03a1dd31"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678e79ed948ab3a2a5fc5fe7"
+  },
+  "latitude": "31.643269",
+  "longitude": "-7.878073"
+},
+{
+  "_id": {
+    "$oid": "678e7a6e948ab3a2a5fc6533"
+  },
+  "projectNumber": "17",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6d4d948ab3a2a5fc2fea"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682da7b77b47d16d0390c2b3"
+    },
+    {
+      "$oid": "682ddd437b47d16d03a523d0"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678e7a6f948ab3a2a5fc6538"
+  },
+  "Commune": "Amghras",
+  "cercle": "Amzmiz",
+  "latitude": "31.237226",
+  "longitude": "-8.214413"
+},
+{
+  "_id": {
+    "$oid": "678e7af1948ab3a2a5fc6ae8"
+  },
+  "projectNumber": "18",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e70da948ab3a2a5fc44c9"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-16334-M",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Amizmiz",
+  "dateDebutProjet": {
+    "$date": "2025-01-20T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-05-14T13:49:54.140Z"
+      },
+      "raison": "tyest",
+      "_id": {
+        "$oid": "68249f82671ea41add392acd"
+      },
+      "dateReprise": {
+        "$date": "2025-07-11T14:39:14.159Z"
+      }
+    }
+  ],
+  "__v": 1,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "678e7af1948ab3a2a5fc6aed"
+  },
+  "dateArret": {
+    "$date": "2025-05-14T13:49:54.140Z"
+  },
+  "dateDerniereReprise": {
+    "$date": "2025-07-11T14:39:14.159Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "678f7376948ab3a2a5fe234b"
+  },
+  "projectNumber": "19",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678f704f948ab3a2a5fe1b6f"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-7052-65",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tameslohte",
+  "dateDebutProjet": {
+    "$date": "2025-01-21T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "682d1844b88e0006214d9188"
+    },
+    {
+      "$oid": "682d18d9b88e0006214ed011"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-28T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "678f7376948ab3a2a5fe2351"
+  },
+  "cercle": "Tahannaout",
+  "latitude": "31.406837",
+  "longitude": "-8.066979"
+},
+{
+  "_id": {
+    "$oid": "679113c1610ce8a0bcba3202"
+  },
+  "projectNumber": "20",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67911002610ce8a0bcba25f1"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "Commune": "Asni",
+  "dateDebutProjet": {
+    "$date": "2025-01-22T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-01-29T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-01-29T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "679113c1610ce8a0bcba3208"
+  },
+  "consistance": "TN",
+  "latitude": "31.311057",
+  "longitude": "-7.947193"
+},
+{
+  "_id": {
+    "$oid": "6794cb8d290fd6c26be3990a"
+  },
+  "projectNumber": "21",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6794c8b4290fd6c26be38b5d"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-1781-43 et 1780-43",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-25T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-06T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "6794cb8e290fd6c26be39911"
+  },
+  "Commune": "Al Ouidane",
+  "latitude": "31.662695",
+  "longitude": "-7.914905"
+},
+{
+  "_id": {
+    "$oid": "679a3ae3e15df473905ddd76"
+  },
+  "projectNumber": "0",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679a39a7e15df473905dc120"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-01T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-12-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-12-31T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "679a3ae3e15df473905ddd7b"
+  }
+},
+{
+  "_id": {
+    "$oid": "679b987e9126ea5ac6638184"
+  },
+  "projectNumber": "22",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6b04948ab3a2a5fc2b91"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-7499-43",
+  "consistance": "TC",
+  "coordonneesX": "278799.956",
+  "coordonneesY": "108000.057",
+  "region": "Marrakech-Safi",
+  "latitude": "31.543397",
+  "longitude": "-7.727846",
+  "prefecture": "Al Haouz",
+  "Commune": "Ait Faska",
+  "dateDebutProjet": {
+    "$date": "2025-01-30T00:00:00.000Z"
+  },
+  "cercle": "Ait Ourir",
+  "Facture": [
+    {
+      "$oid": "682deb66463303a330f221f8"
+    },
+    {
+      "$oid": "682debc8463303a330f2bed7"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-06T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "679b987e9126ea5ac6638189"
+  }
+},
+{
+  "_id": {
+    "$oid": "679cf1ba9126ea5ac66afe62"
+  },
+  "projectNumber": "23",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679b9e729126ea5ac6644ce9"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-267770-04",
+  "consistance": "RDC+1",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "679cf1d07bd5af1deb2a2457"
+  }
+},
+{
+  "_id": {
+    "$oid": "679cf20b7bd5af1deb2a2bb8"
+  },
+  "projectNumber": "24",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679ce6a99126ea5ac66ad0a1"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "cercle": "Riad ourika Marrakech",
+  "Facture": [
+    {
+      "$oid": "682eff3043ab3ce9c7f6bff5"
+    }
+  ],
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "679cf20b7bd5af1deb2a2bbd"
+  },
+  "consistance": "TN",
+  "dateDebutProjet": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "Commune": "Tassoultante"
+},
+{
+  "_id": {
+    "$oid": "679cf25f7bd5af1deb2a411e"
+  },
+  "projectNumber": "25",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679ce6e99126ea5ac66ad0f9"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "679cf2607bd5af1deb2a4123"
+  }
+},
+{
+  "_id": {
+    "$oid": "679cf2a07bd5af1deb2a4f15"
+  },
+  "projectNumber": "26",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679ce9d69126ea5ac66ad4fd"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-274470-04 en partie",
+  "consistance": "Projet Touristique",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Agafay",
+  "dateDebutProjet": {
+    "$date": "2025-01-31T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-03T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "679cf2a07bd5af1deb2a4f1b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a0e15c7bd5af1deb397b02"
+  },
+  "projectNumber": "27",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "679e0d727bd5af1deb2ef302"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-02-03T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-10T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-10T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a0e39dc96f470a8aef2ff0"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a1cdc8c96f470a8af20c10"
+  },
+  "projectNumber": "29",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a1cb70c96f470a8af1a32c"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Harbil",
+  "Facture": [
+    {
+      "$oid": "682ef85143ab3ce9c7f58214"
+    }
+  ],
+  "idDevis": "2025-0001",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a1cdc8c96f470a8af20c15"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a1d3bec96f470a8af250bf"
+  },
+  "projectNumber": "28",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a1d27fc96f470a8af23ac8"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-16119-43",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Annakhil",
+  "dateDebutProjet": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-04T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67a1d3bec96f470a8af250c5"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a1d791c96f470a8af3142b"
+  },
+  "projectNumber": "30",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a0f26dc96f470a8aef8ce1"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Loudaya",
+  "Facture": [],
+  "idDevis": "2025-0002",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a1d791c96f470a8af31430"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a1f7e1c96f470a8af507f6"
+  },
+  "projectNumber": "31",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a1f649c96f470a8af4f04d"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Médina",
+  "Facture": [
+    {
+      "$oid": "682ef80043ab3ce9c7f54140"
+    },
+    {
+      "$oid": "687129a8deb2345bb616d116"
+    }
+  ],
+  "idDevis": "2025-0003",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 2,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a1f7e1c96f470a8af507fc"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a21c27f9618ad58ae69cc3"
+  },
+  "projectNumber": "32",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a21ba5f9618ad58ae69145"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-236901-04",
+  "consistance": "RDC+1",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "",
+  "Facture": [],
+  "idDevis": "2025-0004",
+  "status": "accepté",
+  "archived": true,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67a21c27f9618ad58ae69cc9"
+  },
+  "latitude": "31.670866",
+  "longitude": "-8.071596",
+  "dateDebutProjet": {
+    "$date": "2025-02-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a324401d9af3cc5292416f"
+  },
+  "projectNumber": "32",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6d4d948ab3a2a5fc2fea"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-T45925-43 et T29740-43",
+  "consistance": "TC",
+  "coordonneesX": "285100.019",
+  "coordonneesY": "117000.043",
+  "region": "Marrakech-Safi",
+  "latitude": "31.625790",
+  "longitude": "-7.663578",
+  "prefecture": "Marrakech",
+  "Commune": "El ouidane ",
+  "Facture": [],
+  "idDevis": "2025-0005",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a324401d9af3cc52924175"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-02-05T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-19T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-19T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a3394c1d9af3cc52933f81"
+  },
+  "projectNumber": "33",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a336901d9af3cc529317c6"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-34099-43",
+  "consistance": "TN",
+  "coordonneesX": "243799.964",
+  "coordonneesY": "133140.010",
+  "region": "Marrakech-Safi",
+  "latitude": "31.762444",
+  "longitude": "-8.103126",
+  "prefecture": "Marrakech",
+  "Commune": "Harbil",
+  "Facture": [],
+  "idDevis": "2025-0006",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a3394c1d9af3cc52933f86"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-02-05T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a4d9301d9af3cc529b233e"
+  },
+  "projectNumber": "34",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a4cb241d9af3cc529a5942"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-135054-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultante",
+  "dateDebutProjet": {
+    "$date": "2025-02-06T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-13T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-13T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a4d9301d9af3cc529b2344"
+  }
+},
+{
+  "_id": {
+    "$oid": "67a615e91d9af3cc529eeb95"
+  },
+  "projectNumber": "35",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67a604c41d9af3cc529e9353"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultante",
+  "dateDebutProjet": {
+    "$date": "2025-02-07T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-14T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67a615e91d9af3cc529eeb9b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ac7b201d9af3cc52ae728e"
+  },
+  "projectNumber": "36",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ab32681d9af3cc52ab6242"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-35304-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tameslohte",
+  "dateDebutProjet": {
+    "$date": "2025-02-11T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-19T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-19T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67ac7b201d9af3cc52ae7294"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ac7c981d9af3cc52aeedb9"
+  },
+  "projectNumber": "37",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ac66471d9af3cc52ae1022"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2026-02-12T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2026-02-12T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67ac7c981d9af3cc52aeedbf"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ac7e131d9af3cc52af4793"
+  },
+  "projectNumber": "38",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ac66471d9af3cc52ae1022"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Rehamna",
+  "dateDebutProjet": {
+    "$date": "2025-02-12T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2026-02-12T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2026-02-12T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67ac7e131d9af3cc52af4799"
+  },
+  "consistance": "TN"
+},
+{
+  "_id": {
+    "$oid": "67af0a971d9af3cc52bb1afa"
+  },
+  "projectNumber": "39",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ac9bd51d9af3cc52b06320"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-35292-65",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tameslohte",
+  "dateDebutProjet": {
+    "$date": "2025-02-13T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67af0a971d9af3cc52bb1b00"
+  }
+},
+{
+  "_id": {
+    "$oid": "67af0b041d9af3cc52bb5b80"
+  },
+  "projectNumber": "40",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67aefc1a1d9af3cc52ba07f4"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "T7008_72 (Plle 27217)",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Rehamna",
+  "dateDebutProjet": {
+    "$date": "2025-02-14T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "68249f0b671ea41add387952"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-14T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-05-14T13:51:16.201Z"
+      },
+      "raison": "test",
+      "_id": {
+        "$oid": "68249fd4671ea41add3a3b76"
+      },
+      "dateReprise": {
+        "$date": "2025-05-14T13:52:47.991Z"
+      }
+    }
+  ],
+  "__v": 2,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67af0b041d9af3cc52bb5b86"
+  },
+  "dateArret": {
+    "$date": "2025-05-14T13:51:16.201Z"
+  },
+  "dateDerniereReprise": {
+    "$date": "2025-05-14T13:52:47.991Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67af13aa1d9af3cc52bbdc55"
+  },
+  "projectNumber": "41",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67aefc1a1d9af3cc52ba07f4"
+  },
+  "referenceFonciere": "T17008-72 (Plle 27244)",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Rehamna",
+  "dateDebutProjet": {
+    "$date": "2025-02-14T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-14T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67af13aa1d9af3cc52bbdc5b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67af554a71b42461dbcbe92b"
+  },
+  "projectNumber": "42",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67af27b13985fc4eefaaa159"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-55823-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Elouidane ",
+  "dateDebutProjet": {
+    "$date": "2025-02-14T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67af554a71b42461dbcbe931"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b4524b3f644521a0005000"
+  },
+  "projectNumber": "43",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b35de73f644521a0fd0115"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultante",
+  "dateDebutProjet": {
+    "$date": "2025-02-17T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b4524b3f644521a0005006"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b4566b3f644521a0015ff2"
+  },
+  "projectNumber": "44",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b35e3a3f644521a0fd01c2"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-12243-43",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Ghmate",
+  "dateDebutProjet": {
+    "$date": "2025-02-17T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "67cae4e181a78d5fe70e0978"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b4566b3f644521a0015ff7"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b457853f644521a001b531"
+  },
+  "projectNumber": "45",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677e8d45fc4adc394711d194"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-2657-43",
+  "consistance": "RDC+1",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Annakhil",
+  "dateDebutProjet": {
+    "$date": "2025-02-18T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b457853f644521a001b537"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b46e583f644521a004929b"
+  },
+  "projectNumber": "46",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b35e3a3f644521a0fd01c2"
+  },
+  "Facture": [],
+  "idDevis": "2025-0007",
+  "status": "En attente",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Suspendu"
+},
+{
+  "_id": {
+    "$oid": "67b601e878ae12bd1c4444ab"
+  },
+  "projectNumber": "46",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677e8d45fc4adc394711d194"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-12211-M",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "dateDebutProjet": {
+    "$date": "2025-02-19T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-05T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b601e878ae12bd1c4444b0"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b6ea4778ae12bd1c47dff3"
+  },
+  "projectNumber": "47",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b6e94978ae12bd1c479e85"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-145966-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-20T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b6ea4778ae12bd1c47dff8"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b6f84478ae12bd1c495a95"
+  },
+  "projectNumber": "48",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b6f78078ae12bd1c4938ae"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "-",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-20T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-27T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-27T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b6f84478ae12bd1c495a9b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b74fbf000ab84361cee9d5"
+  },
+  "projectNumber": "49",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b74f7e000ab84361cea91b"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-137930-04",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-20T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-06T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-06T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b74fc0000ab84361cee9da"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b8994f000ab84361d56358"
+  },
+  "projectNumber": "50",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b898fd000ab84361d53faa"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b8994f000ab84361d5635d"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b8a05d000ab84361d5f8ab"
+  },
+  "projectNumber": "51",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67b8a01e000ab84361d5b36d"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "N-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Souihla",
+  "dateDebutProjet": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67b8a05d000ab84361d5f8b1"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c1e200000ab843610281ee"
+  },
+  "projectNumber": "52",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67c1e188000ab84361024f1a"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-4573-M",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-02-28T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-07T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": true,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67c1e200000ab843610281f4"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c6f8f3af5f2a8bf174a322"
+  },
+  "projectNumber": "52",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67c6f8a8af5f2a8bf1746759"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-226329-04",
+  "consistance": "RDC+1",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-03-04T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67c6f8f3af5f2a8bf174a327"
+  }
+},
+{
+  "_id": {
+    "$oid": "67cae00281a78d5fe70693b6"
+  },
+  "projectNumber": "53",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67cadfa681a78d5fe7060e66"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultante",
+  "dateDebutProjet": {
+    "$date": "2025-03-05T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-06T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-06T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67cae00281a78d5fe70693bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d03f3b81a78d5fe726032e"
+  },
+  "projectNumber": "54",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67d03ed381a78d5fe7257916"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Souihla",
+  "dateDebutProjet": {
+    "$date": "2025-03-10T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-18T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-18T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67d03f3b81a78d5fe7260333"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d5664a2968e7987b0f9243"
+  },
+  "projectNumber": "55",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67d5656b2968e7987b0f0279"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Agafay",
+  "dateDebutProjet": {
+    "$date": "2025-03-15T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-22T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67d5664a2968e7987b0f924b"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-22T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d7e9c22968e7987b17f81e"
+  },
+  "projectNumber": "56",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677f98bab271bdad59102205"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-11111111",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-03-17T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67d7e9c22968e7987b17f824"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d8026e2968e7987b1ca8c6"
+  },
+  "projectNumber": "57",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67d801aa2968e7987b1c1803"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-19244-43",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Old Hassoune",
+  "dateDebutProjet": {
+    "$date": "2025-03-17T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67d8026e2968e7987b1ca8cc"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d807222968e7987b1e5fcc"
+  },
+  "projectNumber": "58",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67d8067b2968e7987b1dcef8"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "Commune": "Tahanaout",
+  "dateDebutProjet": {
+    "$date": "2025-03-17T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67d807222968e7987b1e5fd1"
+  }
+},
+{
+  "_id": {
+    "$oid": "67daaaf72968e7987b2b022a"
+  },
+  "projectNumber": "59",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67daaabc2968e7987b2a7033"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultant",
+  "dateDebutProjet": {
+    "$date": "2025-03-18T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-21T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-21T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67daaaf72968e7987b2b0230"
+  }
+},
+{
+  "_id": {
+    "$oid": "67daaba52968e7987b2bdd84"
+  },
+  "projectNumber": "135",
+  "anneeProjet": 2024,
+  "maitreOuvrage": {
+    "$oid": "67daa9d32968e7987b2a247b"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC",
+  "region": "Casablanca-Settat",
+  "prefecture": "Casablanca",
+  "dateDebutProjet": {
+    "$date": "2024-08-01T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2026-08-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2026-08-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67daaba52968e7987b2bdd8a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e15f874be2dc590b6ef627"
+  },
+  "projectNumber": "60",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67e15f4c4be2dc590b6eaac8"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-03-20T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-25T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-25T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67e15f884be2dc590b6ef62c"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e1603a4be2dc590b70206f"
+  },
+  "projectNumber": "61",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67e160054be2dc590b6f8b70"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Agafay",
+  "dateDebutProjet": {
+    "$date": "2025-03-24T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-31T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67e1603a4be2dc590b702074"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e3d8f64be2dc590b7c8338"
+  },
+  "projectNumber": "62",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67c1e188000ab84361024f1a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "Commune": "Ourika",
+  "dateDebutProjet": {
+    "$date": "2025-03-26T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-03-31T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-03-31T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67e3d8f64be2dc590b7c833e"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e3dc524be2dc590b7dff45"
+  },
+  "projectNumber": "63",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67e3dbff4be2dc590b7d68ae"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-03-26T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-02T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-02T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67e3dc524be2dc590b7dff4b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e404f64be2dc590b8051fd"
+  },
+  "projectNumber": "64",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678926bfa1a2810a7960fdbb"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Laâyoune-Sakia El Hamra",
+  "prefecture": "Laâyoune",
+  "dateDebutProjet": {
+    "$date": "2025-03-26T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-07T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67e404f64be2dc590b805204"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ed5d612961e4a18189e3d4"
+  },
+  "projectNumber": "65",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ed5c6e2961e4a1818945f2"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultant",
+  "dateDebutProjet": {
+    "$date": "2025-04-02T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67ed5d622961e4a18189e3d9"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ed610b2961e4a1818b729f"
+  },
+  "projectNumber": "66",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ed5f892961e4a1818ad42a"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-11199-24",
+  "consistance": "TN",
+  "region": "Tanger-Tétouan-Al Hoceïma",
+  "prefecture": "Al Hoceïma",
+  "dateDebutProjet": {
+    "$date": "2025-04-02T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-06-04T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-06-04T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67ed610b2961e4a1818b72a4"
+  }
+},
+{
+  "_id": {
+    "$oid": "67ed66d12961e4a1818da824"
+  },
+  "projectNumber": "67",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67ed636c2961e4a1818c6181"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T47302-06_T30321/06_T39233/06_T428/G_T7520/G",
+  "consistance": "RDC",
+  "region": "Tanger-Tétouan-Al Hoceïma",
+  "prefecture": "Tanger-Assilah",
+  "dateDebutProjet": {
+    "$date": "2025-04-02T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-23T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Terminé",
+  "missionProjet": {
+    "$oid": "67ed66d12961e4a1818da82b"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f100362961e4a1819e0278"
+  },
+  "projectNumber": "68",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f0ff832961e4a1819d60f5"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Casablanca-Settat",
+  "prefecture": "El Jadida",
+  "Commune": "Laaounate",
+  "dateDebutProjet": {
+    "$date": "2025-04-05T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-19T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f100362961e4a1819e027e"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f3f61c2961e4a181ab1ec6"
+  },
+  "projectNumber": "69",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f3f55e2961e4a181aa7e24"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "-",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-05T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-21T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-10T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f3f61c2961e4a181ab1ecb"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f3f68a2961e4a181ac1194"
+  },
+  "projectNumber": "70",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f3f5c02961e4a181aa7e6b"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-07T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-14T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f3f68a2961e4a181ac1199"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f3f7212961e4a181ad02e2"
+  },
+  "projectNumber": "71",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "677f98bab271bdad59102205"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-110828-04",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-07T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-21T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-21T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Terminé",
+  "missionProjet": {
+    "$oid": "67f3f7212961e4a181ad02e8"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f780712961e4a181cbf3c7"
+  },
+  "projectNumber": "72",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f780192961e4a181cb50e0"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f780712961e4a181cbf3cc"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f782a52961e4a181cea297"
+  },
+  "projectNumber": "73",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f7823a2961e4a181cdff90"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-44099-43",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-19T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f782a62961e4a181cea29d"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f783b22961e4a181d03b1c"
+  },
+  "projectNumber": "74",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f783672961e4a181cf981c"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-65525-04",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-10T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-11T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f783b22961e4a181d03b22"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f784142961e4a181d1d291"
+  },
+  "projectNumber": "75",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f782f52961e4a181cf97c9"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultant",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f784142961e4a181d1d296"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f784802961e4a181d275a0"
+  },
+  "projectNumber": "76",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f782f52961e4a181cf97c9"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Tassoultatnt",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f784802961e4a181d275a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f786cb2961e4a181d602db"
+  },
+  "projectNumber": "77",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f784752961e4a181d2759e"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-152844-04",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f786cb2961e4a181d602e1"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f787482961e4a181d6f870"
+  },
+  "projectNumber": "78",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f786452961e4a181d54e49"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-08T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-15T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f787482961e4a181d6f876"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78a0b2961e4a181d894ae"
+  },
+  "projectNumber": "79",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f78a0c2961e4a181d894b4"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78a692961e4a181d937a6"
+  },
+  "projectNumber": "80",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f78a692961e4a181d937ac"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78abd2961e4a181d9daf1"
+  },
+  "projectNumber": "81",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78abd2961e4a181d9daf7"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78b102961e4a181da7e03"
+  },
+  "projectNumber": "82",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Safi",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78b102961e4a181da7e09"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78bb12961e4a181dc6bc1"
+  },
+  "projectNumber": "83",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Chichaoua",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78bb12961e4a181dc6bc7"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78c0b2961e4a181dd617e"
+  },
+  "projectNumber": "84",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "El Kelâa des Sraghna",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78c0b2961e4a181dd6184"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78c4c2961e4a181de04b7"
+  },
+  "projectNumber": "85",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78c4c2961e4a181de04bd"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78cb92961e4a181df4d8f"
+  },
+  "projectNumber": "86",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f789612961e4a181d7f13a"
+  },
+  "consistance": "RDC/TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-01T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78cb92961e4a181df4d96"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f78d2c2961e4a181e043dd"
+  },
+  "projectNumber": "87",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f787162961e4a181d6f829"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-654-M",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-09T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-17T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "67f78d2c2961e4a181e043e4"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f8e8c62961e4a181f4701b"
+  },
+  "projectNumber": "88",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f8e28d2961e4a181f3b905"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "Projet touristique",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Agafay",
+  "dateDebutProjet": {
+    "$date": "2025-04-11T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-16T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-30T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Terminé",
+  "missionProjet": {
+    "$oid": "67f8e8c62961e4a181f47020"
+  }
+},
+{
+  "_id": {
+    "$oid": "67f8e9292961e4a181f56774"
+  },
+  "projectNumber": "89",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67f8ce0f2961e4a181f2dd97"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "Commune": "Loudaya",
+  "dateDebutProjet": {
+    "$date": "2025-04-11T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-16T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-17T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "67f8e9292961e4a181f56779"
+  }
+},
+{
+  "_id": {
+    "$oid": "680117f67a7ca448d2fbbb62"
+  },
+  "projectNumber": "90",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6801141b7a7ca448d2fb0cb6"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-17T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-29T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680117f67a7ca448d2fbbb68"
+  }
+},
+{
+  "_id": {
+    "$oid": "680663767a7ca448d21d2cdf"
+  },
+  "projectNumber": "91",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "68065a9b7a7ca448d21c6e2a"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-15838",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-19T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-28T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680663777a7ca448d21d2ce4"
+  }
+},
+{
+  "_id": {
+    "$oid": "680665d97a7ca448d21e3a37"
+  },
+  "projectNumber": "92",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680629c07a7ca448d21b67df"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-48693-04",
+  "consistance": "RDC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-21T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-04-28T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-04-28T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "livré",
+  "missionProjet": {
+    "$oid": "680665d97a7ca448d21e3a3c"
+  }
+},
+{
+  "_id": {
+    "$oid": "680667ad7a7ca448d21ff771"
+  },
+  "projectNumber": "94",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680661ec7a7ca448d21d2b2e"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-21T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680667ad7a7ca448d21ff776"
+  }
+},
+{
+  "_id": {
+    "$oid": "680b4eb77a7ca448d2444305"
+  },
+  "projectNumber": "93",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "678e6b04948ab3a2a5fc2b91"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "dateDebutProjet": {
+    "$date": "2025-04-22T00:00:00.000Z"
+  },
+  "Facture": [
+    {
+      "$oid": "6874ecbfcf48299992695900"
+    }
+  ],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-02T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680b4eb77a7ca448d244430b"
+  }
+},
+{
+  "_id": {
+    "$oid": "680b513c7a7ca448d2455acd"
+  },
+  "projectNumber": "95",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b49e77a7ca448d23eca1a"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-25189-65",
+  "consistance": "TC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "Commune": "Ait Ourir",
+  "dateDebutProjet": {
+    "$date": "2025-04-24T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-02T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-07-14T11:42:01.025Z"
+      },
+      "raison": "dfesf",
+      "_id": {
+        "$oid": "6874ed09cf4829999269d0d5"
+      },
+      "dateReprise": {
+        "$date": "2025-07-14T11:42:04.925Z"
+      }
+    }
+  ],
+  "__v": 1,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680b513c7a7ca448d2455ad2"
+  },
+  "dateArret": {
+    "$date": "2025-07-14T11:42:01.025Z"
+  },
+  "dateDerniereReprise": {
+    "$date": "2025-07-14T11:42:04.925Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680b52307a7ca448d246cba0"
+  },
+  "projectNumber": "96",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b4b1a7a7ca448d23ecbba"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TC",
+  "region": "Marrakech-Safi",
+  "prefecture": "Al Haouz",
+  "Commune": "Ait Ourir",
+  "dateDebutProjet": {
+    "$date": "2025-04-24T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-02T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680b52307a7ca448d246cba5"
+  }
+},
+{
+  "_id": {
+    "$oid": "680f45747a7ca448d26430e4"
+  },
+  "projectNumber": "97",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b4cda7a7ca448d23f8e70"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-10561-43",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-26T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680f45747a7ca448d26430ea"
+  }
+},
+{
+  "_id": {
+    "$oid": "680f46107a7ca448d264ea0c"
+  },
+  "projectNumber": "98",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680cb2a07a7ca448d25ccfb2"
+  },
+  "Facture": [],
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "680f46107a7ca448d264ea13"
+  },
+  "dateDebutProjet": {
+    "$date": "2025-04-26T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-05T00:00:00.000Z"
+  },
+  "prefecture": "Marrakech",
+  "region": "Marrakech-Safi"
+},
+{
+  "_id": {
+    "$oid": "681206d1bdfcb1e34c31d972"
+  },
+  "projectNumber": "99",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-04-30T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-05-07T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-05-07T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "681206d1bdfcb1e34c31d978"
+  }
+},
+{
+  "_id": {
+    "$oid": "681485a9bdfcb1e34c4507aa"
+  },
+  "projectNumber": "02",
+  "anneeProjet": 2024,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "",
+  "consistance": "Carrière",
+  "region": "Casablanca-Settat",
+  "prefecture": "Berrechid",
+  "dateDebutProjet": {
+    "$date": "2024-02-02T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-07-14T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-07-21T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "681485a9bdfcb1e34c4507b0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68188aa9b8629636bdb31760"
+  },
+  "projectNumber": "100",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-T17142-43 Et T17143-43",
+  "consistance": "TN",
+  "region": "Marrakech-Safi",
+  "prefecture": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-05-03T00:00:00.000Z"
+  },
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-06-02T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-06-05T00:00:00.000Z"
+  },
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "En cours",
+  "missionProjet": {
+    "$oid": "68188aa9b8629636bdb31765"
+  }
+},
+{
+  "_id": {
+    "$oid": "683daea4d806790612744a81"
+  },
+  "projectNumber": "136",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-ddaddee",
+  "consistance": "TN",
+  "coordonneesX": "253218.241",
+  "coordonneesY": "116028.439",
+  "region": "L'Oriental",
+  "latitude": "31.610331951886685",
+  "longitude": "-7.999241173952331",
+  "prefecture": "Nador",
+  "Commune": "test1",
+  "cercle": "test",
+  "Facture": [
+    {
+      "$oid": "683f12eae712031d5a714bf2"
+    }
+  ],
+  "idDevis": "2025-0008",
+  "status": "accepté",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 1,
+  "projectStatus": "Suspendu",
+  "missionProjet": {
+    "$oid": "683daea4d806790612744a8a"
+  }
+},
+{
+  "_id": {
+    "$oid": "684c0fddb1489e5dfe0e8545"
+  },
+  "projectNumber": "137",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680cb2a07a7ca448d25ccfb2"
+  },
+  "Facture": [],
+  "idDevis": "2025-0009",
+  "status": "En attente",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Suspendu"
+},
+{
+  "_id": {
+    "$oid": "684c8a65f46f78731f3776ee"
+  },
+  "projectNumber": "138",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Titre foncier",
+  "referenceFonciere": "T-52635",
+  "consistance": "terrain",
+  "coordonneesX": "202156",
+  "coordonneesY": "201256",
+  "region": "L'Oriental",
+  "latitude": "32.366005",
+  "longitude": "-8.564308",
+  "prefecture": "Driouch",
+  "Commune": "nadour",
+  "cercle": "test",
+  "Facture": [],
+  "idDevis": "2025-0010",
+  "status": "En attente",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "historiqueArrets": [],
+  "__v": 0,
+  "projectStatus": "Suspendu"
+},
+{
+  "_id": {
+    "$oid": "68710108a5a4c2888bb12729"
+  },
+  "projectNumber": "PROJ-2025-0001",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b4cda7a7ca448d23f8e70"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-11T12:18:16.195Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "idDevis": "68710107a5a4c2888bb12723",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872bc87fb8bf23d65d371ad"
+  },
+  "projectNumber": "PROJ-2025-0002",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-rec",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T19:50:31.437Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "idDevis": "6872bc87fb8bf23d65d371a7",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872bd0ffb8bf23d65d3b48d"
+  },
+  "projectNumber": "PROJ-2025-0003",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "test2",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T19:52:47.573Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "idDevis": "6872bd0ffb8bf23d65d3b487",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872c13bf292e9b165ce3323"
+  },
+  "projectNumber": "PROJ-2025-0004",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:10:35.882Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "idDevis": "6872bfab75aa3fdb177098fb",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872c1bef292e9b165ceb9f3"
+  },
+  "projectNumber": "PROJ-2025-0005",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6814843abdfcb1e34c44451f"
+  },
+  "statutFoncier": "Réquisition",
+  "referenceFonciere": "R-4565",
+  "consistance": "fgchc",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "21.606134682398896",
+  "longitude": "-14.14911153048248",
+  "prefecture": "d'Aousserd",
+  "Commune": "Caïdat de Zoug",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:12:46.007Z"
+  },
+  "cercle": "d'Aousserd",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "idDevis": "686d38b1354abccdb6b82a50",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "6872c1bef292e9b165ceb9fb"
+  }
+},
+{
+  "_id": {
+    "$oid": "6872c303ce524e9de2947c5b"
+  },
+  "projectNumber": "PROJ-2025-0006",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-3333",
+  "consistance": "fdsv",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "Marrakech-Safi",
+  "latitude": "31.623611379674536",
+  "longitude": "-7.9936176329729625",
+  "prefecture": "Marrakech",
+  "Commune": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:18:11.902Z"
+  },
+  "cercle": "Préfecture de Marrakech",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "686bf0aadc6053f9764cebd3",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "6872c304ce524e9de2947c63"
+  }
+},
+{
+  "_id": {
+    "$oid": "6872c540ce524e9de2949d9b"
+  },
+  "projectNumber": "PROJ-2025-0007",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-42",
+  "consistance": "sscsac",
+  "zoneLambert": "",
+  "coordonneesX": "253806.418",
+  "coordonneesY": "117559.730",
+  "region": "Marrakech-Safi",
+  "latitude": "31.62426914926043",
+  "longitude": "-7.993445971607389",
+  "prefecture": "de Marrakech",
+  "Commune": "Marrakech",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:27:44.337Z"
+  },
+  "cercle": "de Marrakech",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "686d2675354abccdb6b7cd9c",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "6872c541ce524e9de2949da2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6872c5a0ce524e9de294acb3"
+  },
+  "projectNumber": "PROJ-2025-0008",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b49e77a7ca448d23eca1a"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:29:20.050Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6870e9f663b119907457a572",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872c6edbd6d2042ac71d81e"
+  },
+  "projectNumber": "PROJ-2025-0009",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "testing ",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T20:34:53.273Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872c6ebbd6d2042ac71d810",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872d3a3bd6d2042ac73495d"
+  },
+  "projectNumber": "PROJ-2025-0010",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T21:29:07.520Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872c427ce524e9de2949950",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872dfacfd74c3a7a8f76e56"
+  },
+  "projectNumber": "PROJ-2025-0011",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "Réquisition",
+  "referenceFonciere": "R-",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T22:20:28.327Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872dfacfd74c3a7a8f76e50",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6872fab8fa14795a2041283b"
+  },
+  "projectNumber": "PROJ-2025-0012",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680b4cda7a7ca448d23f8e70"
+  },
+  "statutFoncier": "Non défini",
+  "referenceFonciere": "ND-YRT3W",
+  "consistance": "TVR",
+  "zoneLambert": "",
+  "coordonneesX": "-10378010.486",
+  "coordonneesY": "8348544.779",
+  "region": "",
+  "latitude": "21.739324",
+  "longitude": "-153.452632",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-12T00:00:00.000Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872fa66fa14795a2040e7c0",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6874340f6caa045df1e9ee15"
+  },
+  "projectNumber": "PROJ-2025-0013",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-13T22:32:47.044Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872d7e50766cfb95cca93c2",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687434226caa045df1e9f05c"
+  },
+  "projectNumber": "PROJ-2025-0014",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "67333bb790847a116639d47d"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-13T22:33:06.076Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872d7f40766cfb95cca9464",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "687434cd6caa045df1ea03a1"
+  },
+  "projectNumber": "PROJ-2025-0015",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-13T00:00:00.000Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-07-12T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-07-13T00:00:00.000Z"
+  },
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6872f982fa14795a20408769",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "687434cd6caa045df1ea03a5"
+  }
+},
+{
+  "_id": {
+    "$oid": "6874cc0754425a87dbfb9ad3"
+  },
+  "projectNumber": "PROJ-2025-0016",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "680cb2a07a7ca448d25ccfb2"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-yvdcgw",
+  "consistance": "testing 2",
+  "zoneLambert": "",
+  "coordonneesX": "500226.404",
+  "coordonneesY": "193302.519",
+  "region": "Souss-Massa",
+  "latitude": "30.53471971652067",
+  "longitude": "-7.846088700209521",
+  "prefecture": "de Taroudant",
+  "Commune": "Zagmouzen",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T09:21:11.630Z"
+  },
+  "cercle": "de Taroudant",
+  "Facture": [
+    {
+      "$oid": "6874cc3d54425a87dbfba21a"
+    }
+  ],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6874cba154425a87dbfb58fd",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 1,
+  "missionProjet": {
+    "$oid": "6874cc0754425a87dbfb9ad7"
+  }
+},
+{
+  "_id": {
+    "$oid": "6874d1a554425a87dbfc64c6"
+  },
+  "projectNumber": "PROJ-2025-0017",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Délimitation administrative",
+  "referenceFonciere": "D-862379",
+  "consistance": "TRC",
+  "zoneLambert": "",
+  "coordonneesX": "449587.021",
+  "coordonneesY": "203671.366",
+  "region": "Souss-Massa",
+  "latitude": "30.62719696965656",
+  "longitude": "-8.374468642539231",
+  "prefecture": "de Taroudant",
+  "Commune": "Tinzart",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T09:45:09.893Z"
+  },
+  "cercle": "ouled berhil",
+  "Facture": [
+    {
+      "$oid": "6874d1d254425a87dbfc733f"
+    }
+  ],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6874d1a554425a87dbfc64a4",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": {
+    "$date": "2025-07-14T09:45:34.770Z"
+  },
+  "dateArret": {
+    "$date": "2025-07-14T09:45:30.826Z"
+  },
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-07-14T09:45:30.826Z"
+      },
+      "raison": "test",
+      "_id": {
+        "$oid": "6874d1ba54425a87dbfc6a33"
+      },
+      "dateReprise": {
+        "$date": "2025-07-14T09:45:34.770Z"
+      }
+    }
+  ],
+  "__v": 2,
+  "missionProjet": {
+    "$oid": "6874d1a554425a87dbfc64d1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6874d34d54425a87dbfd144e"
+  },
+  "projectNumber": "PROJ-2025-0018",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T09:52:13.659Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6874d34d54425a87dbfd143e",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6874e87fcf48299992688bc5"
+  },
+  "projectNumber": "PROJ-2025-0019",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "",
+  "zoneLambert": "",
+  "coordonneesX": "",
+  "coordonneesY": "",
+  "region": "",
+  "latitude": "",
+  "longitude": "",
+  "prefecture": "",
+  "Commune": "",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T11:22:39.538Z"
+  },
+  "cercle": "",
+  "Facture": [],
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6874e821cf48299992688a35",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6874ea34cf4829999268baca"
+  },
+  "projectNumber": "PROJ-2025-0020",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "681889ffb8629636bdb24b94"
+  },
+  "statutFoncier": "",
+  "referenceFonciere": "",
+  "consistance": "youssef",
+  "zoneLambert": "",
+  "coordonneesX": "493951.448",
+  "coordonneesY": "326984.758",
+  "region": "Marrakech-Safi",
+  "latitude": "31.740977",
+  "longitude": "-7.912291",
+  "prefecture": "de Rhamna",
+  "Commune": "Jbilate",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T11:29:56.574Z"
+  },
+  "cercle": "de Rhamna",
+  "Facture": [],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "6874ea34cf4829999268babf",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": {
+    "$date": "2025-07-14T11:38:27.110Z"
+  },
+  "dateArret": {
+    "$date": "2025-07-14T11:38:21.647Z"
+  },
+  "historiqueArrets": [
+    {
+      "dateArret": {
+        "$date": "2025-07-14T11:38:21.647Z"
+      },
+      "raison": "dtet",
+      "_id": {
+        "$oid": "6874ec2dcf48299992693f99"
+      },
+      "dateReprise": {
+        "$date": "2025-07-14T11:38:27.110Z"
+      }
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "68750e41b8440d8aec75b62e"
+  },
+  "projectNumber": "PROJ-2025-0021",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6814843abdfcb1e34c44451f"
+  },
+  "statutFoncier": "Réquisition",
+  "referenceFonciere": "R-sssss",
+  "consistance": "service ",
+  "zoneLambert": "",
+  "coordonneesX": "494619.885",
+  "coordonneesY": "326329.064",
+  "region": "Marrakech-Safi",
+  "latitude": "31.735064",
+  "longitude": "-7.905230",
+  "prefecture": "de Rhamna",
+  "Commune": "Jbilate",
+  "dateDebutProjet": {
+    "$date": "2025-07-14T14:03:45.955Z"
+  },
+  "cercle": "de Rhamna",
+  "Facture": [],
+  "dateLivraisonPrevue": null,
+  "dateFinProjet": null,
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "68750e41b8440d8aec75b613",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "68750e42b8440d8aec75b637"
+  }
+},
+{
+  "_id": {
+    "$oid": "68750ea6b8440d8aec75c52b"
+  },
+  "projectNumber": "PROJ-2025-0022",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Délimitation administrative",
+  "referenceFonciere": "D-xakh",
+  "consistance": "scvizhkb c",
+  "zoneLambert": "",
+  "coordonneesX": "492709.383",
+  "coordonneesY": "326370.606",
+  "region": "Marrakech-Safi",
+  "latitude": "31.735428561483975",
+  "longitude": "-7.9254005455263",
+  "prefecture": "de Rhamna",
+  "Commune": "Jbilate",
+  "dateDebutProjet": {
+    "$date": "2025-07-16T00:00:00.000Z"
+  },
+  "cercle": "de Rhamna",
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-07-18T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-07-18T00:00:00.000Z"
+  },
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "68750ea5b8440d8aec75c509",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "68750ea6b8440d8aec75c536"
+  }
+},
+{
+  "_id": {
+    "$oid": "68750f1fb8440d8aec75da3f"
+  },
+  "projectNumber": "PROJ-2025-0023",
+  "anneeProjet": 2025,
+  "maitreOuvrage": {
+    "$oid": "6811fa27bdfcb1e34c29490f"
+  },
+  "statutFoncier": "Non immatriculé",
+  "referenceFonciere": "N-obad",
+  "consistance": "hdlabskjl",
+  "zoneLambert": "",
+  "coordonneesX": "492806.537",
+  "coordonneesY": "325775.885",
+  "region": "Marrakech-Safi",
+  "latitude": "31.730063067854342",
+  "longitude": "-7.924370577302566",
+  "prefecture": "Marrakech",
+  "Commune": "Ouahat Sidi Brahim",
+  "dateDebutProjet": {
+    "$date": "2025-07-15T00:00:00.000Z"
+  },
+  "cercle": "de Marrakech",
+  "Facture": [],
+  "dateLivraisonPrevue": {
+    "$date": "2025-07-16T00:00:00.000Z"
+  },
+  "dateFinProjet": {
+    "$date": "2025-07-16T00:00:00.000Z"
+  },
+  "projectStatus": "En cours",
+  "status": "accepté",
+  "idDevis": "68750f1fb8440d8aec75da1c",
+  "archived": false,
+  "refusalReason": null,
+  "estArrete": false,
+  "tempsPasse": 0,
+  "dateDerniereReprise": null,
+  "dateArret": null,
+  "historiqueArrets": [],
+  "__v": 0,
+  "missionProjet": {
+    "$oid": "68750f20b8440d8aec75da4a"
+  }
+}]

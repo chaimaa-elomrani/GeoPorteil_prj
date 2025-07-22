@@ -201,33 +201,68 @@ const ProjectsMap = () => {
           zoomControl={false} // We'll add custom zoom control
         >
           {/* Layer Control for switching between map types */}
-          <LayersControl position="topright">
+          <LayersControl position="topleft">
             {/* Base Layers */}
-            <BaseLayer checked name="🗺️ Carte Standard">
+            <BaseLayer checked name="🗺️ OpenStreetMap">
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
             </BaseLayer>
 
-            <BaseLayer name="🛰️ Vue Satellite">
+            <BaseLayer name="🛰️ Satellite (Esri)">
               <TileLayer
                 url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                attribution='&copy; <a href="https://www.esri.com/">Esri</a> &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                attribution='&copy; <a href="https://www.esri.com/">Esri</a>, DigitalGlobe, GeoEye, Earthstar Geographics'
               />
             </BaseLayer>
 
-            <BaseLayer name="🌍 Terrain">
+            <BaseLayer name="🌍 Terrain (OpenTopo)">
               <TileLayer
                 url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-                attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+                attribution='&copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors'
               />
             </BaseLayer>
 
-            <BaseLayer name="🌙 Mode Sombre">
+            <BaseLayer name="🗺️ CartoDB Positron">
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+            </BaseLayer>
+
+            <BaseLayer name="🌙 CartoDB Dark">
               <TileLayer
                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+            </BaseLayer>
+
+            <BaseLayer name="🛰️ Google Satellite">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+
+            <BaseLayer name="🗺️ Google Streets">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+
+            <BaseLayer name="🌍 Google Terrain">
+              <TileLayer
+                url="https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}"
+                attribution='&copy; Google'
+              />
+            </BaseLayer>
+
+            <BaseLayer name="🎨 Stamen Watercolor">
+              <TileLayer
+                url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
+                attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
             </BaseLayer>
 

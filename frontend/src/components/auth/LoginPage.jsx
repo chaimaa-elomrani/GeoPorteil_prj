@@ -46,15 +46,18 @@ export default function LoginPage() {
         password: "",
       })
 
-      // Navigate based on user role - this will be handled by the auth context
-      setTimeout(() => {
-        const user = JSON.parse(localStorage.getItem("user") || "{}")
-        if (user.role === "admin") {
-          navigate("/admin-dashboard")
-        } else {
-          navigate("/dashboard")
-        }
-      }, 1500)
+      // Navigate based on user role - redirect admin users to admin dashboard
+      const user = JSON.parse(localStorage.getItem("user") || "{}")
+      console.log("🔄 Redirecting user:", user.role)
+
+      // Immediate redirect for admin users
+      if (user.role === "admin") {
+        console.log("✅ Redirecting admin to admin dashboard")
+        navigate("/admin-dashboard", { replace: true })
+      } else {
+        console.log("✅ Redirecting user to user dashboard")
+        navigate("/dashboard", { replace: true })
+      }
     } catch (err) {
       console.error("Login error:", err)
       setError(err.message || "Une erreur est survenue")

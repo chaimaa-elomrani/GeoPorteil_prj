@@ -1,13 +1,8 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import ProjectDetail from '../components/ProjectDetail'
+import ProjectDetailElegant from '../components/ProjectDetailElegant'
 
 const ProjectDetailPage = () => {
-  return (
-    <AdminLayout title="Détails du Projet">
-      <ProjectDetail />
-    </AdminLayout>
-  )
+  return <ProjectDetailElegant />
 }
 
 export default ProjectDetailPage

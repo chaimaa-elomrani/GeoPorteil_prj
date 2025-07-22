@@ -62,6 +62,14 @@ export default function Sidebar({ user }) {
           title: "Importer GeoJSON",
           path: "/projects/import",
         },
+        {
+          title: "Visualiseur GeoJSON",
+          path: "/geojson-viewer",
+        },
+        {
+          title: "Archives",
+          path: "/archive",
+        },
       ],
     },
     {

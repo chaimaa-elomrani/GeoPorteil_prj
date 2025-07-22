@@ -15,6 +15,9 @@ import {
   Pause,
   Filter,
   RefreshCw,
+  Archive,
+  Trash2,
+  Edit,
 } from "lucide-react"
 import { apiService } from "../services/api"
 
@@ -26,6 +29,7 @@ export default function ProjectsDashboard() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [regionFilter, setRegionFilter] = useState("all")
+  const [actionLoading, setActionLoading] = useState({})
   const [stats, setStats] = useState({
     total: 0,
     enCours: 0,
@@ -51,7 +55,9 @@ export default function ProjectsDashboard() {
 
       // Handle different response structures
       let projectsData = []
-      if (response.data && Array.isArray(response.data)) {
+      if (response.success && response.data && response.data.projects && Array.isArray(response.data.projects)) {
+        projectsData = response.data.projects
+      } else if (response.data && Array.isArray(response.data)) {
         projectsData = response.data
       } else if (Array.isArray(response)) {
         projectsData = response
@@ -162,12 +168,60 @@ export default function ProjectsDashboard() {
     navigate(`/projects/${projectId}`)
   }
 
-  const handleViewOnMap = (projectId) => {
-    navigate(`/projects/map/${projectId}`)
-  }
+
 
   const handleRefresh = () => {
     fetchProjects()
+  }
+
+  const handleEdit = (projectId) => {
+    navigate(`/projects/${projectId}/edit`)
+  }
+
+  const handleArchive = async (projectId) => {
+    if (!window.confirm('Êtes-vous sûr de vouloir archiver ce projet ?')) {
+      return
+    }
+
+    try {
+      setActionLoading(prev => ({ ...prev, [`archive_${projectId}`]: true }))
+      const response = await apiService.archiveProject(projectId)
+
+      if (response.success) {
+        await fetchProjects()
+        alert('Projet archivé avec succès')
+      } else {
+        alert('Erreur lors de l\'archivage: ' + response.message)
+      }
+    } catch (error) {
+      console.error('Error archiving project:', error)
+      alert('Erreur lors de l\'archivage: ' + error.message)
+    } finally {
+      setActionLoading(prev => ({ ...prev, [`archive_${projectId}`]: false }))
+    }
+  }
+
+  const handleDelete = async (projectId) => {
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce projet ? Cette action est irréversible.')) {
+      return
+    }
+
+    try {
+      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: true }))
+      const response = await apiService.deleteProject(projectId)
+
+      if (response.success) {
+        await fetchProjects()
+        alert('Projet supprimé avec succès')
+      } else {
+        alert('Erreur lors de la suppression: ' + response.message)
+      }
+    } catch (error) {
+      console.error('Error deleting project:', error)
+      alert('Erreur lors de la suppression: ' + error.message)
+    } finally {
+      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: false }))
+    }
   }
 
   if (loading) {
@@ -221,7 +275,7 @@ export default function ProjectsDashboard() {
               <span>Actualiser</span>
             </button>
             <button
-              onClick={() => navigate("/projects/import")}
+              onClick={() => navigate("/projects/create")}
               className="bg-[#354939] hover:bg-[#2a3a2d] text-white px-6 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2"
             >
               <Plus className="w-5 h-5" />
@@ -362,8 +416,11 @@ export default function ProjectsDashboard() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex-1">
                       <h3 className="font-semibold text-lg text-gray-900 group-hover:text-[#354939] transition-colors mb-1">
-                        Projet {project.projectNumber || "N/A"}
+                        {project.nomProjet || `Projet ${project.projectNumber}` || "Projet sans nom"}
                       </h3>
+                      <div className="text-xs text-gray-500 mb-2">
+                        {project.projectNumber || "N/A"}
+                      </div>
                       <div className="flex items-center text-sm text-gray-600 mb-2">
                         <User className="h-4 w-4 mr-1" />
                         <span>Chef: {project.maitreOuvrage?.name || "Non assigné"}</span>
@@ -394,30 +451,62 @@ export default function ProjectsDashboard() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex gap-2 pt-4 border-t border-gray-100">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleViewDetails(project._id)
-                      }}
-                      className="flex-1 bg-[#354939] hover:bg-[#2a3a2d] text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-1"
-                    >
-                      <Eye className="h-4 w-4" />
-                      <span>Détails</span>
-                    </button>
-
-                    {((project.latitude && project.longitude) || (project.coordonneesX && project.coordonneesY)) && (
+                  <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
+                    {/* Primary Actions Row */}
+                    <div className="flex gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
-                          handleViewOnMap(project._id)
+                          handleViewDetails(project._id)
                         }}
-                        className="flex-1 border border-[#354939] text-[#354939] hover:bg-[#354939] hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-1"
+                        className="flex-1 bg-[#354939] hover:bg-[#2a3a2d] text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                        title="Voir les détails"
                       >
-                        <MapPin className="h-4 w-4" />
-                        <span>Carte</span>
+                        <Eye className="h-4 w-4" />
+                        <span>Détails</span>
                       </button>
-                    )}
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleEdit(project._id)
+                        }}
+                        className="flex-1 border border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                        title="Modifier le projet"
+                      >
+                        <Edit className="h-4 w-4" />
+                        <span>Modifier</span>
+                      </button>
+                    </div>
+
+                    {/* Secondary Actions Row */}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleArchive(project._id)
+                        }}
+                        disabled={actionLoading[`archive_${project._id}`]}
+                        className="flex-1 border border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
+                        title="Archiver le projet"
+                      >
+                        <Archive className="h-4 w-4" />
+                        <span className="truncate">{actionLoading[`archive_${project._id}`] ? 'Archivage...' : 'Archiver'}</span>
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleDelete(project._id)
+                        }}
+                        disabled={actionLoading[`delete_${project._id}`]}
+                        className="flex-1 border border-red-500 text-red-600 hover:bg-red-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
+                        title="Supprimer le projet"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        <span className="truncate">{actionLoading[`delete_${project._id}`] ? 'Suppression...' : 'Supprimer'}</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -434,7 +523,7 @@ export default function ProjectsDashboard() {
             </p>
             {projects.length === 0 && (
               <button
-                onClick={() => navigate("/projects/import")}
+                onClick={() => navigate("/projects/create")}
                 className="bg-[#354939] hover:bg-[#2a3a2d] text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center space-x-2 mx-auto"
               >
                 <Plus className="w-5 h-5" />
