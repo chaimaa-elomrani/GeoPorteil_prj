@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Save, X } from 'lucide-react'
+import { ArrowLeft, Save, X, User, Users } from 'lucide-react'
 import { Button } from './ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Input } from './ui/input'
 // Using standard HTML elements instead of missing UI components
 import { apiService } from '../services/api'
+import apiServiceDefault from '../services/api'
 
 const ProjectEdit = () => {
   const { id } = useParams()
@@ -14,25 +15,68 @@ const ProjectEdit = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
+  const [users, setUsers] = useState([])
+  const [loadingUsers, setLoadingUsers] = useState(true)
   const [formData, setFormData] = useState({
+    // Basic project info
     projectNumber: '',
+    nomProjet: '',
     anneeProjet: '',
     region: '',
     prefecture: '',
     consistance: '',
     projectStatus: '',
+
+    // Location data
     latitude: '',
     longitude: '',
+    coordonneesX: '',
+    coordonneesY: '',
+
+    // Dates
     dateDebutProjet: '',
     dateLivraisonPrevue: '',
-    dateFinProjet: ''
+    dateFinProjet: '',
+    DateDeCreation: '',
+
+    // Additional fields
+    statutFoncier: '',
+    referenceFonciere: '',
+    Commune: '',
+    cercle: '',
+    tempsPasse: 0,
+    idDevis: '',
+
+    // Team management
+    chefProjet: '',
+    equipe: [],
+
+    // Status
+    status: 'accepté',
+    archived: false
   })
 
   useEffect(() => {
     if (id) {
       fetchProject()
     }
+    fetchUsers()
   }, [id])
+
+  const fetchUsers = async () => {
+    try {
+      setLoadingUsers(true)
+      const response = await apiServiceDefault.getAllUsers()
+      if (response.success) {
+        const activeUsers = response.data.users.filter(user => user.status === 'active')
+        setUsers(activeUsers)
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error)
+    } finally {
+      setLoadingUsers(false)
+    }
+  }
 
   const fetchProject = async () => {
     try {
@@ -41,19 +85,44 @@ const ProjectEdit = () => {
       const projectData = response.data || response
       setProject(projectData)
       
-      // Populate form data
+      // Populate form data - handle both old and new project structures
       setFormData({
-        projectNumber: projectData.projectNumber || '',
-        anneeProjet: projectData.anneeProjet || '',
-        region: projectData.region || '',
-        prefecture: projectData.prefecture || '',
+        // Basic project info
+        projectNumber: projectData.projectInfo?.projectNumber || projectData.projectNumber || '',
+        nomProjet: projectData.nomProjet || projectData.projectInfo?.nomProjet || '',
+        anneeProjet: projectData.projectInfo?.anneeProjet || projectData.anneeProjet || '',
+        region: projectData.projectInfo?.region || projectData.region || '',
+        prefecture: projectData.projectInfo?.prefecture || projectData.prefecture || '',
         consistance: projectData.consistance || '',
-        projectStatus: projectData.projectStatus || '',
+        projectStatus: projectData.projectInfo?.status || projectData.projectStatus || '',
+
+        // Location data
         latitude: projectData.latitude || '',
         longitude: projectData.longitude || '',
+        coordonneesX: projectData.coordonneesX || '',
+        coordonneesY: projectData.coordonneesY || '',
+
+        // Dates
         dateDebutProjet: projectData.dateDebutProjet ? new Date(projectData.dateDebutProjet).toISOString().split('T')[0] : '',
         dateLivraisonPrevue: projectData.dateLivraisonPrevue ? new Date(projectData.dateLivraisonPrevue).toISOString().split('T')[0] : '',
-        dateFinProjet: projectData.dateFinProjet ? new Date(projectData.dateFinProjet).toISOString().split('T')[0] : ''
+        dateFinProjet: projectData.dateFinProjet ? new Date(projectData.dateFinProjet).toISOString().split('T')[0] : '',
+        DateDeCreation: projectData.projectInfo?.dateCreation ? projectData.projectInfo.dateCreation.split('T')[0] : projectData.DateDeCreation ? projectData.DateDeCreation.split('T')[0] : '',
+
+        // Additional fields
+        statutFoncier: projectData.statutFoncier || '',
+        referenceFonciere: projectData.referenceFonciere || '',
+        Commune: projectData.Commune || '',
+        cercle: projectData.cercle || '',
+        tempsPasse: projectData.tempsPasse || 0,
+        idDevis: projectData.idDevis || '',
+
+        // Team management
+        chefProjet: projectData.chefProjet || '',
+        equipe: projectData.equipe || [],
+
+        // Status
+        status: projectData.projectInfo?.status || projectData.status || 'accepté',
+        archived: projectData.archived || false
       })
     } catch (error) {
       console.error('Error fetching project:', error)
@@ -67,6 +136,15 @@ const ProjectEdit = () => {
     setFormData(prev => ({
       ...prev,
       [field]: value
+    }))
+  }
+
+  const handleTeamMemberToggle = (userId) => {
+    setFormData(prev => ({
+      ...prev,
+      equipe: prev.equipe.includes(userId)
+        ? prev.equipe.filter(id => id !== userId)
+        : [...prev.equipe, userId]
     }))
   }
 
@@ -170,12 +248,23 @@ const ProjectEdit = () => {
           <CardContent className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
+                Nom du projet
+              </label>
+              <Input
+                value={formData.nomProjet}
+                onChange={(e) => handleInputChange('nomProjet', e.target.value)}
+                placeholder="Ex: Projet de développement urbain"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Numéro de projet
               </label>
               <Input
                 value={formData.projectNumber}
                 onChange={(e) => handleInputChange('projectNumber', e.target.value)}
-                placeholder="Ex: 001"
+                placeholder="Ex: PROJ-001"
               />
             </div>
             
@@ -272,6 +361,75 @@ const ProjectEdit = () => {
                 />
               </div>
             </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Coordonnée X
+                </label>
+                <Input
+                  value={formData.coordonneesX}
+                  onChange={(e) => handleInputChange('coordonneesX', e.target.value)}
+                  placeholder="Ex: 219738"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Coordonnée Y
+                </label>
+                <Input
+                  value={formData.coordonneesY}
+                  onChange={(e) => handleInputChange('coordonneesY', e.target.value)}
+                  placeholder="Ex: 124629"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Commune
+                </label>
+                <Input
+                  value={formData.Commune}
+                  onChange={(e) => handleInputChange('Commune', e.target.value)}
+                  placeholder="Ex: Casablanca"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Cercle
+                </label>
+                <Input
+                  value={formData.cercle}
+                  onChange={(e) => handleInputChange('cercle', e.target.value)}
+                  placeholder="Ex: Casablanca"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Statut foncier
+                </label>
+                <Input
+                  value={formData.statutFoncier}
+                  onChange={(e) => handleInputChange('statutFoncier', e.target.value)}
+                  placeholder="Ex: Propriété privée"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Référence foncière
+                </label>
+                <Input
+                  value={formData.referenceFonciere}
+                  onChange={(e) => handleInputChange('referenceFonciere', e.target.value)}
+                  placeholder="Ex: TF-12345"
+                />
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -311,6 +469,141 @@ const ProjectEdit = () => {
                   value={formData.dateFinProjet}
                   onChange={(e) => handleInputChange('dateFinProjet', e.target.value)}
                 />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Team Management */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <User className="h-5 w-5 mr-2" />
+              Gestion d'équipe
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Chef de projet */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Chef de projet
+              </label>
+              {loadingUsers ? (
+                <div className="text-sm text-gray-500">Chargement des utilisateurs...</div>
+              ) : (
+                <select
+                  value={formData.chefProjet}
+                  onChange={(e) => handleInputChange('chefProjet', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Sélectionner un chef de projet</option>
+                  {users.map(user => (
+                    <option key={user._id} value={user._id}>
+                      {user.firstName} {user.lastName} ({user.email})
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+
+            {/* Équipe du projet */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                <Users className="h-4 w-4 inline mr-1" />
+                Équipe du projet
+              </label>
+              {loadingUsers ? (
+                <div className="text-sm text-gray-500">Chargement des utilisateurs...</div>
+              ) : (
+                <div className="space-y-2 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                  {users.map(user => (
+                    <label key={user._id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.equipe.includes(user._id)}
+                        onChange={() => handleTeamMemberToggle(user._id)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      />
+                      <div className="flex-1">
+                        <div className="text-sm font-medium text-gray-900">
+                          {user.firstName} {user.lastName}
+                        </div>
+                        <div className="text-xs text-gray-500">{user.email}</div>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )}
+              {formData.equipe.length > 0 && (
+                <div className="mt-3 text-sm text-gray-600">
+                  {formData.equipe.length} membre(s) sélectionné(s)
+                </div>
+              )}
+            </div>
+
+            {/* Additional project fields */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-200">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Temps passé (heures)
+                </label>
+                <Input
+                  type="number"
+                  value={formData.tempsPasse}
+                  onChange={(e) => handleInputChange('tempsPasse', parseInt(e.target.value) || 0)}
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  ID Devis
+                </label>
+                <Input
+                  value={formData.idDevis}
+                  onChange={(e) => handleInputChange('idDevis', e.target.value)}
+                  placeholder="Ex: DEV-2024-001"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Date de création
+                </label>
+                <Input
+                  type="date"
+                  value={formData.DateDeCreation}
+                  onChange={(e) => handleInputChange('DateDeCreation', e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Status and Archive */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-200">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Statut
+                </label>
+                <select
+                  value={formData.status}
+                  onChange={(e) => handleInputChange('status', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="accepté">Accepté</option>
+                  <option value="En cours">En cours</option>
+                  <option value="livré">Livré</option>
+                  <option value="Suspendu">Suspendu</option>
+                  <option value="Terminé">Terminé</option>
+                </select>
+              </div>
+              <div className="flex items-center">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.archived}
+                    onChange={(e) => handleInputChange('archived', e.target.checked)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Projet archivé</span>
+                </label>
               </div>
             </div>
           </CardContent>
