@@ -138,34 +138,34 @@ const projectData = {
     averageResidentsPerBuilding: 14.5,
     totalSurface: 220,
     averageSurfacePerBuilding: 110,
-    riskClassification: new Map([
-      ["Facteurs_De_Degradation", { count: 1, percentage: 50 }],
-      ["Danger", { count: 1, percentage: 50 }],
-    ]),
-    buildingTypes: new Map([
-      ["Maison_Moderne", { count: 2, percentage: 100 }]
-    ]),
-    usageTypes: new Map([
-      ["Habitat_Commerces", { count: 2, percentage: 100 }]
-    ]),
-    occupationStatus: new Map([
-      ["Occupe", { count: 2, percentage: 100 }]
-    ]),
-    propertyOwnership: new Map([
-      ["Prive", { count: 2, percentage: 100 }]
-    ]),
+    riskClassification: {
+      "Facteurs_De_Degradation": { count: 1, percentage: 50 },
+      "Danger": { count: 1, percentage: 50 }
+    },
+    buildingTypes: {
+      "Maison_Moderne": { count: 2, percentage: 100 }
+    },
+    usageTypes: {
+      "Habitat_Commerces": { count: 2, percentage: 100 }
+    },
+    occupationStatus: {
+      "Occupe": { count: 2, percentage: 100 }
+    },
+    propertyOwnership: {
+      "Prive": { count: 2, percentage: 100 }
+    },
     accessibility: {
       accessible: 2,
       notAccessible: 0,
       accessibilityRate: 100,
     },
-    floorDistribution: new Map([
-      ["R_plus_2", { count: 2, percentage: 100 }]
-    ]),
-    enqueteurs: new Map([
-      ["ZAIDANI_Meriam", { count: 1, percentage: 50 }],
-      ["A_HADI", { count: 1, percentage: 50 }],
-    ]),
+    floorDistribution: {
+      "R_plus_2": { count: 2, percentage: 100 }
+    },
+    enqueteurs: {
+      "ZAIDANI_Meriam": { count: 1, percentage: 50 },
+      "A_HADI": { count: 1, percentage: 50 }
+    },
     dateRange: {
       earliest: "2023/07/12",
       latest: "24/10/2023",

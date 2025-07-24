@@ -39,6 +39,7 @@ app.use(cookieParser()); // Parse cookies
 app.use('/api/authRoutes', authRoutes);
 app.use('/api/signup-request', signupRequestRoutes);
 app.use('/api/admin', adminRoutes);
+app.use("/api/projects", projectRoutes)
 app.use("/api/admin/projects", projectRoutes)
 app.use('/api/test', testRoutes);
 // Basic route

@@ -5,10 +5,15 @@ const getAllProjects = async (req, res) => {
   try {
     console.log("🔍 Fetching all projects...")
 
-    const { page = 1, limit = 50, status, region, search } = req.query
+    const { page = 1, limit = 50, status, region, search, archived } = req.query
 
     // Build query
     const query = {}
+
+    // Handle archived filter
+    if (archived !== undefined) {
+      query.archived = archived === 'true'
+    }
 
     if (status && status !== "all") {
       query.projectStatus = status
@@ -99,42 +104,97 @@ const createProject = async (req, res) => {
 
     const projectData = req.body
 
+    // Handle both old and new project structures
+    const projectNumber = projectData.projectInfo?.projectNumber || projectData.projectNumber
+
+    console.log("🔍 Project number to check:", projectNumber)
+    console.log("🔍 Project data structure:", {
+      hasProjectInfo: !!projectData.projectInfo,
+      projectInfoNumber: projectData.projectInfo?.projectNumber,
+      directProjectNumber: projectData.projectNumber
+    })
+
     // Validate required fields
-    if (!projectData.projectNumber) {
+    if (!projectNumber) {
       return res.status(400).json({
         success: false,
         message: "Le numéro de projet est requis",
       })
     }
 
-    // Check if project number already exists
+    // Check if project number already exists (check both old and new structure)
     const existingProject = await Project.findOne({
-      projectNumber: projectData.projectNumber,
+      $or: [
+        { "projectInfo.projectNumber": projectNumber },
+        { projectNumber: projectNumber }
+      ]
     })
+
+    console.log("🔍 Existing project found:", existingProject ? existingProject.projectInfo?.projectNumber || existingProject.projectNumber : "None")
 
     if (existingProject) {
       return res.status(400).json({
         success: false,
-        message: "Un projet avec ce numéro existe déjà",
+        message: `Un projet avec ce numéro existe déjà: ${existingProject.projectInfo?.projectNumber || existingProject.projectNumber}`,
       })
     }
 
-    const project = new Project(projectData)
-    await project.save()
+    console.log("🔧 Creating project with data:", JSON.stringify(projectData, null, 2))
 
-    console.log("✅ Project created:", project._id)
+    try {
+      const project = new Project(projectData)
+      console.log("💾 Saving project to database...")
+      await project.save()
 
-    res.status(201).json({
-      success: true,
-      data: project,
-      message: "Projet créé avec succès",
-    })
+      console.log("✅ Project created successfully:", project._id)
+
+      res.status(201).json({
+        success: true,
+        data: project,
+        message: "Projet créé avec succès",
+      })
+    } catch (saveError) {
+      console.error("❌ Error saving project:", saveError)
+      console.error("❌ Error details:", saveError.message)
+      console.error("❌ Error stack:", saveError.stack)
+
+      // Handle validation errors
+      if (saveError.name === 'ValidationError') {
+        const validationErrors = Object.values(saveError.errors).map(err => err.message)
+        return res.status(400).json({
+          success: false,
+          message: "Erreur de validation: " + validationErrors.join(', '),
+          errors: validationErrors
+        })
+      }
+
+      // Handle MongoDB duplicate key errors
+      if (saveError.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          message: "Un projet avec ce numéro existe déjà",
+        })
+      }
+
+      // Handle custom errors from pre-save middleware
+      if (saveError.message.includes('GeoJSON feature') || saveError.message.includes('Statistics')) {
+        return res.status(400).json({
+          success: false,
+          message: saveError.message,
+        })
+      }
+
+      throw saveError // Re-throw to be caught by outer catch
+    }
+
   } catch (error) {
-    console.error("❌ Error creating project:", error)
+    console.error("❌ Outer error creating project:", error)
+
     res.status(500).json({
       success: false,
       message: "Erreur lors de la création du projet",
       error: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     })
   }
 }

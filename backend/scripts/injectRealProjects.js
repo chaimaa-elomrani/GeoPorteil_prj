@@ -149,11 +149,8 @@ async function injectRealProjects() {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/geoporteil');
     console.log('✅ Connected to MongoDB');
 
-    // Clear existing projects (except the GeoJSON sample)
-    const deleteResult = await Project.deleteMany({ 
-      projectNumber: { $ne: 'GEO-SAMPLE-1753055140612' } 
-    });
-    console.log(`🗑️ Deleted ${deleteResult.deletedCount} existing projects`);
+    // Don't delete existing projects - just add new ones
+    console.log('📝 Adding projects without deleting existing ones');
 
     // Insert real projects
     const insertedProjects = [];

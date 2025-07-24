@@ -1,13 +1,8 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import ProjectCreate from '../components/ProjectCreate'
+import ProjectCreateNew from '../components/ProjectCreateNew'
 
 const ProjectCreatePage = () => {
-  return (
-    <AdminLayout title="Créer un Projet">
-      <ProjectCreate />
-    </AdminLayout>
-  )
+  return <ProjectCreateNew />
 }
 
 export default ProjectCreatePage

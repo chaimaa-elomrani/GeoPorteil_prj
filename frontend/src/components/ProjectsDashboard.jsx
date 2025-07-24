@@ -20,6 +20,7 @@ import {
   Edit,
 } from "lucide-react"
 import { apiService } from "../services/api"
+import ConfirmationModal from "./ConfirmationModal"
 
 export default function ProjectsDashboard() {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export default function ProjectsDashboard() {
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [regionFilter, setRegionFilter] = useState("all")
-  const [actionLoading, setActionLoading] = useState({})
+
   const [stats, setStats] = useState({
     total: 0,
     enCours: 0,
@@ -38,9 +39,62 @@ export default function ProjectsDashboard() {
     termine: 0,
   })
 
+  // Confirmation modal state
+  const [confirmationModal, setConfirmationModal] = useState({
+    isOpen: false,
+    action: null,
+    projectId: null,
+    projectName: '',
+    projectNumber: '',
+    loading: false
+  })
+
   useEffect(() => {
     fetchProjects()
   }, [])
+
+  // Helper function to open confirmation modal
+  const openConfirmationModal = (action, project) => {
+    setConfirmationModal({
+      isOpen: true,
+      action: action,
+      projectId: project._id,
+      projectName: project.projectInfo?.secteur || project.nomProjet || `Projet ${project.projectInfo?.projectNumber || project.projectNumber}`,
+      projectNumber: project.projectInfo?.projectNumber || project.projectNumber,
+      loading: false
+    })
+  }
+
+  // Helper function to close confirmation modal
+  const closeConfirmationModal = () => {
+    setConfirmationModal({
+      isOpen: false,
+      action: null,
+      projectId: null,
+      projectName: '',
+      projectNumber: '',
+      loading: false
+    })
+  }
+
+  // Handle confirmation modal confirm action
+  const handleConfirmAction = () => {
+    const { action, projectId } = confirmationModal
+
+    switch (action) {
+      case 'archive':
+        handleArchive(projectId)
+        break
+      case 'delete':
+        handleDelete(projectId)
+        break
+      case 'reactivate':
+        handleReactivate(projectId)
+        break
+      default:
+        closeConfirmationModal()
+    }
+  }
 
   useEffect(() => {
     filterProjects()
@@ -114,7 +168,14 @@ export default function ProjectsDashboard() {
     }
 
     if (statusFilter !== "all") {
-      filtered = filtered.filter((project) => project.projectStatus === statusFilter)
+      if (statusFilter === "archived") {
+        filtered = filtered.filter((project) => project.archived === true)
+      } else {
+        filtered = filtered.filter((project) => project.projectStatus === statusFilter && project.archived !== true)
+      }
+    } else {
+      // By default, don't show archived projects unless specifically filtered
+      filtered = filtered.filter((project) => project.archived !== true)
     }
 
     if (regionFilter !== "all") {
@@ -179,48 +240,69 @@ export default function ProjectsDashboard() {
   }
 
   const handleArchive = async (projectId) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir archiver ce projet ?')) {
-      return
-    }
+    setConfirmationModal(prev => ({ ...prev, loading: true }))
 
     try {
-      setActionLoading(prev => ({ ...prev, [`archive_${projectId}`]: true }))
       const response = await apiService.archiveProject(projectId)
 
       if (response.success) {
         await fetchProjects()
+        closeConfirmationModal()
+        // Show success message (you can replace with a toast notification)
         alert('Projet archivé avec succès')
       } else {
         alert('Erreur lors de l\'archivage: ' + response.message)
+        closeConfirmationModal()
       }
     } catch (error) {
       console.error('Error archiving project:', error)
       alert('Erreur lors de l\'archivage: ' + error.message)
-    } finally {
-      setActionLoading(prev => ({ ...prev, [`archive_${projectId}`]: false }))
+      closeConfirmationModal()
     }
   }
 
   const handleDelete = async (projectId) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce projet ? Cette action est irréversible.')) {
-      return
-    }
+    setConfirmationModal(prev => ({ ...prev, loading: true }))
 
     try {
-      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: true }))
       const response = await apiService.deleteProject(projectId)
 
       if (response.success) {
         await fetchProjects()
+        closeConfirmationModal()
+        // Show success message (you can replace with a toast notification)
         alert('Projet supprimé avec succès')
       } else {
         alert('Erreur lors de la suppression: ' + response.message)
+        closeConfirmationModal()
       }
     } catch (error) {
       console.error('Error deleting project:', error)
       alert('Erreur lors de la suppression: ' + error.message)
-    } finally {
-      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: false }))
+      closeConfirmationModal()
+    }
+  }
+
+  // Add reactivate handler
+  const handleReactivate = async (projectId) => {
+    setConfirmationModal(prev => ({ ...prev, loading: true }))
+
+    try {
+      const response = await apiService.unarchiveProject(projectId)
+
+      if (response.success) {
+        await fetchProjects()
+        closeConfirmationModal()
+        // Show success message (you can replace with a toast notification)
+        alert('Projet réactivé avec succès')
+      } else {
+        alert('Erreur lors de la réactivation: ' + response.message)
+        closeConfirmationModal()
+      }
+    } catch (error) {
+      console.error('Error reactivating project:', error)
+      alert('Erreur lors de la réactivation: ' + error.message)
+      closeConfirmationModal()
     }
   }
 
@@ -382,6 +464,7 @@ export default function ProjectsDashboard() {
                 <option value="livré">Livré</option>
                 <option value="Suspendu">Suspendu</option>
                 <option value="Terminé">Terminé</option>
+                <option value="archived">Archivés</option>
               </select>
             </div>
 
@@ -481,30 +564,42 @@ export default function ProjectsDashboard() {
 
                     {/* Secondary Actions Row */}
                     <div className="flex gap-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleArchive(project._id)
-                        }}
-                        disabled={actionLoading[`archive_${project._id}`]}
-                        className="flex-1 border border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
-                        title="Archiver le projet"
-                      >
-                        <Archive className="h-4 w-4" />
-                        <span className="truncate">{actionLoading[`archive_${project._id}`] ? 'Archivage...' : 'Archiver'}</span>
-                      </button>
+                      {project.archived ? (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openConfirmationModal('reactivate', project)
+                          }}
+                          className="flex-1 border border-green-500 text-green-600 hover:bg-green-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                          title="Réactiver le projet"
+                        >
+                          <RefreshCw className="h-4 w-4" />
+                          <span className="truncate">Réactiver</span>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openConfirmationModal('archive', project)
+                          }}
+                          className="flex-1 border border-orange-500 text-orange-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                          title="Archiver le projet"
+                        >
+                          <Archive className="h-4 w-4" />
+                          <span className="truncate">Archiver</span>
+                        </button>
+                      )}
 
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
-                          handleDelete(project._id)
+                          openConfirmationModal('delete', project)
                         }}
-                        disabled={actionLoading[`delete_${project._id}`]}
-                        className="flex-1 border border-red-500 text-red-600 hover:bg-red-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
+                        className="flex-1 border border-red-500 text-red-600 hover:bg-red-500 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
                         title="Supprimer le projet"
                       >
                         <Trash2 className="h-4 w-4" />
-                        <span className="truncate">{actionLoading[`delete_${project._id}`] ? 'Suppression...' : 'Supprimer'}</span>
+                        <span className="truncate">Supprimer</span>
                       </button>
                     </div>
                   </div>
@@ -533,6 +628,17 @@ export default function ProjectsDashboard() {
           </div>
         )}
       </div>
+
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={confirmationModal.isOpen}
+        onClose={closeConfirmationModal}
+        onConfirm={handleConfirmAction}
+        action={confirmationModal.action}
+        projectName={confirmationModal.projectName}
+        projectNumber={confirmationModal.projectNumber}
+        loading={confirmationModal.loading}
+      />
     </div>
   )
 }

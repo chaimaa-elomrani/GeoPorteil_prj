@@ -110,11 +110,15 @@ const ArchivePage = () => {
     }
   }
 
-  const filteredProjects = projects.filter(project =>
-    project.nomProjet?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    project.region?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    project.prefecture?.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredProjects = projects.filter(project => {
+    const projectName = project.projectInfo?.secteur || project.nomProjet || ''
+    const region = project.projectInfo?.region || project.region || ''
+    const prefecture = project.projectInfo?.prefecture || project.prefecture || ''
+
+    return projectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           region.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           prefecture.toLowerCase().includes(searchTerm.toLowerCase())
+  })
 
   if (loading) {
     return (
@@ -209,20 +213,20 @@ const ArchivePage = () => {
                       <td className="px-6 py-4">
                         <div>
                           <div className="text-sm font-medium text-gray-900">
-                            {project.nomProjet || 'Projet sans nom'}
+                            {project.projectInfo?.secteur || project.nomProjet || 'Projet sans nom'}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {project.projectNumber || 'N/A'}
+                            #{project.projectInfo?.projectNumber || project.projectNumber || 'N/A'}
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900">{project.region || 'N/A'}</div>
-                        <div className="text-sm text-gray-500">{project.prefecture || 'N/A'}</div>
+                        <div className="text-sm text-gray-900">{project.projectInfo?.region || project.region || 'N/A'}</div>
+                        <div className="text-sm text-gray-500">{project.projectInfo?.prefecture || project.prefecture || 'N/A'}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full border ${getStatusColor(project.projectStatus)}`}>
-                          {project.projectStatus || 'Non défini'}
+                        <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full border ${getStatusColor(project.projectInfo?.status || project.projectStatus)}`}>
+                          {project.projectInfo?.status || project.projectStatus || 'Non défini'}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">

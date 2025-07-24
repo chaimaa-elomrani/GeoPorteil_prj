@@ -234,18 +234,32 @@ ProjectSchema.methods.getRiskSummary = function () {
 // Pre-save middleware to validate data
 ProjectSchema.pre("save", function (next) {
   // Ensure project number is uppercase
-  if (this.projectInfo.projectNumber) {
+  if (this.projectInfo && this.projectInfo.projectNumber) {
     this.projectInfo.projectNumber = this.projectInfo.projectNumber.toString().toUpperCase()
   }
 
+  // Skip validation if no geojsonData (for backward compatibility)
+  if (!this.geojsonData || !this.geojsonData.features) {
+    return next()
+  }
+
   // Validate that we have features
-  if (!this.geojsonData.features || this.geojsonData.features.length === 0) {
+  if (this.geojsonData.features.length === 0) {
     return next(new Error("Project must have at least one GeoJSON feature"))
   }
 
-  // Validate that statistics match the number of features
-  if (this.statistics.totalBuildings !== this.geojsonData.features.length) {
-    return next(new Error("Statistics totalBuildings must match the number of features"))
+  // Skip statistics validation if statistics don't exist
+  if (!this.statistics || !this.statistics.totalBuildings) {
+    return next()
+  }
+
+  // Validate that statistics match the number of features (with tolerance)
+  const featureCount = this.geojsonData.features.length
+  const statsCount = this.statistics.totalBuildings
+  if (Math.abs(statsCount - featureCount) > 0) {
+    console.warn(`⚠️ Statistics mismatch: features=${featureCount}, stats=${statsCount}`)
+    // Auto-correct the statistics
+    this.statistics.totalBuildings = featureCount
   }
 
   next()

@@ -17,26 +17,70 @@ const ProjectCreate = () => {
   const [users, setUsers] = useState([])
   const [loadingUsers, setLoadingUsers] = useState(true)
   const [formData, setFormData] = useState({
-    projectNumber: '',
-    nomProjet: '',
-    anneeProjet: new Date().getFullYear().toString(),
-    region: '',
-    prefecture: '',
-    consistance: '',
-    projectStatus: 'En cours',
-    latitude: '',
-    longitude: '',
-    dateDebutProjet: '',
-    dateLivraisonPrevue: '',
-    dateFinProjet: '',
+    // Project Info
+    projectInfo: {
+      projectNumber: '',
+      anneeProjet: new Date().getFullYear(),
+      region: '',
+      prefecture: '',
+      secteur: '',
+      dateCreation: new Date().toISOString().split('T')[0],
+      status: 'accepté'
+    },
+
+    // Building Features (initially one building)
+    buildings: [{
+      properties: {
+        Batiment_i: '',
+        Numero_Fi: '',
+        Date_Enqu: '',
+        Enqueteur: '',
+        Ancienne_: '',
+        'Secteur/Q': '',
+        Adresse: '',
+        Occupatio: '',
+        Statut_Oc: '',
+        Statut_Sc: null,
+        Proprieta: '',
+        Foncier: '',
+        Foncier_A: null,
+        Superfici: 0,
+        Type_Usag: '',
+        Type_Us_1: null,
+        Type_Equi: null,
+        Soussoll: '',
+        Nombre_Ni: '',
+        Nombre_Lo: null,
+        Nombre_Me: 0,
+        Nombre_Re: 0,
+        Nombre__1: 0,
+        Nombre_Lu: 0,
+        Conformit: null,
+        Conform_1: null,
+        Nombre_Ba: 0,
+        Accessibl: '',
+        Motif_Acc: null,
+        Typologie: '',
+        Typolog_1: null,
+        Monument_: '',
+        Valeur_Pa: '',
+        Age_Batim: null,
+        Classific: '',
+        Risque: '',
+        Risque_Au: null,
+        Fiche_Bat: '',
+        Photo: '',
+        Field2: null
+      },
+      geometry: {
+        type: 'Polygon',
+        coordinates: [[[]]]
+      }
+    }],
+
+    // Team management
     chefProjet: '',
-    equipe: [],
-    statutFoncier: '',
-    referenceFonciere: '',
-    Commune: '',
-    cercle: '',
-    coordonneesX: '',
-    coordonneesY: ''
+    equipe: []
   })
 
   useEffect(() => {
@@ -59,11 +103,113 @@ const ProjectCreate = () => {
     }
   }
 
-  const handleInputChange = (field, value) => {
+  const handleProjectInfoChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
-      [field]: value
+      projectInfo: {
+        ...prev.projectInfo,
+        [field]: value
+      }
     }))
+  }
+
+  const handleBuildingPropertyChange = (buildingIndex, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      buildings: prev.buildings.map((building, index) =>
+        index === buildingIndex
+          ? {
+              ...building,
+              properties: {
+                ...building.properties,
+                [field]: value
+              }
+            }
+          : building
+      )
+    }))
+  }
+
+  const handleGeometryChange = (buildingIndex, coordinates) => {
+    setFormData(prev => ({
+      ...prev,
+      buildings: prev.buildings.map((building, index) =>
+        index === buildingIndex
+          ? {
+              ...building,
+              geometry: {
+                ...building.geometry,
+                coordinates: coordinates
+              }
+            }
+          : building
+      )
+    }))
+  }
+
+  const addBuilding = () => {
+    const newBuilding = {
+      properties: {
+        Batiment_i: '',
+        Numero_Fi: '',
+        Date_Enqu: '',
+        Enqueteur: '',
+        Ancienne_: '',
+        'Secteur/Q': formData.projectInfo.secteur,
+        Adresse: '',
+        Occupatio: '',
+        Statut_Oc: '',
+        Statut_Sc: null,
+        Proprieta: '',
+        Foncier: '',
+        Foncier_A: null,
+        Superfici: 0,
+        Type_Usag: '',
+        Type_Us_1: null,
+        Type_Equi: null,
+        Soussoll: '',
+        Nombre_Ni: '',
+        Nombre_Lo: null,
+        Nombre_Me: 0,
+        Nombre_Re: 0,
+        Nombre__1: 0,
+        Nombre_Lu: 0,
+        Conformit: null,
+        Conform_1: null,
+        Nombre_Ba: 0,
+        Accessibl: '',
+        Motif_Acc: null,
+        Typologie: '',
+        Typolog_1: null,
+        Monument_: '',
+        Valeur_Pa: '',
+        Age_Batim: null,
+        Classific: '',
+        Risque: '',
+        Risque_Au: null,
+        Fiche_Bat: '',
+        Photo: '',
+        Field2: null
+      },
+      geometry: {
+        type: 'Polygon',
+        coordinates: [[[]]]
+      }
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      buildings: [...prev.buildings, newBuilding]
+    }))
+  }
+
+  const removeBuilding = (buildingIndex) => {
+    if (formData.buildings.length > 1) {
+      setFormData(prev => ({
+        ...prev,
+        buildings: prev.buildings.filter((_, index) => index !== buildingIndex)
+      }))
+    }
   }
 
   const handleTeamMemberToggle = (userId) => {
@@ -114,36 +260,184 @@ const ProjectCreate = () => {
     setFiles(prev => prev.filter((_, i) => i !== index))
   }
 
+  const calculateStatistics = () => {
+    const buildings = formData.buildings
+    const totalBuildings = buildings.length
+    const totalResidents = buildings.reduce((sum, b) => sum + (b.properties.Nombre_Re || 0), 0)
+    const totalSurface = buildings.reduce((sum, b) => sum + (b.properties.Superfici || 0), 0)
+
+    // Calculate statistics maps
+    const riskClassification = new Map()
+    const buildingTypes = new Map()
+    const usageTypes = new Map()
+    const occupationStatus = new Map()
+    const propertyOwnership = new Map()
+    const floorDistribution = new Map()
+    const enqueteurs = new Map()
+
+    buildings.forEach(building => {
+      const props = building.properties
+
+      // Risk classification
+      if (props.Classific) {
+        const key = props.Classific.replace(/[.\s/]/g, '_')
+        riskClassification.set(key, {
+          count: (riskClassification.get(key)?.count || 0) + 1,
+          percentage: 0
+        })
+      }
+
+      // Building types, usage types, etc. (similar pattern)
+      if (props.Typologie) {
+        const key = props.Typologie.replace(/[.\s/]/g, '_')
+        buildingTypes.set(key, { count: (buildingTypes.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+
+      if (props.Type_Usag) {
+        const key = props.Type_Usag.replace(/[.\s/]/g, '_')
+        usageTypes.set(key, { count: (usageTypes.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+
+      if (props.Occupatio) {
+        const key = props.Occupatio.replace(/[.\s/]/g, '_')
+        occupationStatus.set(key, { count: (occupationStatus.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+
+      if (props.Foncier) {
+        const key = props.Foncier.replace(/[.\s/]/g, '_')
+        propertyOwnership.set(key, { count: (propertyOwnership.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+
+      if (props.Nombre_Ni) {
+        const key = props.Nombre_Ni.replace(/[.\s/]/g, '_')
+        floorDistribution.set(key, { count: (floorDistribution.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+
+      if (props.Enqueteur) {
+        const key = props.Enqueteur.replace(/[.\s/]/g, '_')
+        enqueteurs.set(key, { count: (enqueteurs.get(key)?.count || 0) + 1, percentage: 0 })
+      }
+    })
+
+    // Calculate percentages
+    const calculatePercentages = (map) => {
+      map.forEach((value) => {
+        value.percentage = Math.round((value.count / totalBuildings) * 100)
+      })
+    }
+
+    calculatePercentages(riskClassification)
+    calculatePercentages(buildingTypes)
+    calculatePercentages(usageTypes)
+    calculatePercentages(occupationStatus)
+    calculatePercentages(propertyOwnership)
+    calculatePercentages(floorDistribution)
+    calculatePercentages(enqueteurs)
+
+    return {
+      totalBuildings,
+      totalResidents,
+      averageResidentsPerBuilding: totalBuildings > 0 ? totalResidents / totalBuildings : 0,
+      totalSurface,
+      averageSurfacePerBuilding: totalBuildings > 0 ? totalSurface / totalBuildings : 0,
+      riskClassification,
+      buildingTypes,
+      usageTypes,
+      occupationStatus,
+      propertyOwnership,
+      accessibility: {
+        accessible: buildings.filter(b => b.properties.Accessibl === 'Oui').length,
+        notAccessible: buildings.filter(b => b.properties.Accessibl === 'Non').length,
+        accessibilityRate: buildings.length > 0 ? (buildings.filter(b => b.properties.Accessibl === 'Oui').length / buildings.length) * 100 : 0
+      },
+      floorDistribution,
+      enqueteurs,
+      dateRange: {
+        earliest: buildings.reduce((earliest, b) => {
+          const date = b.properties.Date_Enqu
+          return !earliest || (date && date < earliest) ? date : earliest
+        }, null) || new Date().toISOString().split('T')[0],
+        latest: buildings.reduce((latest, b) => {
+          const date = b.properties.Date_Enqu
+          return !latest || (date && date > latest) ? date : latest
+        }, null) || new Date().toISOString().split('T')[0]
+      }
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    if (!formData.projectNumber || !formData.region || !formData.prefecture) {
-      setError('Veuillez remplir tous les champs obligatoires')
+
+    // Validate required project info fields
+    if (!formData.projectInfo.projectNumber || !formData.projectInfo.region || !formData.projectInfo.prefecture || !formData.projectInfo.secteur) {
+      setError('Veuillez remplir tous les champs obligatoires du projet')
       return
+    }
+
+    // Validate buildings
+    if (formData.buildings.length === 0) {
+      setError('Le projet doit contenir au moins un bâtiment')
+      return
+    }
+
+    // Validate required building fields
+    for (let i = 0; i < formData.buildings.length; i++) {
+      const building = formData.buildings[i]
+      const props = building.properties
+      if (!props.Batiment_i || !props.Numero_Fi || !props.Adresse || !props.Typologie || !props.Classific || !props.Risque || !props.Fiche_Bat) {
+        setError(`Bâtiment ${i + 1}: Veuillez remplir tous les champs obligatoires (Batiment_i, Numero_Fi, Adresse, Typologie, Classification, Risque, Fiche_Bat)`)
+        return
+      }
     }
 
     try {
       setLoading(true)
       setError(null)
-      
-      // Prepare project data
+
+      // Calculate statistics
+      const statistics = calculateStatistics()
+
+      // Create GeoJSON features
+      const features = formData.buildings.map(building => ({
+        type: 'Feature',
+        properties: building.properties,
+        geometry: building.geometry
+      }))
+
+      // Create project data according to schema
       const projectData = {
-        ...formData,
-        images: images.map(img => img.url), // In a real app, you'd upload to a server
-        files: files.map(f => ({ name: f.name, size: f.size, type: f.type })),
-        dateDebutProjet: formData.dateDebutProjet ? new Date(formData.dateDebutProjet).toISOString() : null,
-        dateLivraisonPrevue: formData.dateLivraisonPrevue ? new Date(formData.dateLivraisonPrevue).toISOString() : null,
-        dateFinProjet: formData.dateFinProjet ? new Date(formData.dateFinProjet).toISOString() : null
+        projectInfo: {
+          ...formData.projectInfo,
+          dateCreation: new Date(formData.projectInfo.dateCreation)
+        },
+        geojsonData: {
+          type: 'FeatureCollection',
+          features: features
+        },
+        statistics: statistics,
+        metadata: {
+          totalFeatures: features.length,
+          boundingBox: {
+            minLat: -90, maxLat: 90, minLng: -180, maxLng: 180
+          },
+          dataQuality: {
+            completeRecords: features.length,
+            incompleteRecords: 0,
+            completenessRate: 100
+          }
+        },
+        chefProjet: formData.chefProjet,
+        equipe: formData.equipe
       }
-      
+
       // Create project using API
       const response = await apiService.createProject(projectData)
-      
+
       setSuccess('Projet créé avec succès!')
       setTimeout(() => {
         navigate(`/projects/${response.data._id}`)
       }, 1500)
-      
+
     } catch (error) {
       console.error('Error creating project:', error)
       setError('Erreur lors de la création: ' + error.message)

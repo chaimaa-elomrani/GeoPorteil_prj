@@ -277,7 +277,7 @@ class ApiService {
   async createProject(projectData) {
     try {
       console.log("➕ Creating new project:", projectData)
-      const response = await this.request("/admin/projects", {
+      const response = await this.request("/projects", {
         method: "POST",
         body: JSON.stringify(projectData),
       })
