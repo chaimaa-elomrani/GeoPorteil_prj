@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import ProjectsDashboard from '../components/ProjectsDashboard'
+import AdminLayout from '../components/layout/AdminLayout'
+import ProjectsDashboard from '../components/projects/ProjectsDashboard'
 
 const ProjectsPage = () => {
   return (

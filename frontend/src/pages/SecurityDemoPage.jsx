@@ -1,5 +1,5 @@
 import React from 'react'
-import SecurityDemo from '../components/SecurityDemo'
+import SecurityDemo from '../components/security/SecurityDemo'
 
 const SecurityDemoPage = () => {
   return (

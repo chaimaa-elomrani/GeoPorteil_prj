@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Shield, Lock, Eye, Download, Trash2, Clock, AlertTriangle, CheckCircle } from 'lucide-react'
-import SecureGeoService from '../services/secureGeoService'
+import SecureGeoService from '../../services/secureGeoService'
 
 const SecureGeoDataManager = ({ projectId, projectName }) => {
   const [securityStatus, setSecurityStatus] = useState(null)

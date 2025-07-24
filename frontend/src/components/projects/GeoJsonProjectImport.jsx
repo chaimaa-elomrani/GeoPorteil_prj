@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Upload, MapPin, AlertCircle, CheckCircle } from 'lucide-react'
-import { Button } from './ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Input } from './ui/input'
-import { createProjectFromGeoJSON } from '../services/api'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Input } from '../ui/input'
+import { createProjectFromGeoJSON } from '../../services/api'
 
 const GeoJsonProjectImport = ({ onProjectCreated }) => {
   const [projectName, setProjectName] = useState('')

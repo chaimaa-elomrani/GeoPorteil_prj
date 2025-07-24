@@ -14,8 +14,8 @@ import {
   Home,
   Users
 } from "lucide-react"
-import apiService from "../services/api"
-import SecureGeoDataManager from "./SecureGeoDataManager"
+import apiService from "../../services/api"
+import SecureGeoDataManager from "../security/SecureGeoDataManager"
 
 const ProjectDetailElegant = () => {
   const { id } = useParams()

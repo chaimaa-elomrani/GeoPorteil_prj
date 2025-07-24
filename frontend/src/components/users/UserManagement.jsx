@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-import { apiService } from "../services/api"
+import { apiService } from "../../services/api"
 
 import UserTable from "./UserTable"
 

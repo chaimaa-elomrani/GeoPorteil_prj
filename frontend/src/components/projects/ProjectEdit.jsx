@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Save, X, User, Users } from 'lucide-react'
-import { Button } from './ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Input } from './ui/input'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Input } from '../ui/input'
 // Using standard HTML elements instead of missing UI components
-import { apiService } from '../services/api'
-import apiServiceDefault from '../services/api'
+import { apiService } from '../../services/api'
+import apiServiceDefault from '../../services/api'
 
 const ProjectEdit = () => {
   const { id } = useParams()

@@ -1,5 +1,5 @@
 import React from 'react'
-import ProjectDetailElegant from '../components/ProjectDetailElegant'
+import ProjectDetailElegant from '../components/projects/ProjectDetailElegant'
 
 const ProjectDetailPage = () => {
   return <ProjectDetailElegant />

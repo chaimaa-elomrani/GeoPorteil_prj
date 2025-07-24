@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Archive, ArchiveRestore, Eye, Trash2, Search, Filter } from 'lucide-react'
-import AdminLayout from '../components/AdminLayout'
+import AdminLayout from '../components/layout/AdminLayout'
 import apiService from '../services/api'
-import ConfirmationModal from '../components/ConfirmationModal'
+import ConfirmationModal from '../components/modals/ConfirmationModal'
 
 const ArchivePage = () => {
   const navigate = useNavigate()

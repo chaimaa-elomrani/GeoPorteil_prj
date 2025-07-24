@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import UserManagement from '../components/UserManagement'
+import AdminLayout from '../components/layout/AdminLayout'
+import UserManagement from '../components/users/UserManagement'
 
 const AdminUsersPage = () => {
   return (

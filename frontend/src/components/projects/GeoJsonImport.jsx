@@ -2,7 +2,7 @@
 
 import { useNavigate } from "react-router-dom"
 import { Upload, FileText, Map } from "lucide-react"
-import AdminLayout from "./AdminLayout"
+import AdminLayout from "../layout/AdminLayout"
 import GeoJsonProjectImport from "./GeoJsonProjectImport"
 
 const GeoJsonImport = () => {

@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import Sidebar from "./Sidebar"
-import Header from "./Header"
+import Sidebar from "../layout/Sidebar"
+import Header from "../layout/Header"
 import DashboardOverview from "./DashboardOverview"
-import UserManagement from "./UserManagement"
-import SignupRequests from "./SignupRequests"
-import { apiService } from "../services/api"
+import UserManagement from "../users/UserManagement"
+import SignupRequests from "../users/SignupRequests"
+import { apiService } from "../../services/api"
 
 export default function AdminDashboard() {
   const location = useLocation()

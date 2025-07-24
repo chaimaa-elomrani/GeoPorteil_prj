@@ -19,8 +19,8 @@ import {
   Trash2,
   Edit,
 } from "lucide-react"
-import { apiService } from "../services/api"
-import ConfirmationModal from "./ConfirmationModal"
+import { apiService } from "../../services/api"
+import ConfirmationModal from "../modals/ConfirmationModal"
 
 export default function ProjectsDashboard() {
   const navigate = useNavigate()

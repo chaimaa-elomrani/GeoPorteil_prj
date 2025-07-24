@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Save, Upload, X, Plus, FileText, Image, User, Users } from 'lucide-react'
-import { Button } from './ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Input } from './ui/input'
-import { apiService } from '../services/api'
-import apiServiceDefault from '../services/api'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Input } from '../ui/input'
+import { apiService } from '../../services/api'
+import apiServiceDefault from '../../services/api'
 
 const ProjectCreate = () => {
   const navigate = useNavigate()

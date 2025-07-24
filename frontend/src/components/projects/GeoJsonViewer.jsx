@@ -4,8 +4,8 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { ArrowLeft, Upload, Eye, Info } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from './ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 const { BaseLayer } = LayersControl
 

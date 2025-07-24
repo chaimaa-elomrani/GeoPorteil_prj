@@ -1,5 +1,5 @@
 import React from 'react'
-import ProjectCreateNew from '../components/ProjectCreateNew'
+import ProjectCreateNew from '../components/projects/ProjectCreateNew'
 
 const ProjectCreatePage = () => {
   return <ProjectCreateNew />

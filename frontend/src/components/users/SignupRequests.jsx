@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { apiService } from "../services/api"
-import ApprovalModal from "./ApprovalModal"
-import RejectionModal from "./RejectionModal"
+import { apiService } from "../../services/api"
+import ApprovalModal from "../modals/ApprovalModal"
+import RejectionModal from "../modals/RejectionModal"
 
 export default function SignupRequests({ onStatsUpdate }) {
   const [requests, setRequests] = useState([])

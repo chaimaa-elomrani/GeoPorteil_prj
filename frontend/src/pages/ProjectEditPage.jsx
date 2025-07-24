@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import ProjectEdit from '../components/ProjectEdit'
+import AdminLayout from '../components/layout/AdminLayout'
+import ProjectEdit from '../components/projects/ProjectEdit'
 
 const ProjectEditPage = () => {
   return (

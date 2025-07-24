@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminLayout from '../components/AdminLayout'
-import SignupRequests from '../components/SignupRequests'
+import AdminLayout from '../components/layout/AdminLayout'
+import SignupRequests from '../components/users/SignupRequests'
 
 const AdminSignupRequestsPage = () => {
   return (
