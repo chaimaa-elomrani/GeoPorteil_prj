@@ -54,10 +54,7 @@ export default function Sidebar({ user }) {
           title: "Tous les projets",
           path: "/projects",
         },
-        {
-          title: "Carte des projets",
-          path: "/projects/map",
-        },
+      
         {
           title: "Importer GeoJSON",
           path: "/projects/import",
@@ -72,13 +69,7 @@ export default function Sidebar({ user }) {
         },
       ],
     },
-    {
-      id: "security",
-      label: "Sécurité",
-      icon: Shield,
-      path: "/security-demo",
-      single: true,
-    },
+  
   ]
 
   return (

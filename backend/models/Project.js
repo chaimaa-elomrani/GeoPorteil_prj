@@ -177,6 +177,7 @@ const ProjectSchema = new mongoose.Schema(
     geojsonData: { type: GeoJSONDataSchema, required: true },
     statistics: { type: ProjectStatisticsSchema, required: true },
     metadata: { type: MetadataSchema, required: true },
+    archived: { type: Boolean, default: false },
   },
   {
     timestamps: true, // This adds createdAt and updatedAt automatically

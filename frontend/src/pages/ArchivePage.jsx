@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Archive, ArchiveRestore, Eye, Trash2, Search, Filter } from 'lucide-react'
 import AdminLayout from '../components/AdminLayout'
 import apiService from '../services/api'
+import ConfirmationModal from '../components/ConfirmationModal'
 
 const ArchivePage = () => {
   const navigate = useNavigate()
@@ -10,11 +11,60 @@ const ArchivePage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [actionLoading, setActionLoading] = useState({})
+
+  // Confirmation modal state
+  const [confirmationModal, setConfirmationModal] = useState({
+    isOpen: false,
+    action: null,
+    projectId: null,
+    projectName: '',
+    projectNumber: '',
+    loading: false
+  })
 
   useEffect(() => {
     fetchArchivedProjects()
   }, [])
+
+  // Helper function to open confirmation modal
+  const openConfirmationModal = (action, project) => {
+    setConfirmationModal({
+      isOpen: true,
+      action: action,
+      projectId: project._id,
+      projectName: project.projectInfo?.secteur || project.nomProjet || `Projet ${project.projectInfo?.projectNumber || project.projectNumber}`,
+      projectNumber: project.projectInfo?.projectNumber || project.projectNumber,
+      loading: false
+    })
+  }
+
+  // Helper function to close confirmation modal
+  const closeConfirmationModal = () => {
+    setConfirmationModal({
+      isOpen: false,
+      action: null,
+      projectId: null,
+      projectName: '',
+      projectNumber: '',
+      loading: false
+    })
+  }
+
+  // Handle confirmation modal confirm action
+  const handleConfirmAction = () => {
+    const { action, projectId } = confirmationModal
+
+    switch (action) {
+      case 'reactivate':
+        handleUnarchive(projectId)
+        break
+      case 'delete':
+        handleDelete(projectId)
+        break
+      default:
+        closeConfirmationModal()
+    }
+  }
 
   const fetchArchivedProjects = async () => {
     try {
@@ -38,48 +88,46 @@ const ArchivePage = () => {
   }
 
   const handleUnarchive = async (projectId) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir désarchiver ce projet ?')) {
-      return
-    }
+    setConfirmationModal(prev => ({ ...prev, loading: true }))
 
     try {
-      setActionLoading(prev => ({ ...prev, [`unarchive_${projectId}`]: true }))
       const response = await apiService.unarchiveProject(projectId)
-      
+
       if (response.success) {
         await fetchArchivedProjects()
-        alert('Projet désarchivé avec succès')
+        closeConfirmationModal()
+        // Show success message (you can replace with a toast notification)
+        alert('Projet réactivé avec succès')
       } else {
-        alert('Erreur lors du désarchivage: ' + response.message)
+        alert('Erreur lors de la réactivation: ' + response.message)
+        closeConfirmationModal()
       }
     } catch (error) {
       console.error('Error unarchiving project:', error)
-      alert('Erreur lors du désarchivage: ' + error.message)
-    } finally {
-      setActionLoading(prev => ({ ...prev, [`unarchive_${projectId}`]: false }))
+      alert('Erreur lors de la réactivation: ' + error.message)
+      closeConfirmationModal()
     }
   }
 
   const handleDelete = async (projectId) => {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer définitivement ce projet ? Cette action est irréversible.')) {
-      return
-    }
+    setConfirmationModal(prev => ({ ...prev, loading: true }))
 
     try {
-      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: true }))
       const response = await apiService.deleteProject(projectId)
-      
+
       if (response.success) {
         await fetchArchivedProjects()
+        closeConfirmationModal()
+        // Show success message (you can replace with a toast notification)
         alert('Projet supprimé définitivement')
       } else {
         alert('Erreur lors de la suppression: ' + response.message)
+        closeConfirmationModal()
       }
     } catch (error) {
       console.error('Error deleting project:', error)
       alert('Erreur lors de la suppression: ' + error.message)
-    } finally {
-      setActionLoading(prev => ({ ...prev, [`delete_${projectId}`]: false }))
+      closeConfirmationModal()
     }
   }
 
@@ -242,17 +290,15 @@ const ArchivePage = () => {
                             <Eye className="h-4 w-4" />
                           </button>
                           <button
-                            onClick={() => handleUnarchive(project._id)}
-                            disabled={actionLoading[`unarchive_${project._id}`]}
-                            className="text-green-600 hover:text-green-900 p-1 rounded transition-colors disabled:opacity-50"
-                            title="Désarchiver"
+                            onClick={() => openConfirmationModal('reactivate', project)}
+                            className="text-green-600 hover:text-green-900 p-1 rounded transition-colors"
+                            title="Réactiver le projet"
                           >
                             <ArchiveRestore className="h-4 w-4" />
                           </button>
                           <button
-                            onClick={() => handleDelete(project._id)}
-                            disabled={actionLoading[`delete_${project._id}`]}
-                            className="text-red-600 hover:text-red-900 p-1 rounded transition-colors disabled:opacity-50"
+                            onClick={() => openConfirmationModal('delete', project)}
+                            className="text-red-600 hover:text-red-900 p-1 rounded transition-colors"
                             title="Supprimer définitivement"
                           >
                             <Trash2 className="h-4 w-4" />
@@ -266,6 +312,17 @@ const ArchivePage = () => {
             </div>
           )}
         </div>
+
+        {/* Confirmation Modal */}
+        <ConfirmationModal
+          isOpen={confirmationModal.isOpen}
+          onClose={closeConfirmationModal}
+          onConfirm={handleConfirmAction}
+          action={confirmationModal.action}
+          projectName={confirmationModal.projectName}
+          projectNumber={confirmationModal.projectNumber}
+          loading={confirmationModal.loading}
+        />
       </div>
     </AdminLayout>
   )
