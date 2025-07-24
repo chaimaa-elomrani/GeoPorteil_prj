@@ -21,6 +21,7 @@ const authRoutes = require('./routes/authRoutes');
 const signupRequestRoutes = require('./routes/signupRequest');
 const adminRoutes = require('./routes/admin');
 const projectRoutes = require('./routes/projectRoutes');
+const secureGeoRoutes = require('./routes/secureGeoRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/admin', adminRoutes);
 app.use("/api/projects", projectRoutes)
 app.use("/api/admin/projects", projectRoutes)
 app.use('/api/test', testRoutes);
+app.use('/api/secure-geo', secureGeoRoutes);
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Geoporteil API is running!' });

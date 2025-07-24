@@ -15,6 +15,7 @@ import {
   Users
 } from "lucide-react"
 import apiService from "../services/api"
+import SecureGeoDataManager from "./SecureGeoDataManager"
 
 const ProjectDetailElegant = () => {
   const { id } = useParams()
@@ -252,6 +253,12 @@ const ProjectDetailElegant = () => {
                 </div>
               </div>
             )}
+
+            {/* Secure Geo Data Manager */}
+            <SecureGeoDataManager
+              projectId={project._id}
+              projectName={project.projectInfo?.secteur || project.nomProjet || `Projet ${project.projectInfo?.projectNumber || project.projectNumber}`}
+            />
           </div>
 
           {/* Sidebar */}
