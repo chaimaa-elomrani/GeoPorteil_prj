@@ -1,6 +1,6 @@
 import React from 'react'
-import AdminLayout from '../components/layout/AdminLayout'
-import ProjectsMap from '../components/maps/ProjectsMap'
+import AdminLayout from '../components/AdminLayout'
+import ProjectsMap from '../components/ProjectsMap'
 
 const ProjectsMapPage = () => {
   return (

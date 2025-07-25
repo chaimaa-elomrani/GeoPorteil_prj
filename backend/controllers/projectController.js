@@ -25,17 +25,16 @@ const getAllProjects = async (req, res) => {
 
     if (search) {
       query.$or = [
-        { projectNumber: { $regex: search, $options: "i" } },
-        { "maitreOuvrage.name": { $regex: search, $options: "i" } },
-        { region: { $regex: search, $options: "i" } },
-        { prefecture: { $regex: search, $options: "i" } },
+        { "projectInfo.projectNumber": { $regex: search, $options: "i" } },
+        { "projectInfo.region": { $regex: search, $options: "i" } },
+        { "projectInfo.prefecture": { $regex: search, $options: "i" } },
+        { "projectInfo.secteur": { $regex: search, $options: "i" } },
       ]
     }
 
     console.log("🔍 Query filters:", query)
 
     const projects = await Project.find(query)
-      .populate("maitreOuvrage", "name email phone")
       .sort({ createdAt: -1 })
       .limit(limit * 1)
       .skip((page - 1) * limit)
@@ -71,7 +70,7 @@ const getProjectById = async (req, res) => {
     const { id } = req.params
     console.log("🔍 Fetching project by ID:", id)
 
-    const project = await Project.findById(id).populate("maitreOuvrage", "name email phone").exec()
+    const project = await Project.findById(id).exec()
 
     if (!project) {
       console.log("❌ Project not found:", id)
@@ -205,10 +204,7 @@ const updateProject = async (req, res) => {
     const { id } = req.params
     console.log("✏️ Updating project:", id, req.body)
 
-    const project = await Project.findByIdAndUpdate(id, req.body, { new: true, runValidators: true }).populate(
-      "maitreOuvrage",
-      "name email phone",
-    )
+    const project = await Project.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
 
     if (!project) {
       return res.status(404).json({
@@ -312,7 +308,7 @@ const getProjectsGeoJSON = async (req, res) => {
 
     const projects = await Project.find({
       $or: [{ latitude: { $exists: true, $ne: null } }, { coordonneesX: { $exists: true, $ne: null } }],
-    }).populate("maitreOuvrage", "name email phone")
+    })
 
     const features = projects
       .map((project) => {
@@ -338,7 +334,7 @@ const getProjectsGeoJSON = async (req, res) => {
             region: project.region,
             prefecture: project.prefecture,
             consistance: project.consistance,
-            maitreOuvrage: project.maitreOuvrage?.name,
+            projectInfo: project.projectInfo,
           },
         }
       })
@@ -403,21 +399,28 @@ const createProjectFromGeoJSON = async (req, res) => {
 
     // Create project with GeoJSON data
     const projectData = {
-      projectNumber,
-      anneeProjet: new Date().getFullYear(),
-      maitreOuvrage: {
-        name: "GeoJSON Import",
-        email: "geojson@example.com"
+      projectInfo: {
+        projectNumber,
+        anneeProjet: new Date().getFullYear(),
+        region: "Casablanca-Settat",
+        prefecture: "Casablanca",
+        secteur: "GeoJSON Import",
+        status: "active",
+        dateCreation: new Date().toISOString()
       },
-      region: "Casablanca-Settat", // Default region
-      prefecture: "Casablanca",
-      consistance: description || `Projet créé à partir de données GeoJSON avec ${geoJsonData.features?.length || 0} éléments`,
-      projectStatus: "En cours",
-      latitude: centerLat || 33.589886,
-      longitude: centerLng || -7.620037,
-      geoJsonData: geoJsonData, // Store the GeoJSON data
-      createdAt: new Date(),
-      updatedAt: new Date()
+      geojsonData: geoJsonData,
+      statistics: {
+        totalBuildings: geoJsonData.features?.length || 0,
+        totalResidents: 0,
+        averageResidentsPerBuilding: 0,
+        totalSurface: 0,
+        averageSurfacePerBuilding: 0
+      },
+      metadata: {
+        importSource: "GeoJSON Upload",
+        importDate: new Date().toISOString(),
+        description: description || `Projet créé à partir de données GeoJSON avec ${geoJsonData.features?.length || 0} éléments`
+      }
     }
 
     const project = new Project(projectData)

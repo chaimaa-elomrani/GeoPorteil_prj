@@ -25,7 +25,7 @@ export const SecureAuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         // Option 1: Try HttpOnly cookie authentication (most secure)
-        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/current-user`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/current-user`, {
           credentials: 'include', // Include HttpOnly cookies
         })
         
@@ -42,7 +42,7 @@ export const SecureAuthProvider = ({ children }) => {
         // Option 2: Fallback to encrypted localStorage token (if HttpOnly cookies fail)
         const token = secureStorage.getToken()
         if (token) {
-          const tokenResponse = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/verify-token`, {
+          const tokenResponse = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/verify-token`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const SecureAuthProvider = ({ children }) => {
   }, [])
 
   const login = async (email, password) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/login`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ export const SecureAuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       // Call logout endpoint to clear HttpOnly cookie
-      await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/logout`, {
+      await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/logout`, {
         method: "POST",
         credentials: 'include',
       })

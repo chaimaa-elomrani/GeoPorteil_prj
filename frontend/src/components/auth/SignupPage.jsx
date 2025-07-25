@@ -54,7 +54,7 @@ export default function SignupPage() {
       console.log("Sending signup request with data:", formData)
 
       // Send signup request to backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/signup-request`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/signup-request`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

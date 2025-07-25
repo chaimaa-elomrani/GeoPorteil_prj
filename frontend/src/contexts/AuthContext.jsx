@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     // Check for existing authentication via cookie
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/current-user`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/current-user`, {
           credentials: 'include', // Include cookies
         })
 
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/login`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       // Call logout endpoint to clear HttpOnly cookie
-      await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/authRoutes/logout`, {
+      await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9000/api"}/authRoutes/logout`, {
         method: "POST",
         credentials: 'include', // Include cookies
       })
