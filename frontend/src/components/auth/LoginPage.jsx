@@ -36,7 +36,7 @@ export default function LoginPage() {
       }
 
       // Use the auth context login method
-      await login(formData.email, formData.password)
+      const user = await login(formData.email, formData.password)
 
       setSuccess("Connexion réussie! Redirection...")
 
@@ -47,11 +47,10 @@ export default function LoginPage() {
       })
 
       // Navigate based on user role - redirect admin users to admin dashboard
-      const user = JSON.parse(localStorage.getItem("user") || "{}")
-      console.log("🔄 Redirecting user:", user.role)
+      console.log("🔄 Redirecting user:", user?.role)
 
       // Immediate redirect for admin users
-      if (user.role === "admin") {
+      if (user?.role === "admin") {
         console.log("✅ Redirecting admin to admin dashboard")
         navigate("/admin-dashboard", { replace: true })
       } else {
